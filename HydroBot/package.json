@@ -1,0 +1,29 @@
+{
+  "name": "hydrobot",
+  "version": "1.0.0",
+  "description": "Multi-purpose discord bot",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/atf1999/hydrobot"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "hydro"
+  ],
+  "author": "Tom Orth (atf1999)",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "discord.js": "^8.1.0",
+    "fs-extra": "^0.30.0",
+    "google-search-scraper": "^0.0.2",
+    "request": "^2.74.0",
+    "unirest": "^0.5.1",
+    "yandex-translate": "^2.1.0"
+  }
+}
