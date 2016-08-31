@@ -10,7 +10,7 @@ module.exports = {
 			}
 
 		} else {
-			bot.reply(message, ': you do not have the proper requirements for this action');
+			bot.reply(message, ': you do not have the proper roles for this action');
 		}
 
 	}

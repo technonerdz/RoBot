@@ -1,12 +1,15 @@
 ```xl
 
-Hydro is a mult-purpose bot for enriching your discord experience!
+RoBot v1.0.0
 
 General commands:
 
-
-lookup <search-query>: search google for a top result link
-translate <text>: translates given text to english
+google <search-query>: search google for a top result link
+frccopypasta <team>: returns an frc copypasta
+ping: pings the bot
+server: gives info about the server
+talk: talks with cleverbot
+user <optional-mention> gives info about yourself, or the mentioned user.
 meme <content>: creates a meme with the content being formatted as such: template-top text-bottom text
 
 Templates: tenguy, afraid, older, aag, tried, biw,
@@ -27,5 +30,9 @@ mute <user>: mutes a given user (requires a role 'muted' to be present')
 unmute <user>: opposite of mute command
 kick <user>: kicks a given user
 ban <user>: bans a given user
+give <role> <user>: gives a role to a user
+prune <amount>: prunes a certain amount of messages
+restart: restarts the bot
+take <role> <user>: takes a role from a user
 
 ```

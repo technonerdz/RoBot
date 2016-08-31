@@ -5,11 +5,13 @@ module.exports = {
 			try {
 				bot.addMemberToRole(mutee, message.server.roles.get('name', 'muted'));
 				bot.reply(message, mutee + ' has been muted.');
+				var reason = message.content.split(" ").splice(2).join(" ")
+				bot.sendMessage(message, "ACTION: MUTE\nUSER: " + user.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
 			} catch (e) {
 				bot.sendMessage(message, 'Muted Role does not exist');
 			}
 		} else {
-			bot.reply(message, 'you do not have the proper requirements for this action');
-		}
+            bot.reply(message, "You don't have permission to do this.");
+        }
 	}
 };
