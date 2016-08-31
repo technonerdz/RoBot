@@ -9,7 +9,7 @@ module.exports = {
 				bot.sendMessage(msg, 'Muted Role does not exist');
 			}
 		} else {
-			bot.reply(msg, 'you do not have the proper requirements for this action');
+			bot.reply(msg, 'you do not have permission to do this action');
 		}
 	}
 };
