@@ -4,7 +4,7 @@ module.exports = {
 		
 		var PREFIX = '~c ';
 		
-		switch (msg.content) {
+		switch (message.content) {
 			case (PREFIX) + "consolegaming":
 				bot.sendMessage(message, cmds.consolegaming);
 				break;
