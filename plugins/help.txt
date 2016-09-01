@@ -36,6 +36,6 @@ restart: restarts the bot
 take <role> <user>: takes a role from a user
 
 
-FRC Custom Commands: consolegaming, boxcutters, datboi, doktor, english, fitnessgram, goodshit, umso, pcmasterrace, wtf, wtf2, wtf3, poke, tsimfd, watergame, aasher, 2017game
+FRC Custom Commands: consolegaming, boxcutters, datboi, doktor, english, fitnessgram, goodshit, umso, pcmasterrace, wtf, wtf2, wtf3, poke, tsimfd, watergame, spaghettigame, spacegame, aasher
 
 ```

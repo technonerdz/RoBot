@@ -53,8 +53,11 @@ module.exports = {
 			case (PREFIX) + "aasher":
 				bot.sendMessage(message, cmds.aasher);
 				break;
-			case (PREFIX) + "2017game":
+			case (PREFIX) + "spaghettigame":
 				bot.sendMessage(message, cmds.spaghettigame);
+				break;
+			case (PREFIX) + "spacegame":
+				bot.sendMessage(message, cmds.spacegame);
 				break;
 		}
 	}
