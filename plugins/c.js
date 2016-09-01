@@ -2,7 +2,7 @@ module.exports = {
 	main: function(bot, message) {
 		var cmds = require('./commands.json');
 		
-		var PREFIX = '~c ';
+		var PREFIX = '%c ';
 		
 		switch (message.content) {
 			case (PREFIX) + "consolegaming":
