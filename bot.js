@@ -62,6 +62,8 @@ bot.on('ready', function() {
 });
 
 bot.on('message', function(msg) {
+	
+	
 	var str = "";
     var currentTime = new Date()
 	var hours = currentTime.getHours()
