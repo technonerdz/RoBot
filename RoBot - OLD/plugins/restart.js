@@ -1,7 +1,7 @@
 module.exports = {
 	main: function(bot, message){
-		if(message.author.id === "171319044715053057" || message.author.id === "180094452860321793") {
-			message.channel.sendMessage(":wave: RoBot is restarting...");
+		if(message.author.id === "171319044715053057") {
+			bot.sendMessage(message, ":wave: RoBot is restarting...\n*Windows XP shutdown sounds*");
 			setTimeout(function() {
 				bot.logout()
 			}, 1000)

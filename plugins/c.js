@@ -2,62 +2,60 @@ module.exports = {
 	main: function(bot, message) {
 		var cmds = require('./commands.json');
 		
-		var PREFIX = '%c ';
-		
 		switch (message.content) {
-			case (PREFIX) + "consolegaming":
-				bot.sendMessage(message, cmds.consolegaming);
+			case "consolegaming":
+				message.channel.sendMessage(cmds.consolegaming);
 				break;
-			case (PREFIX) + "boxcutters":
-				bot.sendMessage(message, cmds.boxcutters);
+			case "boxcutters":
+				message.channel.sendMessage(cmds.boxcutters);
 				break;
-			case (PREFIX) + "datboi":
-				bot.sendMessage(message, cmds.datboi);
+			case "datboi":
+				message.channel.sendMessage(cmds.datboi);
 				break;
-			case (PREFIX) + "doktor":
-				bot.sendMessage(message, cmds.doktor);
+			case "doktor":
+				message.channel.sendMessage(cmds.doktor);
 				break;
-			case (PREFIX) + "english":
-				bot.sendMessage(message, cmds.english);
+			case "english":
+				message.channel.sendMessage(cmds.english);
 				break;
-			case (PREFIX) + "fitnessgram":
-				bot.sendMessage(message, cmds.fitnessgram);
+			case "fitnessgram":
+				message.channel.sendMessage(cmds.fitnessgram);
 				break;
-			case (PREFIX) + "goodshit":
-				bot.sendMessage(message, cmds.goodshit);
+			case "goodshit":
+				message.channel.sendMessage(cmds.goodshit);
 				break;
-			case (PREFIX) + "umso":
-				bot.sendMessage(message, cmds.umso);
+			case "umso":
+				message.channel.sendMessage(cmds.umso);
 				break;
-			case (PREFIX) + "pcmasterrace":
-				bot.sendMessage(message, cmds.pcmasterrace);
+			case "pcmasterrace":
+				message.channel.sendMessage(cmds.pcmasterrace);
 				break;
-			case (PREFIX) + "wtf":
-				bot.sendMessage(message, cmds.wtf);
+			case "wtf":
+				message.channel.sendMessage(cmds.wtf);
 				break;
-			case (PREFIX) + "wtf2":
-				bot.sendMessage(message, cmds.wtf2);
+			case "wtf2":
+				message.channel.sendMessage(cmds.wtf2);
 				break;
-			case (PREFIX) + "wtf3":
-				bot.sendMessage(message, cmds.wtf3);
+			case "wtf3":
+				message.channel.sendMessage(cmds.wtf3);
 				break;
-			case (PREFIX) + "poke":
-				bot.sendMessage(message, cmds.poke);
+			case "poke":
+				message.channel.sendMessage(cmds.poke);
 				break;
-			case (PREFIX) + "tsimfd":
-				bot.sendMessage(message, cmds.tsimfd);
+			case "tsimfd":
+				message.channel.sendMessage(cmds.tsimfd);
 				break;
-			case (PREFIX) + "watergame":
-				bot.sendMessage(message, cmds.watergame);
+			case "watergame":
+				message.channel.sendMessage(cmds.watergame);
 				break;
-			case (PREFIX) + "aasher":
-				bot.sendMessage(message, cmds.aasher);
+			case "aasher":
+				message.channel.sendMessage(cmds.aasher);
 				break;
-			case (PREFIX) + "spaghettigame":
-				bot.sendMessage(message, cmds.spaghettigame);
+			case "spaghettigame":
+				message.channel.sendMessage(cmds.spaghettigame);
 				break;
-			case (PREFIX) + "spacegame":
-				bot.sendMessage(message, cmds.spacegame);
+			case "spacegame":
+				message.channel.sendMessage(cmds.spacegame);
 				break;
 		}
 	}

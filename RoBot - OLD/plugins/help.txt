@@ -1,6 +1,6 @@
 ```xl
 
-RoBot v2.0.0
+RoBot v1.0.0
 
 General commands:
 
