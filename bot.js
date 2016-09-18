@@ -85,7 +85,11 @@ bot.on('message', (msg) => {
 			var str = msg.content;
 			var args = str.substring(2, str.length);
 			args = args.trim();
-			telebot.sendMessage(-1001032632141, msg.author.username + ": " + args);
+			var member = msg.guild.members.find('id', msg.author.id);
+			if(member.nickname != null)
+				telebot.sendMessage(-1001032632141, member.nickname + ": " + args);
+			else
+				telebot.sendMessage(-1001032632141, msg.author.username + ": " + args);
 		}
 		
 		if (msg.content.startsWith(PREFIX)) {
@@ -153,10 +157,14 @@ bot.on("messageUpdate", (message1, message2) => {
 
 telebot.on('message', function (msg) {
 	if(msg.text.startsWith(">")) {
-		var sender = msg.from.username;
+		if(msg.from.last_name != undefined)
+			var sender = msg.from.first_name + " " + msg.from.last_name;
+		else
+			var sender = msg.from.first_name;
+		var content = msg.text
 		if(sender != "FRCDiscordBot") {
-			var text = msg.text.split(">").splice(1).join(" ");
-			var logChannel = bot.channels.get("176186766946992128");
+			var text = content.substring(1, content.length);
+			var logChannel = bot.channels.get("227072177495736321");
 			logChannel.sendMessage('`[TELEGRAM]` ' + sender + ": " + text);
 		}
 	}
