@@ -80,10 +80,11 @@ bot.on('message', (msg) => {
 		if (msg.author.bot) return;
 		
 		//Takes message such as ">Hello" and sends it to Telegram
-		if (msg.content.startsWith("t!")) {
-			//var args = msg.content.split("!").splice(1).join(" ");
-			var str = msg.content;
-			var args = str.substring(2, str.length);
+		if (msg.content.startsWith("t!") || msg.channel.id == "227072177495736321") {
+			var args = msg.content;
+			if (msg.content.startsWith("t!") {
+				args = args.substring(2, str.length);
+			}
 			args = args.trim();
 			var member = msg.guild.members.find('id', msg.author.id);
 			if(member.nickname != null)
