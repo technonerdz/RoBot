@@ -4,17 +4,18 @@
 
 'use strict';
 
+var config = require('./config.json');
 const Discord = require('discord.js');
 const fse = require('fs-extra');
-const PREFIX = '%'
-
-var fs = require('fs')
-fs.readFile('token.txt', 'utf8', function(err, token) {
-    if (err) {
-        return console.log(err);
-    }
-    bot.login(token);
+const PREFIX = config.prefix;
+let bot = new Discord.Client({
+  disableEveryone: true
 });
+
+bot.login(config.token);
+
+var TelegramBot = require('node-telegram-bot-api');
+var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
 
 var chalk = require('chalk');
 var server = chalk.bold.red;
@@ -23,9 +24,6 @@ var message = chalk.yellow;
 var usr = chalk.bold.blue;
 var cmand = chalk.bgRed;
 var gray = chalk.gray;
-let bot = new Discord.Client({
-  disableEveryone: true
-});
 
 let plugins = new Map();
 
@@ -34,9 +32,8 @@ function loadPlugins() {
 	let files = fse.readdirSync(__dirname + '/plugins', 'utf8');
 	for (let plugin of files) {
 		if (plugin.endsWith('.js')) {
-			console.log(plugin.slice(0, -3));
 			plugins.set(plugin.slice(0, -3), require(__dirname + '/plugins/' + plugin));
-			console.log('Map: ' + plugins.has(plugin.slice(0, -3)));
+			console.log(plugin.slice(0, -3) + ': ' + plugins.has(plugin.slice(0, -3)));
 		} else {
 			console.log(plugin);
 		}
@@ -80,23 +77,32 @@ bot.on('message', (msg) => {
 			console.log(gray("[" + str + "] ") + server(msg.guild.name) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.content));
 		}
 		
-	if (msg.author.bot) return;
-	
-	if (msg.content.startsWith(PREFIX)) {
-		let content = msg.content.split(PREFIX)[1];
-		let cmd = content.substring(0, content.indexOf(' ')),
-			args = content.substring(content.indexOf(' ') + 1, content.length);
-		if (plugins.get(cmd) !== undefined && content.indexOf(' ') !== -1) {
-			console.log(cmand(msg.author.username + " executed: " + cmd + " " + args));
-			msg.content = args;
-			plugins.get(cmd).main(bot, msg);
-		} else if (plugins.get(content) !== undefined && content.indexOf(' ') < 0) {
-			console.log(cmand(msg.author.username + " executed: " + content));
-			plugins.get(content).main(bot, msg);
-		} else {
-			console.log('ERROR:' + content);
+		if (msg.author.bot) return;
+		
+		//Takes message such as ">Hello" and sends it to Telegram
+		if (msg.content.startsWith("t!")) {
+			//var args = msg.content.split("!").splice(1).join(" ");
+			var str = msg.content;
+			var args = str.substring(2, str.length);
+			args = args.trim();
+			telebot.sendMessage(-1001032632141, msg.author.username + ": " + args);
 		}
-	}
+		
+		if (msg.content.startsWith(PREFIX)) {
+			let content = msg.content.split(PREFIX)[1];
+			let cmd = content.substring(0, content.indexOf(' ')),
+				args = content.substring(content.indexOf(' ') + 1, content.length);
+			if (plugins.get(cmd) !== undefined && content.indexOf(' ') !== -1) {
+				console.log(cmand(msg.author.username + " executed: " + cmd + " " + args));
+				msg.content = args;
+				plugins.get(cmd).main(bot, msg);
+			} else if (plugins.get(content) !== undefined && content.indexOf(' ') < 0) {
+				console.log(cmand(msg.author.username + " executed: " + content));
+				plugins.get(content).main(bot, msg);
+			} else {
+				console.log('ERROR:' + content);
+			}
+		}
 	}
 });
 
@@ -112,7 +118,7 @@ bot.on('guildMemberAdd', (guild, user) => {
 		var nickee = guild.members.find('id', user.id);
 		nickee.setNickname(username + " - (SET TEAM#)");
 		setTimeout(function() {
-            logChannel.sendMessage(username + " Join Nick set to --> ``" + user.username + " - (SET TEAM#)``");
+            logChannel.sendMessage(username + " Join Nick set to --> ``" + user.user.username + " - (SET TEAM#)``");
         }, 1000)
 	}
 });
@@ -143,4 +149,20 @@ bot.on("messageUpdate", (message1, message2) => {
     if (message1.guild.id === "176186766946992128") {
         console.log(server(message1.author.username + "'s message was edited!\n Old message: " + message1.content));
     }
+});
+
+telebot.on('message', function (msg) {
+	if(msg.text.startsWith(">")) {
+		var sender = msg.from.username;
+		if(sender != "FRCDiscordBot") {
+			var text = msg.text.split(">").splice(1).join(" ");
+			var logChannel = bot.channels.get("176186766946992128");
+			logChannel.sendMessage('`[TELEGRAM]` ' + sender + ": " + text);
+		}
+	}
+});
+
+telebot.onText(/\/help/, function (msg, match) {
+	var fromId = msg.from.id;
+	telebot.sendMessage(fromId, "Just do '>message' to send a message to the Discord!");
 });

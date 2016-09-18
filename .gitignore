@@ -1,4 +1,6 @@
 token.txt
+ttoken.txt
+config.json
 # Logs
 logs
 *.log
