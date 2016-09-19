@@ -61,6 +61,10 @@ bot.on('ready', () => {
 	const ASIANBOI = bot.users.get("171319044715053057");	
     ASIANBOI.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setStatus("online", 'FIRST Stronghold 2016');
+	
+	var teleChannel = bot.channels.get("227072177495736321");
+	teleChannel.sendMessage('**THE CONNECTION HAS BEEN OPENED**');
+	telebot.sendMessage(-1001080706960, 'THE CONNECTION HAS BEEN OPENED');
 });
 
 bot.on('message', (msg) => {
@@ -88,9 +92,9 @@ bot.on('message', (msg) => {
 			args = args.trim();
 			var member = msg.guild.members.find('id', msg.author.id);
 			if(member.nickname != null)
-				telebot.sendMessage(-1001032632141, member.nickname + ": " + args);
+				telebot.sendMessage(-1001080706960, member.nickname + ": " + args);
 			else
-				telebot.sendMessage(-1001032632141, msg.author.username + ": " + args);
+				telebot.sendMessage(-1001080706960, msg.author.username + ": " + args);
 		}
 		
 		if (msg.content.startsWith(PREFIX)) {
@@ -157,18 +161,16 @@ bot.on("messageUpdate", (message1, message2) => {
 });
 
 telebot.on('message', function (msg) {
-	if(msg.text.startsWith(">")) {
 		if(msg.from.last_name != undefined)
 			var sender = msg.from.first_name + " " + msg.from.last_name;
 		else
 			var sender = msg.from.first_name;
-		var content = msg.text
-		if(sender != "FRCDiscordBot") {
-			var text = content.substring(1, content.length);
+		var content = msg.text;
+		if(sender != "RoBot") {
+			var text = content;
 			var logChannel = bot.channels.get("227072177495736321");
 			logChannel.sendMessage('`[TELEGRAM]` ' + sender + ": " + text);
 		}
-	}
 });
 
 telebot.onText(/\/help/, function (msg, match) {
