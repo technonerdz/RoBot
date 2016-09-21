@@ -1,7 +1,7 @@
 module.exports = {
 	main: function(bot, message) {
-		var cmds = require('./commands.json');
-		
+		var cmds = require("./commands.json");
+
 		switch (message.content) {
 			case "consolegaming":
 				message.channel.sendMessage(cmds.consolegaming);

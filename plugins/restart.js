@@ -1,13 +1,15 @@
 module.exports = {
 	main: function(bot, message){
-		if(message.author.id === "171319044715053057" || message.author.id === "180094452860321793") {
+		if (message.member.roles.exists("name", "Bot Commander")) {
 			message.channel.sendMessage(":wave: RoBot is restarting...");
+
 			setTimeout(function() {
-				bot.logout()
-			}, 1000)
+				bot.logout();
+			}, 1000);
+
 			setTimeout(function() {
-				process.exit()
-			}, 2000)
+				process.exit();
+			}, 2000);
 		}
 	}
 };
