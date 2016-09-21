@@ -1,4 +1,4 @@
-var Cleverbot = require('cleverbot-node');
+var Cleverbot = require("cleverbot-node");
 var cleverbot = new Cleverbot;
 
 module.exports = {

@@ -1,6 +1,6 @@
 module.exports = {
 	main: function(bot, message) {
-		if (message.member.roles.exists('name', 'Bot Commander')){
+		if (message.member.roles.exists("name", "Bot Commander")){
 			var num = message.content;
 			if(!isNaN(num)){
 				message.channel.fetchMessages({limit: num})

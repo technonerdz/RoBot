@@ -1,4 +1,4 @@
-var google = require('google');
+var google = require("google");
 
 module.exports = {
 	main: function(bot, message) {
@@ -10,7 +10,7 @@ module.exports = {
                 console.error(err)
                 message.channel.sendMessage("ERROR: Search failed");
             }
-			
+
 			if (res === null) {
 				message.channel.sendMessage("I might be ratelimited right now");
 				return;
