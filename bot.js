@@ -119,9 +119,9 @@ bot.on('guildMemberAdd', (guild, user) => {
 	var logChannel = bot.channels.get("200090417809719296");
 	if(guild.id === "176186766946992128"){
 		guild.defaultChannel.sendMessage("Hello " + user.user + " and welcome to the **FIRST Robotics Competition Discord Server** - " + 
-												"a place for you to talk to fellow FRC students and enthusiasts about more or less anything! " + 
-												"Please pay attention to the rules posted in #rules and have fun! Don't hesitate to ping a mod or an admin " + 
-												"if you have any questions! `(Please change your nick with '/nick (name) - (team #)' to reflect your team number!)`");
+                                                "a place for you to talk to fellow FRC students and enthusiasts about more or less anything! " + 
+                                                "Please pay attention to the rules posted in #rules-info and have fun! Don't hesitate to ping a mod or an admin " + 
+                                                "if you have any questions! \n\n**Please change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
 		logChannel.sendMessage(user.user.username + " joined FIRST Robotics Competition");
 		var username = user.user.username;
 		var nickee = guild.members.find('id', user.id);
