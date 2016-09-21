@@ -1,4 +1,4 @@
-const fse = require("fs-extra");
+var fse = require("fs-extra");
 
 module.exports = {
 	main: function(bot, message) {
