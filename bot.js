@@ -168,7 +168,12 @@ telebot.on("message", function (msg) {
 		var content = msg.text;
 		if(sender != "RoBot") {
 			var text = content;
-			text = text.replace("@everyone", "").replace("@here", "");
+			while(text.indexOf("@everyone") >= -1) {
+				text = text.replace("@everyone", "");
+			}
+			while(text.indexOf("@here") >= -1) {
+				text = text.replace("@here", "");
+			}
 			var logChannel = bot.channels.get("227072177495736321");
 			logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + text);
 		}
