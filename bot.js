@@ -85,7 +85,7 @@ bot.on("message", (msg) => {
 
 		//Takes message such as ">Hello" and sends it to Telegram
 		if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
-			var args = msg.content;
+			var args = msg.cleanContent;
 			if (msg.content.startsWith("t!")) {
 				args = args.substring(2, str.length);
 			}
