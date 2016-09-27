@@ -14,8 +14,8 @@ let bot = new Discord.Client({
 
 bot.login(config.token);
 
-var TelegramBot = require("node-telegram-bot-api");
-var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
+/*var TelegramBot = require("node-telegram-bot-api");
+var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});*/
 
 var chalk = require("chalk");
 var server = chalk.bold.red;
@@ -62,9 +62,9 @@ bot.on("ready", () => {
     ASIANBOI.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setStatus("online", "FIRST Stronghold 2016");
 
-	var teleChannel = bot.channels.get("227072177495736321");
+	/*var teleChannel = bot.channels.get("227072177495736321");
 	teleChannel.sendMessage("**THE CONNECTION HAS BEEN OPENED**");
-	telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");
+	telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");*/
 });
 
 bot.on("message", (msg) => {
@@ -161,7 +161,7 @@ bot.on("messageUpdate", (message1, message2) => {
     }
 });
 
-telebot.on("message", function (msg) {
+/*telebot.on("message", function (msg) {
 		if(msg.from.last_name != undefined)
 			var sender = msg.from.first_name + " " + msg.from.last_name;
 		else
@@ -183,4 +183,4 @@ telebot.on("message", function (msg) {
 telebot.onText(/\/help/, function (msg, match) {
 	var fromId = msg.from.id;
 	telebot.sendMessage(fromId, "Just send a message in the Discord channel to send a message to the Discord server!");
-});
+});*/
