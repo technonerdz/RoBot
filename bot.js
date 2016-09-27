@@ -84,7 +84,7 @@ bot.on("message", (msg) => {
 		if (msg.author.bot) return;
 
 		//Takes message such as "t!Hello" and sends it to Telegram
-		if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
+		/*if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
 			//var args = msg.cleanContent;
 			var args = msg.content;
 			if (msg.content.startsWith("t!")) {
@@ -96,7 +96,7 @@ bot.on("message", (msg) => {
 				telebot.sendMessage(-1001080706960, member.nickname + ": " + args);
 			else
 				telebot.sendMessage(-1001080706960, msg.author.username + ": " + args);
-		}
+		}*/
 
 		if (msg.content.startsWith(PREFIX)) {
 			let content = msg.content.split(PREFIX)[1];
@@ -182,5 +182,5 @@ telebot.on("message", function (msg) {
 
 telebot.onText(/\/help/, function (msg, match) {
 	var fromId = msg.from.id;
-	telebot.sendMessage(fromId, "Just do \">message\" to send a message to the Discord!");
+	telebot.sendMessage(fromId, "Just send a message in the Discord channel to send a message to the Discord server!");
 });
