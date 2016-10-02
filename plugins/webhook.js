@@ -1,4 +1,3 @@
-var config = require('../webhooks.json');
 var unirest = require('unirest');
 var fse = require("fs-extra");
 var webhook = fse.readFileSync(__dirname + "/webhooks.txt")
