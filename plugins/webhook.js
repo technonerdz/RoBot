@@ -1,5 +1,5 @@
 var config = require('../config.json');
-var request = require('request');
+var unirest = require('unirest');
 var webhook = config.webhook;
 
 module.exports = {
@@ -11,10 +11,11 @@ module.exports = {
 		
 		const isCommander = ["171319044715053057", "180094452860321793"];
 		if (isCommander.indexOf(message.author.id) > -1){
-			request.post({
-				url: webhook,
-				options
-			});
+			unirest.post(webhook)
+				.send({"username": 23, "content": message.content})
+				.end(function (response) {
+					console.log(response.body);
+				});
 			message.delete();
 		}
 	}
