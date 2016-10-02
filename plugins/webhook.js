@@ -7,7 +7,7 @@ module.exports = {
 		request.post({
 			url: webhook,
 			json:{
-				//"username": "Server Overlord",
+				"username": "Server Overlord",
 				"content": message.content
 			}
 		});
