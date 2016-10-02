@@ -14,8 +14,8 @@ let bot = new Discord.Client({
 
 bot.login(config.token);
 
-var TelegramBot = require("node-telegram-bot-api");
-var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
+//var TelegramBot = require("node-telegram-bot-api");
+//var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
 
 var chalk = require("chalk");
 var server = chalk.bold.red;
@@ -84,7 +84,7 @@ bot.on("message", (msg) => {
 		if (msg.author.bot) return;
 
 		//Takes message such as "t!Hello" and sends it to Telegram
-		if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
+		/*if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
 			var args = msg.cleanContent;
 			//var args = msg.content;
 			if (msg.content.startsWith("t!")) {
@@ -96,7 +96,7 @@ bot.on("message", (msg) => {
 				telebot.sendMessage(-1001080706960, member.nickname + ": " + args);
 			else
 				telebot.sendMessage(-1001080706960, msg.author.username + ": " + args);
-		}
+		}*/
 
 		if (msg.content.startsWith(PREFIX)) {
 			let content = msg.content.split(PREFIX)[1];
@@ -161,7 +161,7 @@ bot.on("messageUpdate", (message1, message2) => {
     }
 });
 
-telebot.on("message", function (msg) {
+/*telebot.on("message", function (msg) {
 		if(msg.from.last_name != undefined)
 			var sender = msg.from.first_name + " " + msg.from.last_name;
 		else
@@ -183,4 +183,4 @@ telebot.on("message", function (msg) {
 telebot.onText(/\/help/, function (msg, match) {
 	var fromId = msg.from.id;
 	telebot.sendMessage(fromId, "Just send a message in the Discord channel to send a message to the Discord server!");
-});
+});*/
