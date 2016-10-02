@@ -62,9 +62,9 @@ bot.on("ready", () => {
     ASIANBOI.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setStatus("online", "FIRST Steamworks 2017");
 
-	var teleChannel = bot.channels.get("227072177495736321");
+	/*var teleChannel = bot.channels.get("227072177495736321");
 	teleChannel.sendMessage("**THE CONNECTION HAS BEEN OPENED**");
-	telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");
+	telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");*/
 });
 
 bot.on("message", (msg) => {
