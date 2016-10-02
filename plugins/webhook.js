@@ -1,4 +1,4 @@
-var config = require('../config.json');
+var config = require('../webhooks.json');
 var unirest = require('unirest');
 var webhook = config.webhook;
 
