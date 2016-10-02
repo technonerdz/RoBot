@@ -1,6 +1,7 @@
 var config = require('../webhooks.json');
 var unirest = require('unirest');
-var webhook = config.moderators;
+var fse = require("fs-extra");
+var webhook = fse.readFileSync(__dirname + "/announce.txt");
 
 module.exports = {
 	main: function(bot, message) {
