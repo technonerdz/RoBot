@@ -1,1 +1,1 @@
-https://canary.discordapp.com/api/webhooks/232178936111562760/UtZ9hySj3JhZpkbReZ6hiP1kVqtTjVmVlYSmPS5eKmucyQU-G9haFvbvgAWywHoQyQ26
+'https://canary.discordapp.com/api/webhooks/232178936111562760/UtZ9hySj3JhZpkbReZ6hiP1kVqtTjVmVlYSmPS5eKmucyQU-G9haFvbvgAWywHoQyQ26'
