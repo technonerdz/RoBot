@@ -97,6 +97,11 @@ bot.on("message", (msg) => {
 			else
 				telebot.sendMessage(-1001080706960, msg.author.username + ": " + args);
 		}*/
+		
+		if(msg.channel.id == "185858769895424001" && msg.author.id == "193000443981463552") {
+			var feed = bot.channels.get("232295069363732482");
+			feed.sendMessage(msg.content);
+		}
 
 		if (msg.content.startsWith(PREFIX)) {
 			let content = msg.content.split(PREFIX)[1];
