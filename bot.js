@@ -80,6 +80,11 @@ bot.on("message", (msg) => {
 		if (msg.guild.id != "110373943822540800" && msg.guild.id != "185858769895424001" && msg.channel.id != "221664440750309377") {
 			console.log(gray("[" + str + "] ") + server(msg.guild.name) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.content));
 		}
+		
+		if(msg.channel.id == "185858769895424001" && msg.author.id == "193000443981463552") {
+			var feed = bot.channels.get("232295069363732482");
+			feed.sendMessage(msg.content);
+		}
 
 		if (msg.author.bot) return;
 
@@ -98,10 +103,6 @@ bot.on("message", (msg) => {
 				telebot.sendMessage(-1001080706960, msg.author.username + ": " + args);
 		}*/
 		
-		if(msg.channel.id == "185858769895424001" && msg.author.id == "193000443981463552") {
-			var feed = bot.channels.get("232295069363732482");
-			feed.sendMessage(msg.content);
-		}
 
 		if (msg.content.startsWith(PREFIX)) {
 			let content = msg.content.split(PREFIX)[1];
