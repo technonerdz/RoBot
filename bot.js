@@ -85,6 +85,15 @@ bot.on("message", (msg) => {
 			var feed = bot.channels.get("232295069363732482");
 			feed.sendMessage(msg.content);
 		}
+		
+		if(msg.content.startsWith("!") && msg.channel.id == "176186766946992128") {
+			msg.delete();
+			msg.reply("no Mee6 commands in <#176186766946992128> please!")
+		}
+		
+		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944" && !msg.content.startsWith("GG")) {
+			msg.delete();
+		}
 
 		if (msg.author.bot) return;
 
