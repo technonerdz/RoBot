@@ -89,7 +89,7 @@ bot.on("message", (msg) => {
 		if(msg.content.startsWith("!") && msg.channel.id == "176186766946992128") {
 			msg.delete();
 			msg.reply("no Mee6 commands in <#176186766946992128> please!")
-			.then(() => {setTimeout(() => {msg.delete()}, 3000)});
+			.then((msg) => {setTimeout(() => {msg.delete()}, 3000)});
 		}
 		
 		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944" && !msg.content.startsWith("GG")) {
