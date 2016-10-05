@@ -188,7 +188,7 @@ telebot.on('message', function (msg) {
 		return;
 	}
 	
-	var logChannel = bot.channels.get('id', "227072177495736321");
+	var logChannel = bot.channels.find('id', "227072177495736321");
 	logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
 });
 
