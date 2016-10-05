@@ -14,8 +14,8 @@ let bot = new Discord.Client({
 
 bot.login(config.token);
 
-//var TelegramBot = require("node-telegram-bot-api");
-//var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
+var TelegramBot = require("node-telegram-bot-api");
+var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
 
 var chalk = require("chalk");
 var server = chalk.bold.red;
@@ -62,9 +62,9 @@ bot.on("ready", () => {
     ASIANBOI.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setStatus("online", "FIRST Steamworks 2017");
 
-	/*var teleChannel = bot.channels.get("227072177495736321");
+	var teleChannel = bot.channels.get("227072177495736321");
 	teleChannel.sendMessage("**THE CONNECTION HAS BEEN OPENED**");
-	telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");*/
+	telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");
 });
 
 bot.on("message", (msg) => {
@@ -99,7 +99,7 @@ bot.on("message", (msg) => {
 		if (msg.author.bot) return;
 
 		//Takes message such as "t!Hello" and sends it to Telegram
-		/*if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
+		if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
 			var args = msg.cleanContent;
 			//var args = msg.content;
 			if (msg.content.startsWith("t!")) {
@@ -111,7 +111,7 @@ bot.on("message", (msg) => {
 				telebot.sendMessage(-1001080706960, member.nickname + ": " + args);
 			else
 				telebot.sendMessage(-1001080706960, msg.author.username + ": " + args);
-		}*/
+		}
 		
 
 		if (msg.content.startsWith(PREFIX)) {
@@ -177,26 +177,20 @@ bot.on("messageUpdate", (message1, message2) => {
     }
 });
 
-/*telebot.on("message", function (msg) {
-		if(msg.from.last_name != undefined)
-			var sender = msg.from.first_name + " " + msg.from.last_name;
-		else
-			var sender = msg.from.first_name;
-		var content = msg.text;
-		if(sender != "RoBot") {
-			var text = content;
-			while(text.indexOf("@everyone") >= -1) {
-				text = text.replace("@everyone", "");
-			}
-			while(text.indexOf("@here") >= -1) {
-				text = text.replace("@here", "");
-			}
-			var logChannel = bot.channels.get("227072177495736321");
-			logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + text);
-		}
+telebot.on("message", function (msg) {
+	if(msg.from.last_name != undefined)
+		var sender = msg.from.first_name + " " + msg.from.last_name;
+	else
+		var sender = msg.from.first_name;
+	var content = msg.text;
+	if(msg.text.indexOf("@everyone") > -1 || msg.text.indexOf("@here") > -1) {
+		return;
+	}
+	var logChannel = bot.channels.get('id', "227072177495736321");
+	logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
 });
 
 telebot.onText(/\/help/, function (msg, match) {
 	var fromId = msg.from.id;
 	telebot.sendMessage(fromId, "Just send a message in the Discord channel to send a message to the Discord server!");
-});*/
+});
