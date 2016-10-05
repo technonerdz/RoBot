@@ -177,15 +177,17 @@ bot.on("messageUpdate", (message1, message2) => {
     }
 });
 
-telebot.on("message", function (msg) {
+telebot.on('message', function (msg) {
 	if(msg.from.last_name != undefined)
 		var sender = msg.from.first_name + " " + msg.from.last_name;
 	else
 		var sender = msg.from.first_name;
 	var content = msg.text;
+	
 	if(msg.text.indexOf("@everyone") > -1 || msg.text.indexOf("@here") > -1) {
 		return;
 	}
+	
 	var logChannel = bot.channels.get('id', "227072177495736321");
 	logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
 });
