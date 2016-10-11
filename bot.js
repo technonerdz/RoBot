@@ -86,14 +86,12 @@ bot.on("message", (msg) => {
 			feed.sendMessage(msg.content);
 		}
 		
-		if(msg.content.startsWith("!") && msg.channel.id == "176186766946992128") {
-			msg.delete();
-			msg.reply("no Mee6 commands in <#176186766946992128> please!")
-			.then((msg) => {setTimeout(() => {msg.delete()}, 3000)});
+		if(msg.content.startsWith("!rank") || msg.content.startsWith("!levels") && msg.channel.id == "176186766946992128") {
+			setTimeout(() => {msg.delete()}, 5000)
 		}
 		
-		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944" && !msg.content.startsWith("GG")) {
-			msg.delete();
+		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944" && msg.content.contains("TOTAL XP")) {
+			setTimeout(() => {msg.delete()}, 150000)
 		}
 
 		if (msg.author.bot) return;
