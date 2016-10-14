@@ -101,7 +101,7 @@ bot.on("message", (msg) => {
 				telebot.sendMessage(-1001080706960, "Testing connection...");
 				msg.channel.sendMessage("The connection is active!");
 			}
-			catch() {
+			catch(err) {
 				msg.channel.sendMessage("ERROR: Bridge Error");
 			}
 		}
@@ -212,7 +212,7 @@ telebot.onText(/\/ping/, function (msg, match) {
 		var fromId = msg.from.id;
 		telebot.sendMessage(fromId, "The bridge is active!");
 	}
-	catch() {
+	catch(err) {
 		telebot.sendMessage(fromId, "An error has occurred. Please ping @asianboifrc and notify him.");
 	}
 });
