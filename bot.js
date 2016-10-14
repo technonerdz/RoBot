@@ -63,8 +63,8 @@ bot.on("ready", () => {
 	bot.user.setStatus("online", "FIRST Steamworks 2017");
 
 	var teleChannel = bot.channels.get("227072177495736321");
-	teleChannel.sendMessage("**THE CONNECTION HAS BEEN OPENED**");
-	telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");
+	//teleChannel.sendMessage("**THE CONNECTION HAS BEEN OPENED**");
+	//telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");
 });
 
 bot.on("message", (msg) => {
@@ -86,15 +86,25 @@ bot.on("message", (msg) => {
 			feed.sendMessage(msg.content);
 		}
 		
-		if(msg.content.startsWith("!rank") || msg.content.startsWith("!levels") && msg.channel.id == "176186766946992128") {
-			setTimeout(() => {msg.delete()}, 5000)
+		if(msg.content.indexOf("!rank") >= 0 || msg.content.indexOf("!levels") >= 0 && msg.channel.id == "176186766946992128") {
+			setTimeout(() => {msg.delete()}, 5000);
 		}
 		
-		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944" && msg.content.contains("TOTAL XP")) {
-			setTimeout(() => {msg.delete()}, 150000)
+		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944") {
+			setTimeout(() => {msg.delete()}, 15000);
 		}
 
 		if (msg.author.bot) return;
+		
+		if(msg.channel.id == "227072177495736321" && msg.content == "%connection") {
+			try {
+				telebot.sendMessage(-1001080706960, "Testing connection...");
+				msg.channel.sendMessage("The connection is active!");
+			}
+			catch {
+				msg.channel.sendMessage("ERROR: Bridge Error");
+			}
+		}
 
 		//Takes message such as "t!Hello" and sends it to Telegram
 		if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
@@ -193,4 +203,16 @@ telebot.on('message', function (msg) {
 telebot.onText(/\/help/, function (msg, match) {
 	var fromId = msg.from.id;
 	telebot.sendMessage(fromId, "Just send a message in the Discord channel to send a message to the Discord server!");
+});
+
+telebot.onText(/\/ping/, function (msg, match) {
+	try{
+		var logChannel = bot.channels.find('id', "227072177495736321");
+		logChannel.sendMessage("Testing Connection...");
+		var fromId = msg.from.id;
+		telebot.sendMessage(fromId, "The bridge is active!");
+	}
+	catch {
+		telebot.sendMessage(fromId, "An error has occurred. Please ping @asianboifrc and notify him.");
+	}
 });
