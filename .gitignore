@@ -1,7 +1,6 @@
-token.txt
-ttoken.txt
 config.json
 webhooks.json
+
 # Logs
 logs
 *.log

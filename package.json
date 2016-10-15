@@ -1,0 +1,35 @@
+{
+  "name": "RoBot",
+  "version": "2.0.0",
+  "description": "A useful Discord bot",
+  "author": "Michael Cao <mike.x.cao@gmail.com>",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node robot.js"
+  },
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/FRCDiscord/RoBot"
+},
+  "license": "MIT",
+  "bugs": {
+  "url": "https://github.com/FRCDiscord/RoBot/issues"
+},
+  "keywords": [
+  "asianbot",
+  "discord",
+  "discordbot"
+],
+  "dependencies": {
+    "supervisor": "*",
+    "discord.js": ">=9.2.0",
+    "chalk": "*",
+	"ytdl-core" :  "github:fent/node-ytdl-core#master",
+	"youtube-search": "*",
+	"fs-extra": "*",
+	"google-search": "*",
+	"cleverbot-node": "*",
+	"mysql": "*"
+  }
+}
