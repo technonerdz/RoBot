@@ -20,7 +20,7 @@ var connection = mysql.createConnection({
   host: 'localhost',
   user: 'robot',
   password: 'robot',
-  database: 'robot'
+  database: 'RoBot'
 });
 connection.query('SET NAMES utf8mb4');
 
