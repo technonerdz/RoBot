@@ -1,5 +1,5 @@
 /*RoBot v2.0
- *October 14, 2016
+ *September 9, 2016
  *Created by Michael Cao (ASIANBOI)*/
 
 "use strict";
@@ -13,16 +13,6 @@ let bot = new Discord.Client({
 });
 
 bot.login(config.token);
-
-var mysql = require('mysql');
-
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'robot',
-  password: 'robot',
-  database: 'robot'
-});
-connection.query('SET NAMES utf8mb4');
 
 var TelegramBot = require("node-telegram-bot-api");
 var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
@@ -72,7 +62,7 @@ bot.on("ready", () => {
     ASIANBOI.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setStatus("online", "FIRST Steamworks 2017");
 
-	//var teleChannel = bot.channels.get("227072177495736321");
+	var teleChannel = bot.channels.get("227072177495736321");
 	//teleChannel.sendMessage("**THE CONNECTION HAS BEEN OPENED**");
 	//telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");
 });
@@ -82,37 +72,19 @@ bot.on("message", (msg) => {
 	var str = n.substring(0, n.indexOf(" "));
 
 	if(msg.channel.type === "dm" || msg.channel.type === "group") {
-		var args = {
-			ServerID: msg.channel.type,
-			ChannelID: msg.author.id,
-			User: msg.author.username,
-			UserID: msg.author.id,
-			Content: msg.content
-		};
-		
-		var query = 'INSERT INTO `messages` SET ?';
-		
-		connection.query(query, args);
-		
 		console.log(gray("[" + str + "]") + server(" [PM] ") + usr(msg.author.username) + " : " + message(msg.content));
 		return;
 	}
 
 	if(msg.channel.type === "text") {
-			var args = {
-				ServerID: msg.guild.id,
-				ChannelID: msg.channel.id,
-				User: msg.author.username,
-				UserID: msg.author.id,
-				Content: msg.content
-			};
-			
-			var query = 'INSERT INTO `messages` SET ?';
-			
-			connection.query(query, args);
-			
-			msgChannel.sendMessage("[" + str + "] " + msg.guild + " | " + msg.channel.name + " | " + msg.author.username + ": " + msg.cleanContent);
-			console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
+		if (msg.guild.id != "110373943822540800" && msg.guild.id != "185858769895424001" && msg.channel.id != "221664440750309377") {
+			console.log(gray("[" + str + "] ") + server(msg.guild.name) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.content));
+		}
+		
+		if(msg.channel.id == "185858769895424001" && msg.author.id == "193000443981463552") {
+			var feed = bot.channels.get("232295069363732482");
+			feed.sendMessage(msg.content);
+		}
 		
 		if(msg.content.indexOf("!rank") >= 0 || msg.content.indexOf("!levels") >= 0 && msg.channel.id == "176186766946992128") {
 			setTimeout(() => {msg.delete()}, 5000);
@@ -173,8 +145,8 @@ bot.on("guildMemberAdd", (guild, user) => {
 	if(guild.id === "176186766946992128"){
 		guild.defaultChannel.sendMessage("Hello " + user.user + " and welcome to the **FIRST Robotics Competition Discord Server** - " + 
                                                 "a place for you to talk to fellow FRC students and enthusiasts about more or less anything! " + 
-                                                "Please pay attention to the rules posted in #rules-info and have fun! Don't hesitate to ping a mod or an admin " + 
-                                                "if you have any questions! \n\n**Please change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
+                                                "Please pay attention to the rules posted in #rules-info and have fun! Don't hesitate to ping an admin, mod, or helper " + 
+                                                "if you have any questions! \n\n**Don't forget to change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
 		logChannel.sendMessage(user.user.username + " joined FIRST Robotics Competition");
 		var username = user.user.username;
 		var nickee = guild.members.find("id", user.id);
