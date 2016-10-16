@@ -68,8 +68,8 @@ bot.on("ready", () => {
     }
     str += hours + ":" + minutes + ":" + seconds;
     console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
-	const ASIANBOI = bot.users.get("171319044715053057");
-    ASIANBOI.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
+	const owner = bot.users.get(config.owner);
+    owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setStatus("online", "FIRST Steamworks 2017");
 
 	//var teleChannel = bot.channels.get("227072177495736321");
@@ -224,6 +224,15 @@ bot.on("messageUpdate", (message1, message2) => {
     if (message1.guild.id === "176186766946992128") {
         console.log(server(message1.author.username + "'s message was edited!\n Old message: " + message1.content));
     }
+});
+
+bot.on('disconnect', () => {
+	bot.login(config.token);
+});
+
+bot.on('warn', (warning) => {
+	const owner = bot.users.get(config.owner);
+	owner.sendMessage(warning);
 });
 
 telebot.on('message', function (msg) {
