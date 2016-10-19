@@ -43,7 +43,7 @@ function loadPlugins() {
 	for (let plugin of files) {
 		if (plugin.endsWith(".js")) {
 			plugins.set(plugin.slice(0, -3), require(__dirname + "/plugins/" + plugin));
-			console.log(plugin.slice(0, -3) + ": " + plugins.has(plugin.slice(0, -3)));
+			//console.log(plugin.slice(0, -3) + ": " + plugins.has(plugin.slice(0, -3)));
 		} else {
 			console.log(plugin);
 		}
