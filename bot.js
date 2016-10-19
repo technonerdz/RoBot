@@ -235,6 +235,12 @@ bot.on('warn', (warning) => {
 	owner.sendMessage(warning);
 });
 
+process.on("unhandledRejection", err => {
+	console.error("Uncaught Promise Error: \n" + err.stack);
+	const owner = bot.users.get(config.owner);
+	owner.sendMessage(err);
+});
+
 telebot.on('message', function (msg) {
 	if(msg.from.last_name != undefined)
 		var sender = msg.from.first_name + " " + msg.from.last_name;
