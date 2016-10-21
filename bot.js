@@ -118,7 +118,7 @@ bot.on("message", (msg) => {
 		}
 		
 		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944") {
-			setTimeout(() => {msg.delete()}, 10000);
+			setTimeout(() => {msg.delete()}, 6000);
 		}
 
 		if (msg.author.bot) return;
