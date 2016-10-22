@@ -2,7 +2,7 @@ module.exports = {
 	main: function(bot, message) {
 		var kickee = message.mentions.users.array()[0];
 
-		if (message.member.roles.exists("name", "Bot Commander")) {
+		if(message.guild.permissionsFor(message.author).serialize().MANAGE_MESSAGES) {
 			try {
 				var kicked = message.guild.members.find("id", kickee.id);
 				var reason = message.content.split(" ").splice(1).join(" ")
@@ -22,7 +22,7 @@ module.exports = {
 				console.log(e);
 			}
 		} else {
-			bot.reply(message, " you do not have the proper roles for this action");
+			message.reply( " you do not have permission to do this!");
 		}
 	}
 };
