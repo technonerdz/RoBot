@@ -30,6 +30,8 @@
 	"fs-extra": "*",
 	"google-search": "*",
 	"cleverbot-node": "*",
-	"mysql": "*"
+	"mysql": "*",
+	"node-telegram-bot-api": "*",
+	"unirest": "*"
   }
 }

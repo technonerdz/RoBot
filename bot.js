@@ -20,7 +20,7 @@ var connection = mysql.createConnection({
   host: 'localhost',
   user: 'robot',
   password: 'robot',
-  database: 'robot'
+  database: 'RoBot'
 });
 connection.query('SET NAMES utf8mb4');
 
@@ -43,7 +43,7 @@ function loadPlugins() {
 	for (let plugin of files) {
 		if (plugin.endsWith(".js")) {
 			plugins.set(plugin.slice(0, -3), require(__dirname + "/plugins/" + plugin));
-			console.log(plugin.slice(0, -3) + ": " + plugins.has(plugin.slice(0, -3)));
+			//console.log(plugin.slice(0, -3) + ": " + plugins.has(plugin.slice(0, -3)));
 		} else {
 			console.log(plugin);
 		}
@@ -68,8 +68,8 @@ bot.on("ready", () => {
     }
     str += hours + ":" + minutes + ":" + seconds;
     console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
-	const ASIANBOI = bot.users.get("171319044715053057");
-    ASIANBOI.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
+	const owner = bot.users.get(config.owner);
+    owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setStatus("online", "FIRST Steamworks 2017");
 
 	//var teleChannel = bot.channels.get("227072177495736321");
@@ -111,7 +111,6 @@ bot.on("message", (msg) => {
 			
 			connection.query(query, args);
 			
-			msgChannel.sendMessage("[" + str + "] " + msg.guild + " | " + msg.channel.name + " | " + msg.author.username + ": " + msg.cleanContent);
 			console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
 		
 		if(msg.content.indexOf("!rank") >= 0 || msg.content.indexOf("!levels") >= 0 && msg.channel.id == "176186766946992128") {
@@ -119,7 +118,7 @@ bot.on("message", (msg) => {
 		}
 		
 		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944") {
-			setTimeout(() => {msg.delete()}, 15000);
+			setTimeout(() => {msg.delete()}, 6000);
 		}
 
 		if (msg.author.bot) return;
@@ -133,15 +132,20 @@ bot.on("message", (msg) => {
 				msg.channel.sendMessage("ERROR: Bridge Error");
 			}
 		}
-
-		//Takes message such as "t!Hello" and sends it to Telegram
-		if (msg.content.startsWith("t!") || msg.content.startsWith("T!") || msg.channel.id == "227072177495736321") {
-			var args = msg.cleanContent;
-			//var args = msg.content;
-			if (msg.content.startsWith("t!")) {
-				args = args.substring(2, str.length);
+		
+		if(msg.channel.id == "233025496433033217" && msg.content == "%connection") {
+			try {
+				telebot.sendMessage(-1001060854075, "Testing connection...");
+				msg.channel.sendMessage("The connection is active!");
 			}
-			args = args.trim();
+			catch(err) {
+				msg.channel.sendMessage("ERROR: Bridge Error");
+			}
+		}
+
+		if (msg.channel.id == "227072177495736321") {
+			//var args = msg.content;
+			var args = msg.cleanContent.trim();
 			var member = msg.guild.members.find("id", msg.author.id);
 			if(member.nickname != null)
 				telebot.sendMessage(-1001080706960, member.nickname + ": " + args);
@@ -149,6 +153,15 @@ bot.on("message", (msg) => {
 				telebot.sendMessage(-1001080706960, msg.author.username + ": " + args);
 		}
 		
+		if (msg.guild.id == "233025496433033217") {
+			//var args = msg.content;
+			var args = msg.cleanContent.trim();
+			var member = msg.guild.members.find("id", msg.author.id);
+			if(member.nickname != null)
+				telebot.sendMessage(-1001060854075, member.nickname + ": " + args);
+			else
+				telebot.sendMessage(-1001060854075, msg.author.username + ": " + args);
+		}
 
 		if (msg.content.startsWith(PREFIX)) {
 			let content = msg.content.split(PREFIX)[1];
@@ -213,6 +226,21 @@ bot.on("messageUpdate", (message1, message2) => {
     }
 });
 
+bot.on('disconnect', () => {
+	bot.login(config.token);
+});
+
+bot.on('warn', (warning) => {
+	const owner = bot.users.get(config.owner);
+	owner.sendMessage(warning);
+});
+
+process.on("unhandledRejection", err => {
+	console.error("Uncaught Promise Error: \n" + err.stack);
+	const owner = bot.users.get(config.owner);
+	owner.sendMessage(err);
+});
+
 telebot.on('message', function (msg) {
 	if(msg.from.last_name != undefined)
 		var sender = msg.from.first_name + " " + msg.from.last_name;
@@ -224,8 +252,15 @@ telebot.on('message', function (msg) {
 		return;
 	}
 	
-	var logChannel = bot.channels.find('id', "227072177495736321");
-	logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
+	if(msg.chat.id == -1001080706960) {
+		var logChannel = bot.channels.find('id', "227072177495736321");
+		logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
+	}
+	
+	else if(msg.chat.id == -1001060854075) {
+		var logChannel = bot.channels.find('id', "233025496433033217");
+		logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
+	}
 });
 
 telebot.onText(/\/help/, function (msg, match) {
@@ -234,13 +269,27 @@ telebot.onText(/\/help/, function (msg, match) {
 });
 
 telebot.onText(/\/ping/, function (msg, match) {
-	try{
-		var logChannel = bot.channels.find('id', "227072177495736321");
-		logChannel.sendMessage("Testing Connection...");
-		var fromId = msg.from.id;
-		telebot.sendMessage(fromId, "The bridge is active!");
+	if(msg.chat.id == -1001080706960) {
+		try{
+			var logChannel = bot.channels.find('id', "227072177495736321");
+			logChannel.sendMessage("Testing Connection...");
+			var fromId = msg.from.id;
+			telebot.sendMessage(fromId, "The bridge is active!");
+		}
+		catch(err) {
+			telebot.sendMessage(fromId, "An error has occurred. Please ping @asianboifrc and notify him.");
+		}
 	}
-	catch(err) {
-		telebot.sendMessage(fromId, "An error has occurred. Please ping @asianboifrc and notify him.");
+	
+	else if(msg.chat.id == -1001060854075) {
+		try{
+			var logChannel = bot.channels.find('id', "233025496433033217");
+			logChannel.sendMessage("Testing Connection...");
+			var fromId = msg.from.id;
+			telebot.sendMessage(fromId, "The bridge is active!");
+		}
+		catch(err) {
+			telebot.sendMessage(fromId, "An error has occurred. Please ping @asianboifrc and notify him.");
+		}
 	}
 });
