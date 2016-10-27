@@ -124,14 +124,14 @@ bot.on("message", (msg) => {
 		if (msg.author.bot) return;
 		
 		if(msg.content == "%connection") {
-			var chan;
+			var dchan;
 			if(msg.channel.id == "227072177495736321")
-				chan = -1001080706960;
+				dchan = -1001080706960;
 			else if(msg.channel.id == "233025496433033217")
-				chan = -1001060854075;
+				dchan = -1001060854075;
 			
 			try {
-				telebot.sendMessage(chan, "Testing connection...");
+				telebot.sendMessage(dchan, "Testing connection...");
 				msg.channel.sendMessage("The connection is active!");
 			}
 			catch(err) {
@@ -140,18 +140,18 @@ bot.on("message", (msg) => {
 		}
 
 		if (msg.channel.id == "227072177495736321" || msg.guild.id == "233025496433033217") {
-			var chan;
+			var dchan;
 			if(msg.channel.id == "227072177495736321")
-				chan = -1001080706960;
+				dchan = -1001080706960;
 			if(msg.guild.id == "233025496433033217")
-				chan = -1001060854075;
+				dchan = -1001060854075;
 			
 			var args = msg.cleanContent.trim();
 			var member = msg.guild.members.find("id", msg.author.id);
 			if(member.nickname != null)
-				telebot.sendMessage(chan, member.nickname + ": " + args);
+				telebot.sendMessage(dchan, member.nickname + ": " + args);
 			else
-				telebot.sendMessage(chan, msg.author.username + ": " + args);
+				telebot.sendMessage(dchan, msg.author.username + ": " + args);
 		}
 
 		if (msg.content.startsWith(PREFIX)) {
