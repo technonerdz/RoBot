@@ -113,29 +113,25 @@ bot.on("message", (msg) => {
 			
 			console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
 		
-		if(msg.content.indexOf("!rank") >= 0 || msg.content.indexOf("!levels") >= 0 && msg.channel.id == "176186766946992128") {
+		if(msg.content.indexOf("!rank") >= 0 || msg.content.indexOf("!levels") >= 0) {
 			setTimeout(() => {msg.delete()}, 5000);
 		}
 		
-		if(msg.channel.id == "176186766946992128" && msg.author.id == "159985870458322944") {
-			setTimeout(() => {msg.delete()}, 6000);
+		if(msg.author.id == "159985870458322944" && msg.content.includes("RANK")) {
+			setTimeout(() => {msg.delete()}, 5000);
 		}
 
 		if (msg.author.bot) return;
 		
-		if(msg.channel.id == "227072177495736321" && msg.content == "%connection") {
+		if(msg.content == "%connection") {
+			var chan;
+			if(msg.channel.id == "227072177495736321")
+				chan = -1001080706960;
+			else if(msg.channel.id == "233025496433033217")
+				chan = -1001060854075;
+			
 			try {
-				telebot.sendMessage(-1001080706960, "Testing connection...");
-				msg.channel.sendMessage("The connection is active!");
-			}
-			catch(err) {
-				msg.channel.sendMessage("ERROR: Bridge Error");
-			}
-		}
-		
-		if(msg.channel.id == "233025496433033217" && msg.content == "%connection") {
-			try {
-				telebot.sendMessage(-1001060854075, "Testing connection...");
+				telebot.sendMessage(chan, "Testing connection...");
 				msg.channel.sendMessage("The connection is active!");
 			}
 			catch(err) {
@@ -143,24 +139,19 @@ bot.on("message", (msg) => {
 			}
 		}
 
-		if (msg.channel.id == "227072177495736321") {
-			//var args = msg.content;
+		if (msg.channel.id == "227072177495736321" || msg.guild.id == "233025496433033217") {
+			var chan;
+			if(msg.channel.id == "227072177495736321")
+				chan = -1001080706960;
+			if(msg.guild.id == "233025496433033217")
+				chan = -1001060854075;
+			
 			var args = msg.cleanContent.trim();
 			var member = msg.guild.members.find("id", msg.author.id);
 			if(member.nickname != null)
-				telebot.sendMessage(-1001080706960, member.nickname + ": " + args);
+				telebot.sendMessage(chan, member.nickname + ": " + args);
 			else
-				telebot.sendMessage(-1001080706960, msg.author.username + ": " + args);
-		}
-		
-		if (msg.guild.id == "233025496433033217") {
-			//var args = msg.content;
-			var args = msg.cleanContent.trim();
-			var member = msg.guild.members.find("id", msg.author.id);
-			if(member.nickname != null)
-				telebot.sendMessage(-1001060854075, member.nickname + ": " + args);
-			else
-				telebot.sendMessage(-1001060854075, msg.author.username + ": " + args);
+				telebot.sendMessage(chan, msg.author.username + ": " + args);
 		}
 
 		if (msg.content.startsWith(PREFIX)) {
