@@ -6,7 +6,8 @@ module.exports = {
 			try {
 				var banned = message.guild.members.get(banee.id);
 				var reason = message.content.split(" ").splice(1).join(" ");
-
+				if(!banned.bannable) return message.channel.sendMessage("I can't ban that person, stupid.");
+				
 				banned.ban();
 
 				message.reply(banee + " has been banned.");
