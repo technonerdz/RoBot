@@ -2,7 +2,7 @@ module.exports = {
 	main: function(bot, message) {
 		var kickee = message.mentions.users.array()[0];
 
-		if(message.guild.permissionsFor(message.author).serialize().MANAGE_MESSAGES) {
+		if(message.member.hasPermission("KICK_MEMBERS")) {
 			try {
 				var kicked = message.guild.members.find("id", kickee.id);
 				var reason = message.content.split(" ").splice(1).join(" ")
