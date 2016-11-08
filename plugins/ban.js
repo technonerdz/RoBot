@@ -11,7 +11,12 @@ module.exports = {
 					return;
 				}
 				
-				banned.ban();
+				try {
+					banned.ban();
+				} catch(e) {
+					message.channel.sendMessage("It seems that I couldn't ban that person!");
+					return;
+				}
 
 				message.reply(banee + " has been banned.");
 
