@@ -18,11 +18,11 @@ module.exports = {
 
 				try {
 					var log = message.guild.channels.find("name", "mod-log");
-					log.sendMessage("ACTION: BAN\nUSER: " + mutee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
+					log.sendMessage("ACTION: BAN\nUSER: " + banee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
 				} catch (e) {
 					console.error(e);
 					message.channel.sendMessage("Make a channel called #mod-log.");
-					message.channel.sendMessage("ACTION: BAN\nUSER: " + mutee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
+					message.channel.sendMessage("ACTION: BAN\nUSER: " + banee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
 				}
 			} catch (e) {
 				console.error(e);
