@@ -1,9 +1,3 @@
-/*RoBot v2.0
- *October 14, 2016
- *Created by Michael Cao (ASIANBOI)*/
-
-"use strict";
-
 var config = require("./config.json");
 const Discord = require("discord.js");
 const fse = require("fs-extra");
@@ -13,16 +7,6 @@ let bot = new Discord.Client({
 });
 
 bot.login(config.token);
-
-var mysql = require('mysql');
-
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'robot',
-  password: 'robot',
-  database: 'RoBot'
-});
-connection.query('SET NAMES utf8mb4');
 
 var TelegramBot = require("node-telegram-bot-api");
 var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
@@ -43,7 +27,6 @@ function loadPlugins() {
 	for (let plugin of files) {
 		if (plugin.endsWith(".js")) {
 			plugins.set(plugin.slice(0, -3), require(__dirname + "/plugins/" + plugin));
-			//console.log(plugin.slice(0, -3) + ": " + plugins.has(plugin.slice(0, -3)));
 		} else {
 			console.log(plugin);
 		}
@@ -71,73 +54,17 @@ bot.on("ready", () => {
 	const owner = bot.users.get(config.owner);
     owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setStatus("online", "FIRST Steamworks 2017");
-
-	//var teleChannel = bot.channels.get("227072177495736321");
-	//teleChannel.sendMessage("**THE CONNECTION HAS BEEN OPENED**");
-	//telebot.sendMessage(-1001080706960, "THE CONNECTION HAS BEEN OPENED");
 });
 
 bot.on("message", (msg) => {
 	var n = msg.timestamp.toTimeString();
 	var str = n.substring(0, n.indexOf(" "));
 
-	if(msg.channel.type === "dm" || msg.channel.type === "group") {
-		var args = {
-			ServerID: msg.channel.type,
-			ChannelID: msg.author.id,
-			User: msg.author.username,
-			UserID: msg.author.id,
-			Content: msg.content
-		};
-		
-		var query = 'INSERT INTO `messages` SET ?';
-		
-		connection.query(query, args);
-		
-		console.log(gray("[" + str + "]") + server(" [PM] ") + usr(msg.author.username) + " : " + message(msg.content));
-		return;
-	}
-
 	if(msg.channel.type === "text") {
-			var args = {
-				ServerID: msg.guild.id,
-				ChannelID: msg.channel.id,
-				User: msg.author.username,
-				UserID: msg.author.id,
-				Content: msg.content
-			};
 			
-			var query = 'INSERT INTO `messages` SET ?';
-			
-			connection.query(query, args);
-			
-			console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
-		
-		if(msg.content.indexOf("!rank") >= 0 || msg.content.indexOf("!levels") >= 0) {
-			setTimeout(() => {msg.delete()}, 5000);
-		}
-		
-		if(msg.author.id == "159985870458322944" && msg.content.includes("RANK")) {
-			setTimeout(() => {msg.delete()}, 5000);
-		}
+		console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
 
 		if (msg.author.bot) return;
-		
-		if(msg.content == "%connection") {
-			var dchan;
-			if(msg.channel.id == "227072177495736321")
-				dchan = -1001080706960;
-			else if(msg.channel.id == "233025496433033217")
-				dchan = -1001060854075;
-			
-			try {
-				telebot.sendMessage(dchan, "Testing connection...");
-				msg.channel.sendMessage("The connection is active!");
-			}
-			catch(err) {
-				msg.channel.sendMessage("ERROR: Bridge Error");
-			}
-		}
 
 		if (msg.channel.id == "227072177495736321" || msg.guild.id == "233025496433033217") {
 			var dchan;
@@ -203,35 +130,6 @@ bot.on("guildBanAdd", (guild, user) => {
 		logChannel.sendMessage(":hammer: " + user.user.username + " was banned.");
 });
 
-bot.on("messageDelete", (message) => {
-    try {
-        console.log(server(msg.author.username + "'s message was deleted!\n Old message: " + msg.content));
-    } catch (err) {
-        console.log(server("ERR: MESSAGE NOT ARCHIVED"));
-    }
-});
-
-bot.on("messageUpdate", (message1, message2) => {
-    if (message1.guild.id === "176186766946992128") {
-        console.log(server(message1.author.username + "'s message was edited!\n Old message: " + message1.content));
-    }
-});
-
-bot.on('disconnect', () => {
-	bot.login(config.token);
-});
-
-bot.on('warn', (warning) => {
-	const owner = bot.users.get(config.owner);
-	owner.sendMessage(warning);
-});
-
-process.on("unhandledRejection", err => {
-	console.error("Uncaught Promise Error: \n" + err.stack);
-	const owner = bot.users.get(config.owner);
-	owner.sendMessage(err);
-});
-
 telebot.on('message', function (msg) {
 	if(msg.from.last_name != undefined)
 		var sender = msg.from.first_name + " " + msg.from.last_name;
@@ -251,36 +149,5 @@ telebot.on('message', function (msg) {
 	else if(msg.chat.id == -1001060854075) {
 		var logChannel = bot.channels.find('id', "233025496433033217");
 		logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
-	}
-});
-
-telebot.onText(/\/help/, function (msg, match) {
-	var fromId = msg.from.id;
-	telebot.sendMessage(fromId, "Just send a message in the Discord channel to send a message to the Discord server!");
-});
-
-telebot.onText(/\/ping/, function (msg, match) {
-	if(msg.chat.id == -1001080706960) {
-		try{
-			var logChannel = bot.channels.find('id', "227072177495736321");
-			logChannel.sendMessage("Testing Connection...");
-			var fromId = msg.from.id;
-			telebot.sendMessage(fromId, "The bridge is active!");
-		}
-		catch(err) {
-			telebot.sendMessage(fromId, "An error has occurred. Please ping @asianboifrc and notify him.");
-		}
-	}
-	
-	else if(msg.chat.id == -1001060854075) {
-		try{
-			var logChannel = bot.channels.find('id', "233025496433033217");
-			logChannel.sendMessage("Testing Connection...");
-			var fromId = msg.from.id;
-			telebot.sendMessage(fromId, "The bridge is active!");
-		}
-		catch(err) {
-			telebot.sendMessage(fromId, "An error has occurred. Please ping @asianboifrc and notify him.");
-		}
 	}
 });
