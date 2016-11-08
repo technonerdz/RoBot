@@ -57,7 +57,7 @@ bot.on("ready", () => {
 });
 
 bot.on("message", (msg) => {
-	var n = msg.createdTimestamp.toTimeString();
+	var n = msg.createdAt.toTimeString();
 	var str = n.substring(0, n.indexOf(" "));
 
 	if(msg.channel.type === "text") {
