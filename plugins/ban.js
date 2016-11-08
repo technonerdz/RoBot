@@ -14,13 +14,11 @@ module.exports = {
 				banned.ban();
 
 				message.reply(banee + " has been banned.");
-				message.channel.sendMessage("ACTION: BAN\nUSER: " + banned.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
 
 				try {
 					var log = message.guild.channels.find("name", "mod-log");
 					log.sendMessage("ACTION: BAN\nUSER: " + banee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
 				} catch (e) {
-					console.error(e);
 					message.channel.sendMessage("Make a channel called #mod-log.");
 					message.channel.sendMessage("ACTION: BAN\nUSER: " + banee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
 				}
