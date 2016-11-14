@@ -1,12 +1,12 @@
 {
   "name": "RoBot",
   "version": "2.0.0",
-  "description": "A useful Discord bot",
+  "description": "A Discord bot for the FRC Discord Server",
   "author": "Michael Cao <mike.x.cao@gmail.com>",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node robot.js"
+    "test": "node bot.js",
+    "start": "supervisor bot.js"
   },
   "repository": {
   "type": "git",
