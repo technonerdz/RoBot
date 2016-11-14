@@ -6,11 +6,6 @@ let bot = new Discord.Client({
   disableEveryone: true
 });
 
-bot.login(config.token);
-
-var TelegramBot = require("node-telegram-bot-api");
-var telebot = telebot = new TelegramBot(config.ttoken, {polling: true});
-
 var chalk = require("chalk");
 var server = chalk.bold.red;
 var chan = chalk.bold.green;
@@ -130,24 +125,4 @@ bot.on("guildBanAdd", (guild, user) => {
 		logChannel.sendMessage(":hammer: " + user.user.username + " was banned.");
 });
 
-telebot.on('message', function (msg) {
-	if(msg.from.last_name != undefined)
-		var sender = msg.from.first_name + " " + msg.from.last_name;
-	else
-		var sender = msg.from.first_name;
-	var content = msg.text;
-	
-	if(msg.text.indexOf("@everyone") > -1 || msg.text.indexOf("@here") > -1) {
-		return;
-	}
-	
-	if(msg.chat.id == -1001080706960) {
-		var logChannel = bot.channels.find('id', "227072177495736321");
-		logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
-	}
-	
-	else if(msg.chat.id == -1001060854075) {
-		var logChannel = bot.channels.find('id', "233025496433033217");
-		logChannel.sendMessage("`[TELEGRAM]` " + sender + ": " + content);
-	}
-});
+bot.login(config.token);
