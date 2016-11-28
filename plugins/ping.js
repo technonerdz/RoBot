@@ -3,7 +3,7 @@ module.exports = {
 		var start = new Date(message.timestamp).getTime();
 
 		message.channel.sendMessage("Pong!")
-			.then(message => message.edit("Hello, pong! You're on the " + message.channel.guild.name + " server.\nTook " + (message.timestamp.getTime() - start) + " ms to respond."))
-			.catch(message.edit);
+			.then(msg => msg.edit("Hello, pong! You're on the " + message.channel.guild.name + " server.\nTook " + (message.timestamp.getTime() - start) + " ms to respond."))
+			.catch(msg.edit);
 	}
 };
