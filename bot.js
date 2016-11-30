@@ -61,19 +61,24 @@ bot.on("message", (msg) => {
 
 		if (msg.author.bot) return;
 
-		if (msg.channel.id == "227072177495736321" || msg.guild.id == "233025496433033217") {
-			var dchan;
-			if(msg.channel.id == "227072177495736321")
-				dchan = -1001080706960;
-			if(msg.guild.id == "233025496433033217")
-				dchan = -1001060854075;
+		if(msg.content == "I have accepted the rules and regulations." && !msg.author.roles.find('name', 'Members')) {
+			var logChannel = bot.channels.get("200090417809719296");
+			var role = msg.guild.roles.find('name', 'Members');
+			logChannel.sendMessage(msg.author + " has read the rules and verified themselves!");
+			msg.author.addRole(role).catch(console.error);
+			var nickee = guild.members.find(msg.author.user);
+			nickee.setNickname(msg.author.user.username + " - (SET TEAM#)");
+			setTimeout(function() {
+				logChannel.sendMessage(username + " Join Nick set to --> ``" + user.user.username + " - (SET TEAM#)``");
+			}, 1000)
 			
-			var args = msg.cleanContent.trim();
-			var member = msg.guild.members.find("id", msg.author.id);
-			if(member.nickname != null)
-				telebot.sendMessage(dchan, member.nickname + ": " + args);
-			else
-				telebot.sendMessage(dchan, msg.author.username + ": " + args);
+			guild.defaultChannel.sendMessage("Welcome " + user.user + " to the **FIRST Robotics Competition Discord Server** - " + 
+                                                "a place for you to talk to fellow FRC members about more or less anything! " + 
+                                                "Please follow the rules posted in #rules-info and have fun! Don't hesitate to ping a mod or an admin " + 
+                                                "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
+			message.guild.channels.find('id', '253661179702935552').fetchMessages({limit: num})
+					.then(messages => message.channel.bulkDelete(messages))
+					.catch(message.channel.bulkDelete);
 		}
 
 		if (msg.content.startsWith(PREFIX)) {
@@ -97,17 +102,11 @@ bot.on("message", (msg) => {
 bot.on("guildMemberAdd", (guild, user) => {
 	var logChannel = bot.channels.get("200090417809719296");
 	if(guild.id === "176186766946992128"){
-		guild.defaultChannel.sendMessage("Hello " + user.user + " and welcome to the **FIRST Robotics Competition Discord Server** - " + 
-                                                "a place for you to talk to fellow FRC students and enthusiasts about more or less anything! " + 
-                                                "Please pay attention to the rules posted in #rules-info and have fun! Don't hesitate to ping a mod or an admin " + 
-                                                "if you have any questions! \n\n**Please change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
-		logChannel.sendMessage(user.user.username + " joined FIRST Robotics Competition");
-		var username = user.user.username;
-		var nickee = guild.members.find("id", user.id);
-		nickee.setNickname(username + " - (SET TEAM#)");
-		setTimeout(function() {
-            logChannel.sendMessage(username + " Join Nick set to --> ``" + user.user.username + " - (SET TEAM#)``");
-        }, 1000)
+		logChannel.sendMessage(user.user.username + " joined the server");
+		
+		guild.channels.find('id', '253661179702935552').sendMessage("Welcome " + user + " to the FIRST® Robotics Competition server! " + 
+		"You are currently unable to see the vast majority of the server's channels. "
+		"To gain access to the rest of the server, please read #rules-info to find the phrase to enter.")
 	}
 });
 
