@@ -61,7 +61,7 @@ bot.on("message", (msg) => {
 
 		if (msg.author.bot) return;
 
-		if(msg.content == "I have read the rules and regulations." && msg.channel.id == "200090417809719296") {
+		if (msg.content === "I have read the rules and regulations." && msg.channel.id === "200090417809719296") {
 			var logChannel = bot.channels.get("200090417809719296");
 			var role = msg.guild.roles.get('name', 'Members');
 			logChannel.sendMessage(msg.author + " has read the rules and verified themselves!");
