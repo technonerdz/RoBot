@@ -66,19 +66,19 @@ bot.on("message", (msg) => {
 			var role = msg.guild.roles.get('name', 'Members');
 			logChannel.sendMessage(msg.author + " has read the rules and verified themselves!");
 			msg.member.addRole(role).catch(console.error);
-			var nickee = guild.members.find(msg.author.user);
+			var nickee = msg.guild.members.find(msg.author.user);
 			nickee.setNickname(msg.author.user.username + " - (SET TEAM#)");
 			setTimeout(function() {
 				logChannel.sendMessage(username + " Join Nick set to --> ``" + user.user.username + " - (SET TEAM#)``");
 			}, 1000)
 			
-			guild.defaultChannel.sendMessage("Welcome " + user.user + " to the **FIRST Robotics Competition Discord Server** - " + 
+			msg.guild.defaultChannel.sendMessage("Welcome " + user.user + " to the **FIRST Robotics Competition Discord Server** - " + 
                                                 "a place for you to talk to fellow FRC members about more or less anything! " + 
                                                 "Please follow the rules posted in #rules-info and have fun! Don't hesitate to ping a mod or an admin " + 
                                                 "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
-			message.guild.channels.find('id', '253661179702935552').fetchMessages({limit: num})
-					.then(messages => message.channel.bulkDelete(messages))
-					.catch(message.channel.bulkDelete);
+			msg.guild.channels.find('id', '253661179702935552').fetchMessages({limit: num})
+					.then(messages => msg.channel.bulkDelete(messages))
+					.catch(msg.channel.bulkDelete);
 		}
 
 		if (msg.content.startsWith(PREFIX)) {
