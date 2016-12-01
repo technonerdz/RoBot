@@ -102,9 +102,10 @@ bot.on("message", (msg) => {
 bot.on("guildMemberAdd", (guild, user) => {
 	var logChannel = bot.channels.get('id', '200090417809719296');
 	if(guild.id === "176186766946992128"){
-		logChannel.sendMessage(user.user.username + " joined the server");
+		logChannel.sendMessage(user.username + " joined the server");
 		
-		guild.channels.find('id', '253661179702935552').sendMessage("Welcome " + user + " to the FIRST® Robotics Competition server! " + 
+		var welcome = guild.channels.find('id', '253661179702935552')
+		welcome.sendMessage("Welcome " + user + " to the FIRST® Robotics Competition server! " + 
 		"You are currently unable to see the server's main channels. " +
 		"To gain access to the rest of the server, please read #rules-info to find the phrase to enter.");
 	}
