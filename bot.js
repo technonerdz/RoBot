@@ -100,8 +100,8 @@ bot.on("message", (msg) => {
 });
 
 bot.on("guildMemberAdd", (member) => {
-	var logChannel = bot.channels.get('id', '200090417809719296');
 	if(member.guild.id === "176186766946992128"){
+		var logChannel = bot.channels.find('id', '200090417809719296');
 		logChannel.sendMessage(member.username + " joined the server");
 		
 		var welcome = member.guild.channels.find('id', '253661179702935552')
