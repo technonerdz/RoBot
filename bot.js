@@ -69,7 +69,7 @@ bot.on("message", (msg) => {
 			var nickee = msg.guild.members.find('id', msg.author.id);
 			nickee.setNickname(msg.author.user.username + " - (SET TEAM#)");
 			setTimeout(function() {
-				logChannel.sendMessage(username + " Join Nick set to --> ``" + user.user.username + " - (SET TEAM#)``");
+				logChannel.sendMessage(username + " Join Nick set to --> ``" + user.username + " - (SET TEAM#)``");
 			}, 1000)
 			
 			msg.guild.defaultChannel.sendMessage("Welcome " + user.user + " to the **FIRST Robotics Competition Discord Server** - " + 
