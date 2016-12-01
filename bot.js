@@ -99,13 +99,13 @@ bot.on("message", (msg) => {
 	}
 });
 
-bot.on("guildMemberAdd", (guild, user) => {
+bot.on("guildMemberAdd", (member) => {
 	var logChannel = bot.channels.get('id', '200090417809719296');
-	if(guild.id === "176186766946992128"){
-		logChannel.sendMessage(user.username + " joined the server");
+	if(member.guild.id === "176186766946992128"){
+		logChannel.sendMessage(member.username + " joined the server");
 		
-		var welcome = guild.channels.find('id', '253661179702935552')
-		welcome.sendMessage("Welcome " + user + " to the FIRST® Robotics Competition server! " + 
+		var welcome = member.guild.channels.find('id', '253661179702935552')
+		welcome.sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " + 
 		"You are currently unable to see the server's main channels. " +
 		"To gain access to the rest of the server, please read <#176386169959874560> to find the phrase to enter.");
 	}
