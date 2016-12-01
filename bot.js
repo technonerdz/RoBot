@@ -72,7 +72,7 @@ bot.on("message", (msg) => {
 				logChannel.sendMessage(username + " Join Nick set to --> ``" + user.username + " - (SET TEAM#)``");
 			}, 1000)
 			
-			msg.guild.defaultChannel.sendMessage("Welcome " + user.user + " to the **FIRST Robotics Competition Discord Server** - " + 
+			msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server** - " + 
                                                 "a place for you to talk to fellow FRC members about more or less anything! " + 
                                                 "Please follow the rules posted in #rules-info and have fun! Don't hesitate to ping a mod or an admin " + 
                                                 "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
