@@ -74,7 +74,7 @@ bot.on("message", (msg) => {
 			
 			msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server** - " + 
                                                 "a place for you to talk to fellow FRC members about more or less anything! " + 
-                                                "Please follow the rules posted in #rules-info and have fun! Don't hesitate to ping a mod or an admin " + 
+                                                "Please follow the rules posted in <#176386169959874560> and have fun! Don't hesitate to ping a mod or an admin " + 
                                                 "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
 			msg.guild.channels.find('id', '253661179702935552').fetchMessages({limit: 5})
 					.then(messages => msg.channel.bulkDelete(messages))
@@ -107,7 +107,7 @@ bot.on("guildMemberAdd", (guild, user) => {
 		var welcome = guild.channels.find('id', '253661179702935552')
 		welcome.sendMessage("Welcome " + user + " to the FIRST® Robotics Competition server! " + 
 		"You are currently unable to see the server's main channels. " +
-		"To gain access to the rest of the server, please read #rules-info to find the phrase to enter.");
+		"To gain access to the rest of the server, please read <#176386169959874560> to find the phrase to enter.");
 	}
 });
 
