@@ -107,7 +107,7 @@ bot.on("guildMemberAdd", (member) => {
 		var welcome = member.guild.channels.find('id', '253661179702935552')
 		welcome.sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " + 
 		"You are currently unable to see the server's main channels. " +
-		"To gain access to the rest of the server, please read <#176386169959874560> to find the phrase to enter.");
+		"To gain access to the rest of the server, please read <#253679529745186816> to find the phrase to enter.");
 	}
 });
 
