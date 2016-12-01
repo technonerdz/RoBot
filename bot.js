@@ -63,8 +63,8 @@ bot.on("message", (msg) => {
 
 		if (msg.content.startsWith("I have read the rules") && msg.channel.id === "253661179702935552") {
 			var logChannel = bot.channels.get("200090417809719296");
-			var role = msg.guild.roles.get('name', 'Members');
 			logChannel.sendMessage(msg.author + " has read the rules and verified themselves!");
+			var role = msg.guild.roles.find('name', 'Members');
 			msg.member.addRole(role).catch(console.error);
 			var nickee = msg.guild.members.find('id', msg.author.id);
 			nickee.setNickname(msg.author.username + " - (SET TEAM#)");
