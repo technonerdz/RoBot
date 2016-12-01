@@ -48,7 +48,7 @@ bot.on("ready", () => {
     console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
 	const owner = bot.users.get(config.owner);
     owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
-	bot.user.setStatus("online", "FIRST Steamworks 2017");
+	bot.setGame("FIRST Steamworks 2017");
 });
 
 bot.on("message", (msg) => {
