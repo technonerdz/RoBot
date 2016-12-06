@@ -112,8 +112,8 @@ bot.on("guildMemberAdd", (member) => {
 });
 
 bot.on("guildMemberRemove", (member) => {
-	guild.defaultChannel.sendMessage(member.user.username + " left the server. RIP " + member.user.username + ".");
-	if(guild.id === "176186766946992128"){
+	member.guild.defaultChannel.sendMessage(member.user.username + " left the server. RIP " + member.user.username + ".");
+	if(member.guild.id === "176186766946992128"){
 		var logChannel = bot.channels.get("200090417809719296");
 		logChannel.sendMessage(member.user.username + " left FIRST Robotics Competition");
 	}
