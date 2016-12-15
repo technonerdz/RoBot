@@ -41,8 +41,8 @@ function countdown() {
 	var totalMinutes = parseInt(time / 60000);
 	var minutes = parseInt((time - (totalHours * 3600000)) / 60000);
 	var seconds = parseInt((time - (totalMinutes * 60000)) / 1000);
-	bot.channels.get('176186766946992128').setTopic("*FIRST®* Steamworks™ Kickoff Countdown: " + days + ":" + hours + ":" + minutes + ":" + seconds + "\n" + 
-	'"An innovation is one of those things that society looks at and says, if we make this part of the way we live and work, ' + 
+	bot.channels.get('176186766946992128').setTopic("*FIRST®* Steamworks™ Kickoff Countdown: " + days + ":" + hours + ":" + minutes + ":00\n" + 
+	'" | An innovation is one of those things that society looks at and says, if we make this part of the way we live and work, ' + 
 	'it will change the way we live and work." - Dean Kamen | #general is for talk only | Read #rules-info for rules');
 }
 
@@ -66,7 +66,7 @@ bot.on("ready", () => {
 	const owner = bot.users.get(config.owner);
     owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setGame("FIRST Steamworks 2017");
-	setInterval(() => {countdown()}, 1000)
+	setInterval(() => {countdown()}, 60000)
 });
 
 bot.on("message", (msg) => {
