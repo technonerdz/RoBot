@@ -64,7 +64,7 @@ bot.on("message", (msg) => {
 		if (msg.content.startsWith("I have read the rules") && msg.channel.id === "253661179702935552") {
 			var logChannel = bot.channels.get("200090417809719296");
 			logChannel.sendMessage(msg.author + " has read the rules and verified themselves!");
-			var role = msg.guild.roles.get('Members');
+			var role = msg.guild.roles.find('name', 'Members');
 			msg.member.addRole(role).catch(console.error);
 			var nickee = msg.guild.members.find('id', msg.author.id);
 			nickee.setNickname(msg.author.username + " - (SET TEAM#)");
@@ -76,7 +76,7 @@ bot.on("message", (msg) => {
                                                 "a place for you to talk to fellow FRC members about more or less anything! " + 
                                                 "Please follow the rules posted in <#176386169959874560> and have fun! Don't hesitate to ping a mod or an admin " + 
                                                 "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
-			msg.guild.channels.find('id', '253661179702935552').fetchMessages({limit: 5})
+			msg.guild.channels.get('253661179702935552').fetchMessages({limit: 5})
 					.then(messages => msg.channel.bulkDelete(messages))
 					.catch(msg.channel.bulkDelete);
 		}
@@ -101,10 +101,10 @@ bot.on("message", (msg) => {
 
 bot.on("guildMemberAdd", (member) => {
 	if(member.guild.id === "176186766946992128"){
-		var logChannel = bot.channels.find('id', '200090417809719296');
+		var logChannel = bot.channels.get('200090417809719296');
 		logChannel.sendMessage(member.user.username + " joined the server");
 		
-		var welcome = member.guild.channels.find('id', '253661179702935552')
+		var welcome = member.guild.channels.get('253661179702935552')
 		welcome.sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " + 
 		"You are currently unable to see the server's main channels. " +
 		"To gain access to the rest of the server, please read <#253679529745186816> to find the phrase to enter.");
