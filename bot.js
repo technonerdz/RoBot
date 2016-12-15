@@ -36,17 +36,32 @@ function countdown() {
 	var t2 = d2.getTime();
 	var time = t1 - t2;
 	var days = parseInt(time/86400000);
+	var dzero;
+	if(days < 10)
+		dzero = "0";
+	else
+		dzero = "";
 	var totalHours = parseInt(time / 3600000);
 	var hours = parseInt((time-(days*86400000)) / 3600000);
+	var hzero;
+	if(hours < 10)
+		hzero = "0";
+	else
+		hzero = "";
 	var totalMinutes = parseInt(time / 60000);
 	var minutes = parseInt((time - (totalHours * 3600000)) / 60000);
+	var mzero;
+	if(hours < 10)
+		minutes = "0";
+	else
+		mzero = "";
 	var seconds = parseInt((time - (totalMinutes * 60000)) / 1000);
 	var zero;
 	if(seconds < 10)
 		zero = "0";
 	else
 		zero = "";
-	bot.channels.get('176186766946992128').setTopic("*FIRST®* Steamworks™ Kickoff Countdown: " + days + ":" + hours + ":" + minutes + ":" + zero + seconds + "\n" + 
+	bot.channels.get('176186766946992128').setTopic("*FIRST®* Steamworks™ Kickoff Countdown: " + dzero + days + ":" + hzero + hours + ":" + mzero + minutes + ":" + zero + seconds + "\n" + 
 	' | "An innovation is one of those things that society looks at and says, if we make this part of the way we live and work, ' + 
 	'it will change the way we live and work." - Dean Kamen | #general is for talk only | Read #rules-info for rules');
 }
