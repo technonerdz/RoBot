@@ -74,7 +74,7 @@ bot.on("message", (msg) => {
 			
 			msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server** - " + 
                                                 "a place for you to talk to fellow FRC members about more or less anything! " + 
-                                                "Please follow the rules posted in <#176386169959874560> and have fun! Don't hesitate to ping a mod or an admin " + 
+                                                "Please follow the rules posted in <#253679529745186816> and have fun! Don't hesitate to ping a mod or an admin " + 
                                                 "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
 			msg.guild.channels.get('253661179702935552').fetchMessages({limit: 5})
 					.then(messages => msg.channel.bulkDelete(messages))
