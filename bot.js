@@ -52,7 +52,7 @@ function countdown() {
 	var minutes = parseInt((time - (totalHours * 3600000)) / 60000);
 	var mzero;
 	if(hours < 10)
-		minutes = "0";
+		mzero = "0";
 	else
 		mzero = "";
 	var seconds = parseInt((time - (totalMinutes * 60000)) / 1000);
