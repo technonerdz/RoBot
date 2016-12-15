@@ -66,7 +66,7 @@ bot.on("ready", () => {
 	const owner = bot.users.get(config.owner);
     owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setGame("FIRST Steamworks 2017");
-	setInterval(countdown(), 1000);
+	setInterval(() => {countdown()}, 1000)
 });
 
 bot.on("message", (msg) => {
