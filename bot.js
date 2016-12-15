@@ -66,7 +66,7 @@ bot.on("message", (msg) => {
 			logChannel.sendMessage(msg.author + " has read the rules and verified themselves!");
 			var role = msg.guild.roles.find('name', 'Members');
 			msg.member.addRole(role).catch(console.error);
-			var nickee = msg.guild.members.find('id', msg.author.id);
+			var nickee = msg.guild.members.get(msg.author.id);
 			nickee.setNickname(msg.author.username + " - (SET TEAM#)");
 			setTimeout(function() {
 				logChannel.sendMessage(msg.author.username + " Join Nick set to --> ``" + msg.author.username + " - (SET TEAM#)``");
