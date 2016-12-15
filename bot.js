@@ -109,6 +109,10 @@ bot.on("guildMemberAdd", (member) => {
 		"You are currently unable to see the server's main channels. " +
 		"To gain access to the rest of the server, please read <#253679529745186816> to find the phrase to enter.");
 	}
+	if(member.guild.id === "170144952871813120") {
+		member.guild.defaultChannel.sendMessage("Welcome " + member + " to the " + member.guild.name + " server! " + 
+		"Please read the rules and remember to be GP. \n[Set your nickname to [name] [team #] (pronouns) | Ex: Sean R. 5113 (he/him)]")
+	}
 });
 
 bot.on("guildMemberRemove", (member) => {
@@ -121,8 +125,10 @@ bot.on("guildMemberRemove", (member) => {
 
 bot.on("guildBanAdd", (guild, user) => {
 	guild.defaultChannel.sendMessage(":hammer: " + user.user.username + " was banned.");
-	var logChannel = bot.channels.get("200090417809719296");
+	if(member.guild.id === "176186766946992128"){
+		var logChannel = bot.channels.get("200090417809719296");
 		logChannel.sendMessage(":hammer: " + user.user.username + " was banned.");
+	}
 });
 
 bot.login(config.token);
