@@ -29,6 +29,23 @@ function loadPlugins() {
     console.log("Plugins loaded.");
 }
 
+function countdown() {
+	var d1 = new Date("2017", "0", "7", "12", "0");
+	var d2 = new Date();
+	var t1 = d1.getTime();
+	var t2 = d2.getTime();
+	var time = t1 - t2;
+	var days = parseInt(time/86400000);
+	var totalHours = parseInt(time / 3600000);
+	var hours = parseInt((time-(days*86400000)) / 3600000);
+	var totalMinutes = parseInt(time / 60000);
+	var minutes = parseInt((time - (totalHours * 3600000)) / 60000);
+	var seconds = parseInt((time - (totalMinutes * 60000)) / 1000);
+	bot.channels.get('176186766946992128').setTopic("*FIRST®* Steamworks™ Kickoff Countdown: " + days + ":" + hours + ":" + minutes + ":" + seconds + "\n" + 
+	'"An innovation is one of those things that society looks at and says, if we make this part of the way we live and work, ' + 
+	'it will change the way we live and work." - Dean Kamen | #general is for talk only | Read #rules-info for rules');
+}
+
 bot.on("ready", () => {
 	console.log("RoBot is ready! Loading plugins...");
 	loadPlugins();
@@ -49,6 +66,7 @@ bot.on("ready", () => {
 	const owner = bot.users.get(config.owner);
     owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	bot.user.setGame("FIRST Steamworks 2017");
+	setInterval(countdown(), 1000);
 });
 
 bot.on("message", (msg) => {
