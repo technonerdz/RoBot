@@ -30,7 +30,7 @@ function loadPlugins() {
 }
 
 function countdown() {
-	var d1 = new Date("2017", "0", "7", "16", "0");
+	var d1 = new Date("2017", "0", "7", "17", "0");
 	var d2 = new Date();
 	var t1 = d1.getTime();
 	var t2 = d2.getTime();
