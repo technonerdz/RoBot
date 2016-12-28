@@ -15,7 +15,7 @@ module.exports = {
 
 				try {
 					var log = message.guild.channels.find("name", "mod-log");
-					message.channel.sendMessage("ACTION: KICK\nUSER: " + kickee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
+					log.sendMessage("ACTION: KICK\nUSER: " + kickee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
 				} catch (e) {
 					console.error(e);
 					message.channel.sendMessage("Make a channel called #mod-log.");
