@@ -2,10 +2,13 @@ module.exports = {
 	main: function(bot, message) {
 		var kickee = message.mentions.users.array()[0];
 
-		if(message.member.hasPermission("KICK_MEMBERS")) {
+		if (message.member.hasPermission('KICK_MEMBERS') === true || message.member.hasPermission('ADMINISTRATOR') === true) {
 			try {
-				var kicked = message.guild.members.find("id", kickee.id);
+				var kicked = message.guild.members.get(kickee.id);
 				var reason = message.content.split(" ").splice(1).join(" ")
+				
+				if(reason == "")
+					var reason = "Reason not specified.";
 
 				kicked.kick();
 				message.channel.sendMessage(kickee + " has been kicked.");

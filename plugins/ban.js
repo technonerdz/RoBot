@@ -2,14 +2,10 @@ module.exports = {
 	main: function(bot, message) {
 		var banee = message.mentions.users.array()[0];
 
-		if (message.member.roles.exists("name", "Bot Commander")) {
+		if (message.member.hasPermission('BAN_MEMBERS') === true || message.member.hasPermission('ADMINISTRATOR') === true) {
 			try {
 				var banned = message.guild.members.get(banee.id);
 				var reason = message.content.split(" ").splice(1).join(" ");
-				if(banned.bannable = false) {
-					message.channel.sendMessage("I can't ban that person, stupid.");
-					return;
-				}
 				
 				banned.ban();
 
@@ -26,7 +22,7 @@ module.exports = {
 				console.error(e);
 			}
 		} else {
-			message.reply(" you do not have the proper roles for this action");
+			message.reply(" you do not have permission to do this action");
 		}
 	}
 };

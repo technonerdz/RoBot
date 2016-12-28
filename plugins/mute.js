@@ -1,9 +1,9 @@
 module.exports = {
 	main: function(bot, message) {
 		var mutee = message.mentions.users.array()[0];
-		if (message.member.roles.exists('name', 'Bot Commander')) {
+		if (message.member.hasPermission('KICK_MEMBERS') === true || message.member.hasPermission('ADMINISTRATOR') === true) {
 			try {
-				var muted = message.guild.members.find('id', mutee.id);
+				var muted = message.guild.members.get(mutee.id);
 				let role = message.guild.roles.find("name", 'muted');
 				muted.addRole(role).catch(console.error);
 				message.reply(mutee + ' has been muted.');

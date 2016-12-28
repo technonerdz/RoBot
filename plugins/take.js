@@ -9,7 +9,7 @@ module.exports = {
 				message.channel.sendMessage("Role does not exist.");
 				return;
 			}
-			var member = message.guild.members.find('id', user.id);
+			var member = message.guild.members.get(user.id);
 			member.removeRole(roleToTake);
 			message.channel.sendMessage("Successfully removed role " + roleToTake + " from " + user.username + ".");
 		}

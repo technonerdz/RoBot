@@ -10,7 +10,7 @@ module.exports = {
 				message.channel.sendMessage("Role does not exist.");
 				return;
 			}
-			var member = message.guild.members.find('id', user.id);
+			var member = message.guild.members.get(user.id);
 			member.addRole(role).catch(console.error);
 			message.channel.sendMessage("Successfully added role " + roleToGive + " to " + user.username + ".");
 		}
