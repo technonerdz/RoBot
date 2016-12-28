@@ -22,16 +22,12 @@
   "discordbot"
 ],
   "dependencies": {
-    "supervisor": "*",
     "discord.js": ">=9.2.0",
     "chalk": "*",
-	"ytdl-core" :  "github:fent/node-ytdl-core#master",
-	"youtube-search": "*",
 	"fs-extra": "*",
 	"google-search": "*",
-	"cleverbot-node": "*",
 	"mysql": "*",
-	"node-telegram-bot-api": "*",
-	"unirest": "*"
+	"unirest": "*",
+	"xkcd": "*",
   }
 }
