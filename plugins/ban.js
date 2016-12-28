@@ -7,6 +7,9 @@ module.exports = {
 				var banned = message.guild.members.get(banee.id);
 				var reason = message.content.split(" ").splice(1).join(" ");
 				
+				if(reason == "")
+					var reason = "Not specified.";
+				
 				banned.ban();
 
 				message.reply(banee + " has been banned.");

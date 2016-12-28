@@ -8,7 +8,7 @@ module.exports = {
 				var reason = message.content.split(" ").splice(1).join(" ")
 				
 				if(reason == "")
-					var reason = "Reason not specified.";
+					var reason = "Not specified.";
 
 				kicked.kick();
 				message.channel.sendMessage(kickee + " has been kicked.");

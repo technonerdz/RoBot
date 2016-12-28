@@ -8,6 +8,8 @@ module.exports = {
 				muted.addRole(role).catch(console.error);
 				message.reply(mutee + ' has been muted.');
 				var reason = message.content.split(" ").splice(1).join(" ")
+				if(reason == "")
+					var reason = "Not specified.";
 				try{
 					var log = message.guild.channels.find('name', 'mod-log');
 					log.sendMessage("ACTION: MUTE\nUSER: " + mutee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
