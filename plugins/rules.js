@@ -13,7 +13,7 @@ module.exports = {
 		  .setURL('https://discord.gg/FRC')
 		  .addField('Server Guidelines', '1) This server is a Graciously Professional space. Use proper judgement at all times.\n2) Pornographic or crude content is ' + 
 		  'not allowed. Swearing is allowed, but not excessively.\n3) Do not bash, flame, or roast anything.\n4) Spam is not acceptable in any form, except in ' + 
-		'<#176515260516139009> \n5)Your nickname must contain your team number in a readable way.\n6) Do not mention any role without reason to.\n7) Do not post ' + 
+		'<#176515260516139009> \n5) Your nick must contain your team number in base 10.\n6) Do not mention any role without reason to.\n7) Do not post ' + 
 		'others personal information without permission.\n\n*Refer to <#253679529745186816> for the complete rules and regulations.*')
 		  .addField('Server Information', 'The FIRST® Robotics Competition Discord Server is an unofficial *FIRST®* community platform designed to promote ' + 
 		'communication and collaboration between *FIRST®* teams throughout the world and the *FIRST®* community.')
