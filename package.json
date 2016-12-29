@@ -28,6 +28,6 @@
 	"google-search": "*",
 	"mysql": "*",
 	"unirest": "*",
-	"xkcd": "*",
+	"xkcd": "*"
   }
 }
