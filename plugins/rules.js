@@ -19,10 +19,6 @@ module.exports = {
 		'communication and collaboration between *FIRST®* teams throughout the world and the *FIRST®* community.')
 		  .addField('Other Information', '*Check out <#188052258825568260> for the latest server news!*');
 
-		message.channel.sendEmbed(
-		  embed,
-		  'this is some content but nobody cares',
-		  { disableEveryone: true }
-		);
+		message.channel.sendEmbed(embed,{ disableEveryone: true });
 	}
 };
