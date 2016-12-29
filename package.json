@@ -1,33 +1,33 @@
 {
-  "name": "RoBot",
-  "version": "2.0.0",
-  "description": "A Discord bot for the FRC Discord Server",
-  "author": "Michael Cao <mike.x.cao@gmail.com>",
-  "main": "bot.js",
-  "scripts": {
-    "test": "node bot.js",
-    "start": "supervisor bot.js"
-  },
-  "repository": {
-  "type": "git",
-  "url": "https://github.com/FRCDiscord/RoBot"
-},
-  "license": "MIT",
-  "bugs": {
-  "url": "https://github.com/FRCDiscord/RoBot/issues"
-},
-  "keywords": [
-  "asianbot",
-  "discord",
-  "discordbot"
-],
-  "dependencies": {
-    "discord.js": ">=9.2.0",
-    "chalk": "*",
-	"fs-extra": "*",
-	"google-search": "*",
-	"mysql": "*",
-	"unirest": "*",
-	"xkcd": "*"
-  }
+    "name": "RoBot",
+    "version": "2.0.0",
+    "description": "A Discord bot for the FRC Discord Server",
+    "author": "Michael Cao <mike.x.cao@gmail.com>",
+    "main": "bot.js",
+    "scripts": {
+        "test": "node bot.js",
+        "start": "supervisor bot.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/FRCDiscord/RoBot"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/FRCDiscord/RoBot/issues"
+    },
+    "keywords": [
+        "discord",
+        "discordbot"
+    ],
+    "dependencies": {
+        "discord.js": ">=9.2.0",
+        "chalk": "*",
+        "fs-extra": "*",
+        "google-search": "*",
+        "mysql": "*",
+        "unirest": "*",
+        "xkcd": "*",
+        "urban": "*"
+    }
 }

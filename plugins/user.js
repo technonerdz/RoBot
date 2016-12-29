@@ -23,7 +23,7 @@ module.exports = {
 			message.channel.sendMessage(
 				"```xml" +
 				"\nName: " + user.username +
-				"\nNickname: " + member.nickname + 
+				"\nNickname: " + member.nickname +
 				"\nDiscriminator: " + user.discriminator +
 				"\nID: " + user.id +
 				"\nRoles: " + roles +
