@@ -17,7 +17,6 @@ module.exports = {
 		  .addField('Member Count', message.guild.members.size, true)
 		  .addField('Channel Count', message.guild.channels.size, true)
 		  .addField('Role List', message.guild.roles.map(r => r.name).join(", "), true)
-		  .addField
 		message.channel.sendEmbed(embed,{ disableEveryone: true });
 	}
 };
