@@ -10,7 +10,7 @@ module.exports = {
 		  .setTimestamp()
 		  .addField('Name', message.guild.name, true)
 		  .addField('Created', message.guild.createdAt.toLocaleString())
-		  .addField('ID', nessage.guild.id, true)
+		  .addField('ID', message.guild.id, true)
 		  .addField('Owner', message.guild.owner.user.username, true)
 		  .addField('Default Channel', message.guild.defaultChannel, true)
 		  .addField('Region', message.guild.region, true)
