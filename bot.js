@@ -56,8 +56,8 @@ bot.on("message", (msg) => {
     var str = n.substring(0, n.indexOf(" "));
 
     if (msg.channel.type === "text") {
-
-        console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
+		if(msg.guild.id != '170144952871813120')
+			console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
 
         if (msg.author.bot) return;
 
