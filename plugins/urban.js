@@ -15,7 +15,7 @@ module.exports = {
 					  .setTimestamp()
 					  .addField('Definition', def.definition, true)
 					  .addField('Example', def.example, true)
-					  .addField('', def.thumbs_up + ' :thumbsup: \n' + def.thumbs_down + ' :thumbsdown: \nAuthor: ' + def.author);
+					  .addField('Other Information', def.thumbs_up + ' :thumbsup: \n' + def.thumbs_down + ' :thumbsdown: \nAuthor: ' + def.author, false);
 					message.channel.sendEmbed(embed,{ disableEveryone: true });
 				}
 				else {
