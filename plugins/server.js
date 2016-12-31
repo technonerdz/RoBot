@@ -1,16 +1,23 @@
 module.exports = {
 	main: function(bot, message) {
-		message.channel.sendMessage(
-			"```" +
-			"\n╠═►Server: " + message.guild.name +
-			"\n╠═►Owner: " + message.guild.owner.user.username +
-			"\n╠═►Region: " + message.guild.region +
-			"\n╠═►Server ID: " + message.guild.id +
-			"\n╠═►Members: " + message.guild.members.size +
-			"\n╠═►Channels: " + message.guild.channels.size +
-			"\n╠═►Roles: " + message.guild.roles.map(r => r.name).join(", ") +
-			"\n╠═►Icon: " + message.guild.iconURL +
-			"```"
-		);
+		const Discord = require('discord.js');
+		const embed = new Discord.RichEmbed()
+		  .setTitle(message.guild.name)
+		  .setColor(0x1675DB)
+		  .setDescription('Server Information')
+		  .setFooter('Triggered by ' + message.author.username, message.author.avatarURL)
+		  .setThumbnail(message.guild.iconURL)
+		  .setTimestamp()
+		  .addField('Name', message.guild.name, true)
+		  .addField('Created', message.guild.createdAt.toLocaleString())
+		  .addField('ID', nessage.guild.id, true)
+		  .addField('Owner', message.guild.owner.user.username, true)
+		  .addField('Default Channel', message.guild.defaultChannel, true)
+		  .addField('Region', message.guild.region, true)
+		  .addField('Member Count', message.guild.members.size, true)
+		  .addField('Channel Count', message.guild.channels.size, true)
+		  .addField('Role List', message.guild.roles.map(r => r.name).join(", "), true)
+		  .addField
+		message.channel.sendEmbed(embed,{ disableEveryone: true });
 	}
 };
