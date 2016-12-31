@@ -5,7 +5,6 @@ module.exports = {
 		try {
 			definition.first(function(def) {
 				if(def != undefined) {
-					
 					const Discord = require('discord.js');
 					const embed = new Discord.RichEmbed()
 					  .setTitle(def.word)
@@ -16,7 +15,7 @@ module.exports = {
 					  .setTimestamp()
 					  .addField('Definition', def.definition, true)
 					  .addField('Example', def.example, true)
-					  .addField(def.thumbs_up + " :thumbsup: | " + def.thumbs_down + " :thumbsdown: | Author: " + def.author)
+					  .addField('', def.thumbs_up + ' :thumbsup: \n' + def.thumbs_down + ' :thumbsdown: \nAuthor: ' + def.author);
 					message.channel.sendEmbed(embed,{ disableEveryone: true });
 				}
 				else {
