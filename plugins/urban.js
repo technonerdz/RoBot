@@ -13,9 +13,9 @@ module.exports = {
 					  .setFooter('Triggered by ' + message.author.username, message.author.avatarURL)
 					  .setThumbnail('https://lh5.googleusercontent.com/-rY97dP0iEo0/AAAAAAAAAAI/AAAAAAAAAGA/xm1HYqJXdMw/s0-c-k-no-ns/photo.jpg')
 					  .setTimestamp()
-					  .addField('Definition', def.definition, true)
-					  .addField('Example', def.example, true)
-					  .addField('Other Information', def.thumbs_up + ' :thumbsup: \n' + def.thumbs_down + ' :thumbsdown: \nAuthor: ' + def.author, false);
+					  .addField('Definition', def.definition, false)
+					  .addField('Example', def.example, false)
+					  .addField('Other Information', def.thumbs_up + ' :thumbsup: | ' + def.thumbs_down + ' :thumbsdown: \nAuthor: ' + def.author, false);
 					message.channel.sendEmbed(embed,{ disableEveryone: true });
 				}
 				else {
