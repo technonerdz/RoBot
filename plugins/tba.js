@@ -46,11 +46,11 @@ module.exports = {
 						var awards = [];
 						var n = 0;
 						for(var i = 0; i < d.length; i++) {
-							if(awards[n].length > 2048)
+							if((awards[n].length + d[i].year + " - " + d[i].name) >= 2048)
 								n++;
 							awards[n] += d[i].year + " - " + d[i].name + "\n";
 						}
-						for(int j = 0; j < awards.length; j++) {
+						for(var j = 0; j < awards.length; j++) {
 							if(awards[j] != undefined) {
 								embed.addField("Award List Page " + (j + 1), awards[j])
 								m.channel.sendEmbed(embed);
