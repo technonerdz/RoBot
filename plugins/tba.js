@@ -9,10 +9,10 @@ module.exports = {
 		console.log(args + ", " + teamNumber);
 		if(!isNaN(args)) {
 			var embed = new Discord.RichEmbed();
-			req.getTeam(teamNumber).then(d => {
-					embed.setTitle('*FIRST®* Robotics Competition Team ' + teamNumber)
+			req.getTeam(args).then(d => {
+					embed.setTitle('*FIRST®* Robotics Competition Team ' + args)
 						 .setColor(0x1675DB)
-						 .setURL('https://www.thebluealliance.com/team/' + teamNumber)
+						 .setURL('https://www.thebluealliance.com/team/' + args)
 						 .addField('Name', d.nickname, true)
 						 .addField('Rookie Year', d.rookie_year, true)
 						 .addField('Location', d.location, true)
