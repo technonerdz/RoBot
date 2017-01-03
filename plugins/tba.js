@@ -56,29 +56,27 @@ module.exports = {
 							else {
 								awards[n] = d[i].year + " - " + d[i].name + "\n";
 							}
-							console.log(n);
 						}
 						for(var j = 0; j < awards.length; j++) {
 							if(awards[j] != undefined) {
 								if(awards.length == 1) {
 									embed.addField("Award List", awards[j])
-									.setColor(0x1675DB)
 								}
 								else {
 									embed.addField("Award List Page " + (j + 1), awards[j])
-									.setColor(0x1675DB)
 								}
+							}
+							if(embed.fields.length == 2 || j == awards.length - 1) {
+								embed.setColor(0x1675DB)
 								m.channel.sendEmbed(embed);
 								embed = null;
+								var embed = new Discord.RichEmbed();
 							}
-							var embed = new Discord.RichEmbed();
 						}
 						embed = null;
 				}).catch((e) => {
 					console.log(e.message);
-					if(e.message.startsWith("RichEmbed field values")) {
-						m.reply("An error has occurred: Too Many Awards! (Coming Soon™)")
-					}
+					msg.reply(e);
 				});
 			} else if (args === "robots") {
 				var embed = new Discord.RichEmbed();
