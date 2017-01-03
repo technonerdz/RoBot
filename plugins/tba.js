@@ -43,12 +43,21 @@ module.exports = {
 						embed.setTitle('Awards for *FIRST®* Robotics Competition Team ' + teamNumber)
 							.setColor(0x1675DB)
 							.setURL('https://www.thebluealliance.com/team/' + teamNumber)
-						var awards = "";
+						var awards = [];
+						var n = 0;
 						for(var i = 0; i < d.length; i++) {
-							awards += d[i].year + " - " + d[i].name + "\n";
+							if(awards[n].length > 2048)
+								n++;
+							awards[n] += d[i].year + " - " + d[i].name + "\n";
 						}
-						embed.addField("Award List", awards)
-						m.channel.sendEmbed(embed);
+						for(int j = 0; j < awards.length; j++) {
+							if(awards[j] != undefined) {
+								embed.addField("Award List Page " + (j + 1), awards[j])
+								m.channel.sendEmbed(embed);
+								embed = null;
+							}
+							var embed = new Discord.RichEmbed();
+						}
 						embed = null;
 				}).catch((e) => {
 					console.log(e.message);
