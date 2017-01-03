@@ -50,6 +50,7 @@ module.exports = {
 							if((awards[n].length + d[i].year + " - " + d[i].name) >= 1024)
 								n++;
 							awards[n] += d[i].year + " - " + d[i].name + "\n";
+							console.log(n);
 						}
 						for(var j = 0; j < awards.length; j++) {
 							if(awards[j] != undefined) {
@@ -63,7 +64,6 @@ module.exports = {
 				}).catch((e) => {
 					console.log(e.message);
 					if(e.message.startsWith("RichEmbed field values")) {
-						console.log("1");
 						m.reply("An error has occurred: Too Many Awards! (Coming Soon™)")
 					}
 				});
