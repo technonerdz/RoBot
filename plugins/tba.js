@@ -47,8 +47,9 @@ module.exports = {
 						var awards = [""];
 						var n = 0;
 						for(var i = 0; i < d.length; i++) {
-							if((awards[n].length + d[i].year + " - " + d[i].name) >= 1024)
+							if((awards[n] + d[i].year + " - " + d[i].name).length >= 1024) {
 								n++;
+							}
 							awards[n] += d[i].year + " - " + d[i].name + "\n";
 							console.log(n);
 						}
