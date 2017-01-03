@@ -50,12 +50,18 @@ module.exports = {
 							if((awards[n] + d[i].year + " - " + d[i].name).length >= 1024) {
 								n++;
 							}
-							awards[n] += d[i].year + " - " + d[i].name + "\n";
+							if(awards[n] != undefined) {
+								awards[n] += d[i].year + " - " + d[i].name + "\n";
+							}
+							else {
+								awards[n] = d[i].year + " - " + d[i].name + "\n";
+							}
 							console.log(n);
 						}
 						for(var j = 0; j < awards.length; j++) {
 							if(awards[j] != undefined) {
 								embed.addField("Award List Page " + (j + 1), awards[j])
+								.setColor(0x1675DB)
 								m.channel.sendEmbed(embed);
 								embed = null;
 							}
