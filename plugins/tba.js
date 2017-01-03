@@ -44,12 +44,12 @@ module.exports = {
 						embed.setTitle('Awards for *FIRST®* Robotics Competition Team ' + teamNumber)
 							.setColor(0x1675DB)
 							.setURL('https://www.thebluealliance.com/team/' + teamNumber)
-						var awards = [];
+						var awards = [""];
 						var n = 0;
 						for(var i = 0; i < d.length; i++) {
-							awards[n] += d[i].year + " - " + d[i].name + "\n";
 							if((awards[n].length + d[i].year + " - " + d[i].name) >= 1024)
 								n++;
+							awards[n] += d[i].year + " - " + d[i].name + "\n";
 						}
 						for(var j = 0; j < awards.length; j++) {
 							if(awards[j] != undefined) {
