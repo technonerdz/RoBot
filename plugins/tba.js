@@ -40,6 +40,7 @@ module.exports = {
 			} else if (args === "awards") {
 				var embed = new Discord.RichEmbed();
 				req.getTeamAwardHistory(teamNumber).then(d => {
+					var embed = new Discord.RichEmbed();
 						embed.setTitle('Awards for *FIRST®* Robotics Competition Team ' + teamNumber)
 							.setColor(0x1675DB)
 							.setURL('https://www.thebluealliance.com/team/' + teamNumber)
