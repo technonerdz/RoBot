@@ -7,6 +7,21 @@ module.exports = {
 		var args = m.content.split(" ")[0];
 		var teamNumber = m.content.split(" ")[1];
 		console.log(args + ", " + teamNumber);
+		if(!isNaN(args)) {
+			var embed = new Discord.RichEmbed();
+			req.getTeam(teamNumber).then(d => {
+					embed.setTitle('*FIRST®* Robotics Competition Team ' + teamNumber)
+						 .setColor(0x1675DB)
+						 .setURL('https://www.thebluealliance.com/team/' + teamNumber)
+						 .addField('Name', d.nickname, true)
+						 .addField('Rookie Year', d.rookie_year, true)
+						 .addField('Location', d.location, true)
+						 .addField('Website', d.website, true)
+						 .addField('Motto', d.motto, true)
+					m.channel.sendEmbed(embed)
+					embed = null;
+			}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
+		}
 		if(!isNaN(teamNumber)) {
 			if (args === "team") {
 				var embed = new Discord.RichEmbed();
@@ -18,7 +33,8 @@ module.exports = {
 							 .addField('Rookie Year', d.rookie_year, true)
 							 .addField('Location', d.location, true)
 							 .addField('Website', d.website, true)
-						m.channel.sendEmbed(embed);
+							 .addField('Motto', d.motto, true)
+						m.channel.sendEmbed(embed)
 						embed = null;
 				}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
 			} else if (args === "awards") {
@@ -85,7 +101,7 @@ module.exports = {
 				m.channel.sendMessage("Please specify an argument! Accepted arguments: team, awards, robots, events");
 			}
 		} else {
-			m.channel.sendMessage("Please specify a valid team number!");
+			m.channel.sendMessage("Please specify an argument! Accepted arguments: team, awards, robots, events");
 		}
 	}
 };
