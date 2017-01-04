@@ -1,4 +1,6 @@
 var config = require("./config.json");
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('frclogs');
 const Discord = require("discord.js");
 const fse = require("fs-extra");
 const PREFIX = config.prefix;
@@ -56,20 +58,23 @@ bot.on("message", (msg) => {
     var str = n.substring(0, n.indexOf(" "));
 
     if (msg.channel.type === "text") {
-		if(msg.guild.id != '170144952871813120')
-			console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
+      db.serialize(function() {
+        db.run("CREATE TABLE IF NOT EXISTS frc_logs (INDEX INT PRIMARY KEY AUTOINCREMENT, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID INT NOT NULL, AUTHOR_ID INT NOT NULL, AUTHOR_NAME VARCHAR(50) NOT NULL, MESSAGE VARCHAR(255) NOT NULL)");
+        var stmt = db.prepare(`INSERT INTO frc_logs (CHANNEL_ID, AUTHOR_ID, AUTHOR_NAME, MESSAGE) VALUES (${msg.guild.id}, ${msg.author.id}, ${msg.author.username}, ${msg.cleanContent})`);
+        console.log("Inserted!");
+        stmt.finalize();
+      });
+
+		  console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
 
         if (msg.author.bot) return;
 
         if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
-            var logChannel = bot.channels.get("200090417809719296");
-            logChannel.sendMessage(msg.author + " has read the rules and verified themselves!");
-            var role = msg.guild.roles.find('name', 'Members');
-            msg.member.addRole(role).catch(console.error);
-            var nickee = msg.guild.members.get(msg.author.id);
-            nickee.setNickname(msg.author.username + " - (SET TEAM#)");
+            bot.channels.get("200090417809719296").sendMessage(msg.author + " has read the rules and verified themselves!");
+            msg.member.addRole(msg.guild.roles.find('name', 'Members')).catch(console.error);
+            msg.guild.members.get(msg.author.id).setNickname(msg.author.username + " - (SET TEAM#)");
             setTimeout(function() {
-                logChannel.sendMessage(msg.author.username + " Join Nick set to --> ``" + msg.author.username + " - (SET TEAM#)``");
+                bot.channels.get("200090417809719296").sendMessage(msg.author.username + " Join Nick set to --> ``" + msg.author.username + " - (SET TEAM#)``");
             }, 1000)
 
             msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server** - " +
@@ -103,33 +108,25 @@ bot.on("message", (msg) => {
 
 bot.on("guildMemberAdd", (member) => {
     if (member.guild.id === "176186766946992128") {
-        var logChannel = bot.channels.get('200090417809719296');
-        logChannel.sendMessage(member.user.username + " joined the server");
+        bot.channels.get('200090417809719296').sendMessage(member.user.username + " joined the server");
 
-        var welcome = member.guild.channels.get('253661179702935552')
-        welcome.sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " +
+        member.guild.channels.get('253661179702935552').sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " +
             "You are currently unable to see the server's main channels. " +
             "To gain access to the rest of the server, please read <#253679529745186816> to find the phrase to enter.");
-    }
-    if (member.guild.id === "170144952871813120") {
-        member.guild.defaultChannel.sendMessage("Welcome " + member + " to the " + member.guild.name + " server! " +
-            "Please read the rules and remember to be GP. \n[Set your nickname to [name] [team #] (pronouns) | Ex: Sean R. 5113 (he/him)]")
     }
 });
 
 bot.on("guildMemberRemove", (member) => {
     member.guild.defaultChannel.sendMessage(member.user.username + " left the server. RIP " + member.user.username + ".");
     if (member.guild.id === "176186766946992128") {
-        var logChannel = bot.channels.get("200090417809719296");
-        logChannel.sendMessage(member.user.username + " left FIRST Robotics Competition");
+        bot.channels.get("200090417809719296").sendMessage(member.user.username + " left FIRST Robotics Competition");
     }
 });
 
 bot.on("guildBanAdd", (guild, user) => {
     guild.defaultChannel.sendMessage(":hammer: " + user.user.username + " was banned.");
     if (member.guild.id === "176186766946992128") {
-        var logChannel = bot.channels.get("200090417809719296");
-        logChannel.sendMessage(":hammer: " + user.user.username + " was banned.");
+        bot.channels.get("200090417809719296").sendMessage(":hammer: " + user.user.username + " was banned.");
     }
 });
 
