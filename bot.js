@@ -63,7 +63,7 @@ bot.on("message", (msg) => {
       var year = new Date().getFullYear();
       db.serialize(function() {
         db.run(`CREATE TABLE IF NOT EXISTS frc_logs_${day}_${month}_${year} (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, MESSAGE VARCHAR(2000) NOT NULL)`);
-        var stmt = db.prepare("INSERT INTO frc_logs (CHANNEL_ID, AUTHOR_ID, AUTHOR_NAME, MESSAGE) VALUES (?, ?, ?, ?)");
+        var stmt = db.prepare(`INSERT INTO frc_logs_${day}_${month}_${year} (CHANNEL_ID, AUTHOR_ID, AUTHOR_NAME, MESSAGE) VALUES (?, ?, ?, ?)``);
         var channelID = msg.channel.id, authorID = msg.author.id, authorNAME = msg.author.username, message = msg.cleanContent;
         stmt.run(channelID, authorID, authorNAME, message);
         stmt.finalize();
