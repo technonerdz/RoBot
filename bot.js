@@ -59,7 +59,7 @@ bot.on("message", (msg) => {
 
     if (msg.channel.type === "text") {
       db.serialize(function() {
-        db.run("CREATE TABLE IF NOT EXISTS frc_logs (MSGINDEX INT AUTOINCREMENT, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID INT NOT NULL, AUTHOR_ID INT NOT NULL, AUTHOR_NAME VARCHAR(50) NOT NULL, MESSAGE VARCHAR(255) NOT NULL)");
+        db.run("CREATE TABLE IF NOT EXISTS frc_logs (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID INT NOT NULL, AUTHOR_ID INT NOT NULL, AUTHOR_NAME VARCHAR(50) NOT NULL, MESSAGE VARCHAR(255) NOT NULL)");
         var stmt = db.prepare(`INSERT INTO frc_logs (CHANNEL_ID, AUTHOR_ID, AUTHOR_NAME, MESSAGE) VALUES (${msg.guild.id}, ${msg.author.id}, ${msg.author.username}, ${msg.cleanContent})`);
         console.log("Inserted!");
         stmt.finalize();
