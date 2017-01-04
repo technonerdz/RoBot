@@ -51,12 +51,6 @@ bot.on("ready", () => {
     const owner = bot.users.get(config.owner);
     owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
     bot.user.setGame("FIRST Steamworks 2017");
-
-    db.serialize(function() {
-      db.each("SELECT * FROM frc_logs", function(err, row) {
-          console.log(row.id + ": " + row.info);
-      });
-    });
 });
 
 bot.on("message", (msg) => {
