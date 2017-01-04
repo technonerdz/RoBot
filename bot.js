@@ -66,8 +66,14 @@ bot.on("message", (msg) => {
     if (msg.channel.type === "text") {
       db.serialize(function() {
         db.run("CREATE TABLE IF NOT EXISTS frc_logs (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, MESSAGE VARCHAR(2000) NOT NULL)");
-        var stmt = db.prepare(`INSERT INTO frc_logs (CHANNEL_ID, AUTHOR_ID, AUTHOR_NAME, MESSAGE) VALUES ('${msg.channel.id}', '${msg.author.id}', '${msg.author.username}', '${msg.cleanContent}')`);
+        var stmt = db.prepare("INSERT INTO frc_logs (CHANNEL_ID, AUTHOR_ID, AUTHOR_NAME, MESSAGE) VALUES (?, ?, ?, ?)");
+        var channelID = msg.channel.id, authorID = msg.author.id, authorNAME = msg.author.username, message = msg.cleanContent;
+        stmt.run(channelID, authorID, authorNAME, message);
         stmt.finalize();
+
+        db.each("SELECT * FROM frc_logs", function(err, row) {
+          console.log(row);
+        });
       });
 
 		  console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
