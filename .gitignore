@@ -1,5 +1,5 @@
-config.json
-webhooks.json
+*.json
+*.sqlite
 
 # Logs
 logs
