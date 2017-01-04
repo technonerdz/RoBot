@@ -51,6 +51,12 @@ bot.on("ready", () => {
     const owner = bot.users.get(config.owner);
     owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
     bot.user.setGame("FIRST Steamworks 2017");
+
+    db.serialize(function() {
+      db.each("SELECT * FROM frc_logs", function(err, row) {
+          console.log(row.id + ": " + row.info);
+      });
+    });
 });
 
 bot.on("message", (msg) => {
@@ -59,8 +65,8 @@ bot.on("message", (msg) => {
 
     if (msg.channel.type === "text") {
       db.serialize(function() {
-        db.run("CREATE TABLE IF NOT EXISTS frc_logs (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, MESSAGE VARCHAR(255) NOT NULL)");
-        var stmt = db.prepare(`INSERT INTO frc_logs (CHANNEL_ID, AUTHOR_ID, AUTHOR_NAME, MESSAGE) VALUES ('${msg.guild.id}', '${msg.author.id}', '${msg.author.username}', '${msg.cleanContent}')`);
+        db.run("CREATE TABLE IF NOT EXISTS frc_logs (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, MESSAGE VARCHAR(2000) NOT NULL)");
+        var stmt = db.prepare(`INSERT INTO frc_logs (CHANNEL_ID, AUTHOR_ID, AUTHOR_NAME, MESSAGE) VALUES ('${msg.channel.id}', '${msg.author.id}', '${msg.author.username}', '${msg.cleanContent}')`);
         stmt.finalize();
       });
 
