@@ -62,9 +62,9 @@ bot.on("message", (msg) => {
       var month = new Date().getMonth() + 1;
       var year = new Date().getFullYear();
       db.serialize(function() {
-        db.run(`CREATE TABLE IF NOT EXISTS frc_logs_${month}_${day - 1}_${year} (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, CHANNEL_NAME VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, AUTHOR_NICKNAME VARCHAR(32) NOT NULL, MESSAGE VARCHAR(2000) NOT NULL)`);
-        var stmt = db.prepare(`INSERT INTO frc_logs_${month}_${day - 1}_${year} (CHANNEL_ID, CHANNEL_NAME, AUTHOR_ID, AUTHOR_NAME, AUTHOR_NICKNAME, MESSAGE) VALUES (?, ?, ?, ?, ?, ?)`);
-        var channelID = msg.channel.id, channelName = msg.channel.name, authorID = msg.author.id, authorNAME = msg.author.username, authorNICK = msg.author.nickname, message = msg.cleanContent;
+        db.run(`CREATE TABLE IF NOT EXISTS frc_logs_${month}_${day + 1}_${year} (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, CHANNEL_NAME VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, AUTHOR_NICKNAME VARCHAR(32), MESSAGE VARCHAR(2000) NOT NULL)`);
+        var stmt = db.prepare(`INSERT INTO frc_logs_${month}_${day + 1}_${year} (CHANNEL_ID, CHANNEL_NAME, AUTHOR_ID, AUTHOR_NAME, AUTHOR_NICKNAME, MESSAGE) VALUES (?, ?, ?, ?, ?, ?)`);
+        var channelID = msg.channel.id, channelName = msg.channel.name, authorID = msg.author.id, authorNAME = msg.author.username, authorNICK = msg.member.nickname, message = msg.cleanContent;
         stmt.run(channelID, channelName, authorID, authorNAME, authorNICK, message);
         stmt.finalize();
 
