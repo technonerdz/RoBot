@@ -4,9 +4,7 @@ var db = new sqlite3.Database('frclogs.sqlite');
 const Discord = require("discord.js");
 const fse = require("fs-extra");
 const PREFIX = config.prefix;
-let bot = new Discord.Client({
-    disableEveryone: true
-});
+let bot = new Discord.Client();
 
 var chalk = require("chalk");
 var server = chalk.bold.red;
@@ -79,16 +77,15 @@ bot.on("message", (msg) => {
 
         if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
             bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server! They are member number " + msg.guild.members.size);
-            msg.member.addRole(msg.guild.roles.find('name', 'Members')).catch(err => {console.error(err); msg.member.addRole(msg.guild.roles.find('name', 'Members'));});
+            msg.member.addRole(msg.guild.roles.find('name', 'Members')).catch(err => {console.error(err)});
             msg.guild.members.get(msg.author.id).setNickname(msg.author.username + " - (SET TEAM#)");
             setTimeout(function() {
                 bot.channels.get("200090417809719296").sendMessage(msg.author.username + " Join Nick set to --> ``" + msg.author.username + " - (SET TEAM#)``");
             }, 1000)
 
             msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!**");
-			msg.author.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server** - " +
-                "a place for you to talk to fellow FRC members, mentors, volunteers, and alum about more or less anything! " +
-                "Please follow the rules posted in <#253679529745186816> and have fun! Don't hesitate to ping a mod or an admin " +
+			msg.author.sendMessage("Thank you for reading the rules and regulations. Welcome to the FIRST Robotics Competition Discord Server! " +
+                "Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
                 "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
             msg.guild.channels.get('253661179702935552').fetchMessages({
 				limit: 2
