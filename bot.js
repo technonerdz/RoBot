@@ -78,22 +78,25 @@ bot.on("message", (msg) => {
         if (msg.author.bot) return;
 
         if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
-            bot.channels.get("200090417809719296").sendMessage(msg.author + " has read the rules and verified themselves!");
-            msg.member.addRole(msg.guild.roles.find('name', 'Members')).catch(console.error);
+            bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server! They are member number " + msg.guild.members.size);
+            msg.member.addRole(msg.guild.roles.find('name', 'Members')).catch(err => {console.error(err); msg.member.addRole(msg.guild.roles.find('name', 'Members'));});
             msg.guild.members.get(msg.author.id).setNickname(msg.author.username + " - (SET TEAM#)");
             setTimeout(function() {
                 bot.channels.get("200090417809719296").sendMessage(msg.author.username + " Join Nick set to --> ``" + msg.author.username + " - (SET TEAM#)``");
             }, 1000)
 
-            msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server** - " +
-                "a place for you to talk to fellow FRC members about more or less anything! " +
+            msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!**");
+			msg.author.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server** - " +
+                "a place for you to talk to fellow FRC members, mentors, volunteers, and alum about more or less anything! " +
                 "Please follow the rules posted in <#253679529745186816> and have fun! Don't hesitate to ping a mod or an admin " +
                 "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
             msg.guild.channels.get('253661179702935552').fetchMessages({
-                    limit: 5
-                })
-                .then(messages => msg.channel.bulkDelete(messages))
-                .catch(msg.channel.bulkDelete);
+				limit: 2
+			})
+			.then(messages => msg.channel.bulkDelete(messages))
+			.catch(msg.channel.bulkDelete);
+				
+			msg.channel.sendMessage("@everyone Welcome to the server! Please enter the phrase, which may be found in <#253679529745186816>, to gain access to the server.");
         }
 
         if (msg.content.startsWith(PREFIX)) {
@@ -116,7 +119,7 @@ bot.on("message", (msg) => {
 
 bot.on("guildMemberAdd", (member) => {
     if (member.guild.id === "176186766946992128") {
-        bot.channels.get('200090417809719296').sendMessage(member.user.username + " joined the server");
+        bot.channels.get('200090417809719296').sendMessage(member + " joined the server");
 
         member.guild.channels.get('253661179702935552').sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " +
             "You are currently unable to see the server's main channels. " +

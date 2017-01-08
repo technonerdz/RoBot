@@ -1,7 +1,7 @@
 module.exports = {
 	main: function(bot, message) {
 		if (message.mentions.users.array()[0] == null) {
-			var member = message.guild.members.get(message.author.id);
+			var member = message.guild.members.get(message.author.user.id);
 		} else {
 			var user = message.mentions.users.array()[0];
 			var member = message.guild.members.get(user.id);
