@@ -84,16 +84,16 @@ bot.on("message", (msg) => {
             }, 1000)
 
             msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!**");
-			msg.author.sendMessage("Thank you for reading the rules and regulations. Welcome to the FIRST Robotics Competition Discord Server! " +
+			msg.author.sendMessage("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
                 "Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
-                "if you have any questions! \n\n**Change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
+                "if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
             msg.guild.channels.get('253661179702935552').fetchMessages({
 				limit: 2
 			})
 			.then(messages => msg.channel.bulkDelete(messages))
 			.catch(msg.channel.bulkDelete);
 				
-			msg.channel.sendMessage("@everyone Welcome to the server! Please enter the phrase, which may be found in <#253679529745186816>, to gain access to the server.");
+			msg.channel.sendMessage("Welcome to the server! Please enter the phrase, which may be found in <#253679529745186816>, to gain access to the server.\n\n@everyone");
         }
 
         if (msg.content.startsWith(PREFIX)) {
