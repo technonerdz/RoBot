@@ -86,7 +86,7 @@ bot.on("message", (msg) => {
             msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!**");
 			msg.author.sendMessage("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
                 "Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
-                "if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!**");
+                "if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!*");
             msg.guild.channels.get('253661179702935552').fetchMessages({
 				limit: 2
 			})
