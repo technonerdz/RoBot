@@ -56,12 +56,12 @@ bot.on("message", (msg) => {
     var str = n.substring(0, n.indexOf(" "));
 
     if (msg.channel.type === "text") {
-      var day = new Date().getDay();
+      var day = new Date().getDate();
       var month = new Date().getMonth() + 1;
       var year = new Date().getFullYear();
       db.serialize(function() {
-        db.run(`CREATE TABLE IF NOT EXISTS frc_logs_${month}_${day + 1}_${year} (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, CHANNEL_NAME VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, AUTHOR_NICKNAME VARCHAR(32), MESSAGE VARCHAR(2000) NOT NULL)`);
-        var stmt = db.prepare(`INSERT INTO frc_logs_${month}_${day + 1}_${year} (CHANNEL_ID, CHANNEL_NAME, AUTHOR_ID, AUTHOR_NAME, AUTHOR_NICKNAME, MESSAGE) VALUES (?, ?, ?, ?, ?, ?)`);
+        db.run(`CREATE TABLE IF NOT EXISTS frc_logs_${month}_${day}_${year} (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, CHANNEL_NAME VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, AUTHOR_NICKNAME VARCHAR(32), MESSAGE VARCHAR(2000) NOT NULL)`);
+        var stmt = db.prepare(`INSERT INTO frc_logs_${month}_${day}_${year} (CHANNEL_ID, CHANNEL_NAME, AUTHOR_ID, AUTHOR_NAME, AUTHOR_NICKNAME, MESSAGE) VALUES (?, ?, ?, ?, ?, ?)`);
         var channelID = msg.channel.id, channelName = msg.channel.name, authorID = msg.author.id, authorNAME = msg.author.username, authorNICK = msg.member.nickname, message = msg.cleanContent;
         stmt.run(channelID, channelName, authorID, authorNAME, authorNICK, message);
         stmt.finalize();
@@ -128,16 +128,10 @@ bot.on("guildMemberAdd", (member) => {
 
 bot.on("guildMemberRemove", (member) => {
     bot.channels.get('267837014014033931').sendMessage(member.user.username + " left the server. RIP " + member.user.username + ".");
-    if (member.guild.id === "176186766946992128") {
-        bot.channels.get("200090417809719296").sendMessage(member.user.username + " left FIRST Robotics Competition");
-    }
 });
 
 bot.on("guildBanAdd", (guild, user) => {
     bot.channels.get('267837014014033931').sendMessage(":hammer: " + user.user.username + " was banned.");
-    if (member.guild.id === "176186766946992128") {
-        bot.channels.get("200090417809719296").sendMessage(":hammer: " + user.user.username + " was banned.");
-    }
 });
 
 bot.login(config.token);
