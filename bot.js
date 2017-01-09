@@ -76,14 +76,16 @@ bot.on("message", (msg) => {
         if (msg.author.bot) return;
 
         if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
-            bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server! They are member number " + msg.guild.members.size);
-            msg.member.addRole(msg.guild.roles.find('name', 'Members')).catch(err => {console.error(err)});
             msg.guild.members.get(msg.author.id).setNickname(msg.author.username + " - (SET TEAM#)");
+			msg.member.addRole(msg.guild.roles.find('name', 'Members'))
+			.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server! They are member number " + msg.guild.members.size))
+			.catch(err => {console.log(err)})
+			
             setTimeout(function() {
                 bot.channels.get("200090417809719296").sendMessage(msg.author.username + " Join Nick set to --> ``" + msg.author.username + " - (SET TEAM#)``");
             }, 1000)
 
-            msg.guild.defaultChannel.sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!**");
+            bot.channels.get('267837014014033931').sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!** We now have ``" + msg.guild.members.size + "`` members.");
 			msg.author.sendMessage("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
                 "Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
                 "if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!*");
@@ -125,14 +127,14 @@ bot.on("guildMemberAdd", (member) => {
 });
 
 bot.on("guildMemberRemove", (member) => {
-    member.guild.defaultChannel.sendMessage(member.user.username + " left the server. RIP " + member.user.username + ".");
+    bot.channels.get('267837014014033931').sendMessage(member.user.username + " left the server. RIP " + member.user.username + ".");
     if (member.guild.id === "176186766946992128") {
         bot.channels.get("200090417809719296").sendMessage(member.user.username + " left FIRST Robotics Competition");
     }
 });
 
 bot.on("guildBanAdd", (guild, user) => {
-    guild.defaultChannel.sendMessage(":hammer: " + user.user.username + " was banned.");
+    bot.channels.get('267837014014033931').sendMessage(":hammer: " + user.user.username + " was banned.");
     if (member.guild.id === "176186766946992128") {
         bot.channels.get("200090417809719296").sendMessage(":hammer: " + user.user.username + " was banned.");
     }
