@@ -1,6 +1,6 @@
 module.exports = {
 	main: function(bot, msg) {
-		const allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python'];
+		const allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media'];
 		var roleToGive = msg.content;
 		roleToGive = roleToGive.trim().toLowerCase();
 		var found = false;
@@ -16,7 +16,11 @@ module.exports = {
 			member.addRole(role).catch(console.error);
 			msg.channel.sendMessage("Successfully gave you " + role.name + "!");
 		} else if(roleToGive == "list") {
-			
+			var list = "List of Allowed Roles:";
+			for(var i = 0; i < allowedRoles.length; i++) {
+				list += "\n" + allowedRoles[i];
+			}
+			msg.channel.sendMessage(list);
 		} else {
 			msg.reply('that giveme does not exist!');
 		}
