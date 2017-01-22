@@ -77,7 +77,7 @@ bot.on("message", (msg) => {
 
         if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
             msg.guild.members.get(msg.author.id).setNickname(msg.author.username + " - (SET TEAM#)");
-			msg.member.addRole(msg.guild.roles.find('name', 'Members'))
+			msg.member.addRole('246469964574228481')
 			.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server! They are member number " + msg.guild.members.size))
 			.catch(err => {console.log(err)})
 			

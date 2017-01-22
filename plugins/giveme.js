@@ -15,7 +15,7 @@ module.exports = {
 			var member = msg.member;
 			member.addRole(role).catch(console.error);
 			msg.channel.sendMessage("Successfully gave you " + role.name + "!");
-		} else if(roleToGive == "list") {
+		} else if(roleToGive == "list" || roleToGive == "-l") {
 			var list = "List of Allowed Roles:";
 			for(var i = 0; i < allowedRoles.length; i++) {
 				list += "\n" + allowedRoles[i];
