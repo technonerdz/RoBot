@@ -16,7 +16,7 @@ module.exports = {
 		'others personal information without permission.\n8)The flexibility of these rules may be determined by a member of the Moderation Team.\nYou also agree to follow the rules in the expanded rules document here: <https://goo.gl/UDHrIH>\n\n' +
 		'New Members should enter the phrase "I have read the rules and regulations" to enter the server. \n*Refer to <#253679529745186816> for the complete rules and regulations.*')
 		.addField('Server Information', 'The FIRST® Robotics Competition Discord Server is an unofficial *FIRST®* community platform designed to promote ' + 
-		'communication and collaboration between *FIRST®* teams throughout the world and the *FIRST®* community. Like other platforms, this is a Graciously Professional space, meant to promote and inspire rather than diminish or deter people from the *FIRST®* community. These rules have been put in place in order to accomplish these goals.')
+		'communication and collaboration between *FIRST®* teams throughout the world and the *FIRST®* community. Like other platforms, this is a Graciously Professional space, meant to promote and inspire rather than diminish or deter people from the *FIRST®* community.')
 		.addField('Other Information', '*Check out <#188052258825568260> for the latest server news!*');
 
 		message.channel.sendEmbed(embed,{ disableEveryone: true });
