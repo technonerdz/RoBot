@@ -6,7 +6,7 @@ module.exports = {
 		.setAuthor('FIRST® Robotics Competition Discord Server', 'https://discordapp.com/api/v6/users/176870986900045824/avatars/c48ecf19c0002fe6e36204779d3b5401.jpg')
 		.setColor(0x1675DB)
 		.setDescription('Welcome to our server!')
-		.setFooter('Triggered by ' + message.author.user.username, message.author.user.avatarURL)
+		.setFooter('Triggered by ' + message.author.username, message.author.avatarURL)
 		.setThumbnail('https://discordapp.com/api/v6/users/176870986900045824/avatars/c48ecf19c0002fe6e36204779d3b5401.jpg')
 		.setTimestamp()
 		.setURL('https://discord.gg/FRC')
