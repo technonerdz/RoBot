@@ -77,7 +77,7 @@ bot.on("message", (msg) => {
 
         if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
             msg.guild.members.get(msg.author.id).setNickname(msg.author.username + " - (SET TEAM#)");
-			msg.member.addRole(msg.guild.roles.find('name', 'Members'))
+			msg.member.addRole(msg.guild.roles.get('246469964574228481'))
 			.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server! They are member number " + msg.guild.members.size))
 			.catch(err => {console.log(err)})
 			
@@ -90,12 +90,12 @@ bot.on("message", (msg) => {
                 "Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
                 "if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!*");
             msg.guild.channels.get('253661179702935552').fetchMessages({
-				limit: 2
+				limit: 10
 			})
 			.then(messages => msg.channel.bulkDelete(messages))
 			.catch(msg.channel.bulkDelete);
-				
-			msg.channel.sendMessage("Welcome to the server! Please enter the phrase, which may be found in <#253679529745186816>, to gain access to the server.\n\n@everyone");
+			msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please follow the bot's instructions to enter the server!")
+			.then(msg => msg.pin());
         }
 
         if (msg.content.startsWith(PREFIX)) {
@@ -122,7 +122,7 @@ bot.on("guildMemberAdd", (member) => {
 
         member.guild.channels.get('253661179702935552').sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " +
             "You are currently unable to see the server's main channels. " +
-            "To gain access to the rest of the server, please read <#253679529745186816> to find the phrase to enter.");
+            "To gain access to the rest of the server, please do %rules and read the rules to find the phrase to enter.");
     }
 });
 
