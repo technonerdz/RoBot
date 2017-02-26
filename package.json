@@ -24,12 +24,18 @@
     "chalk": "*",
     "discord.js": ">=11.0",
     "fs-extra": "*",
-    "google-search": "*",
-    "mysql": "*",
     "tba-api-storm": "^1.0.3",
     "unirest": "*",
     "urban": "*",
     "xkcd": "*",
-	"sqlite3": "*"
+	"sqlite3": "*",
+	"concat-stream": "*",
+	"hyperquest": "*",
+	"eightball": "*",
+	"emoji-random": "*",
+	"google-search": "*",
+	"leetspeak": "*",
+	"xkcd": "*",
+	"os-utils": "*"
   }
 }

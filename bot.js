@@ -22,8 +22,6 @@ function loadPlugins() {
     for (let plugin of files) {
         if (plugin.endsWith(".js")) {
             plugins.set(plugin.slice(0, -3), require(__dirname + "/plugins/" + plugin));
-        } else {
-            console.log(plugin);
         }
     }
     console.log("Plugins loaded.");
@@ -97,21 +95,29 @@ bot.on("message", (msg) => {
 			msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please follow the bot's instructions to enter the server!")
 			.then(msg => msg.pin());
         }
+		
+		if(msg.content == '%reload') {
+			plugins = null;
+			plugins = new Map();
+			loadPlugins();
+			msg.channel.sendMessage('Plugins Reloaded');
+		}
 
         if (msg.content.startsWith(PREFIX)) {
             let content = msg.content.split(PREFIX)[1];
-            let cmd = content.substring(0, content.indexOf(" ")),
-                args = content.substring(content.indexOf(" ") + 1, content.length);
-            if (plugins.get(cmd) !== undefined && content.indexOf(" ") !== -1) {
-                console.log(cmand(msg.author.username + " executed: " + cmd + " " + args));
-                msg.content = args;
-                plugins.get(cmd).main(bot, msg);
-            } else if (plugins.get(content) !== undefined && content.indexOf(" ") < 0) {
-                console.log(cmand(msg.author.username + " executed: " + content));
-                plugins.get(content).main(bot, msg);
-            } else {
-                console.log("ERROR:" + content);
-            }
+			
+			let cmd = content.substring(0, content.indexOf(" ")),
+				args = content.substring(content.indexOf(" ") + 1, content.length);
+			if (plugins.get(cmd) !== undefined && content.indexOf(" ") !== -1) {
+				console.log(cmand(msg.author.username + " executed: " + cmd + " " + args));
+				msg.content = args;
+				plugins.get(cmd).main(bot, msg);
+			} else if (plugins.get(content) !== undefined && content.indexOf(" ") < 0) {
+				console.log(cmand(msg.author.username + " executed: " + content));
+				plugins.get(content).main(bot, msg);
+			} else {
+				console.log("ERROR:" + content);
+			}
         }
     }
 });

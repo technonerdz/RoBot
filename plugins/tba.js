@@ -21,8 +21,7 @@ module.exports = {
 					m.channel.sendEmbed(embed)
 					embed = null;
 			}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
-		}
-		if(!isNaN(teamNumber)) {
+		} else if(!isNaN(teamNumber)) {
 			if (args === "team") {
 				var embed = new Discord.RichEmbed();
 				req.getTeam(teamNumber).then(d => {
@@ -118,8 +117,6 @@ module.exports = {
 					console.log(e.message);
 					m.reply("an error has occurred")
 				});
-			} else {
-				m.channel.sendMessage("Please specify an argument! Accepted arguments: team, awards, robots, events");
 			}
 		} else {
 			m.channel.sendMessage("Please specify an argument! Accepted arguments: team, awards, robots, events");

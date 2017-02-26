@@ -1,10 +1,25 @@
 module.exports = {
-	main: function(bot, message) {
+	main: function(bot, msg) {
 		var xkcd = require('xkcd');
-			
-		xkcd(689, function (data) {
-			message.channel.sendMessage("**" + data.num + "**: " + data.title + "\n" + data.alt + "\n*" + data.img);
-			console.log(data);
-		});
+		var num = msg.content;
+		if(!isNaN(num)) {
+			xkcd(num, function (data) {
+				try {
+					msg.channel.sendMessage("**XKCD #" + data.num + "**: \"" + data.title + "\"\n" + data.img + "\n*" + data.alt + "*");
+				} catch(err) {
+					msg.channel.sendMessage(err);
+				}
+				console.log(data);
+			});
+		} else {
+			xkcd(function (data) {
+				try {
+					msg.channel.sendMessage("**" + data.num + "**: " + data.title + "\n" + data.img + "\n*" + data.alt + "*");
+				} catch(err) {
+					msg.channel.sendMessage(err);
+				}
+				console.log(data);
+			});
+		}
 	}
 };
