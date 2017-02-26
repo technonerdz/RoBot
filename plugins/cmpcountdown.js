@@ -11,7 +11,7 @@ module.exports = {
 		var totalMinutes = parseInt(time / 60000);
 		var minutes = parseInt((time - (totalHours * 3600000)) / 60000);
 		var seconds = parseInt((time - (totalMinutes * 60000)) / 1000);
-        message.channel.sendMessage("Time until *FIRST®* Chanpionship @ Houston : \n**" + days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + " seconds**");
+        message.channel.sendMessage("Time until *FIRST®* Championship @ Houston : \n**" + days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + " seconds**");
 		
 		var d1 = new Date("2017", "3", "26", "0", "0");
 		var d2 = new Date();
@@ -24,6 +24,6 @@ module.exports = {
 		var totalMinutes = parseInt(time / 60000);
 		var minutes = parseInt((time - (totalHours * 3600000)) / 60000);
 		var seconds = parseInt((time - (totalMinutes * 60000)) / 1000);
-        message.channel.sendMessage("Time until *FIRST®* Chanpionship @ St. Louis : \n**" + days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + " seconds**");
+        message.channel.sendMessage("Time until *FIRST®* Championship @ St. Louis : \n**" + days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + " seconds**");
 	}
 };

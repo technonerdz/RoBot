@@ -119,7 +119,10 @@ bot.on("message", (msg) => {
 				console.log("ERROR:" + content);
 			}
         }
-    }
+    } else {
+		if (msg.author.bot) return;
+		msg.channel.sendMessage("This bot cannot be used in DMs!");
+	}
 });
 
 bot.on("guildMemberAdd", (member) => {
