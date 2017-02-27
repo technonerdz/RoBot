@@ -68,7 +68,7 @@ bot.on("message", (msg) => {
         });*/
       });
 
-		  console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
+		  console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + " (" + usr(msg.author.nickname) + ") : " + message(msg.cleanContent));
 
         if (msg.author.bot) return;
 
