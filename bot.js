@@ -9,7 +9,7 @@ let bot = new Discord.Client();
 var chalk = require("chalk");
 var chan = chalk.bold.red;
 var usr = chalk.bold.green;
-var msg = chalk.bold.blue;
+var message = chalk.bold.blue;
 var cmand = chalk.bgRed;
 var gray = chalk.gray;
 
@@ -68,7 +68,7 @@ bot.on("message", (msg) => {
         });*/
       });
 
-		  console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + msg(msg.cleanContent));
+		  console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
 
         if (msg.author.bot) return;
 
