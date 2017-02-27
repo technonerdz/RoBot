@@ -10,7 +10,6 @@ var chalk = require("chalk");
 var chan = chalk.bold.red;
 var usr = chalk.bold.green;
 var message = chalk.bold.blue;
-var nick = chalk.bold.yellow;
 var cmand = chalk.bgRed;
 var gray = chalk.gray;
 
@@ -69,7 +68,7 @@ bot.on("message", (msg) => {
         });*/
       });
 
-		  console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + " (" + nick(msg.member.nickname) + ") : " + message(msg.cleanContent));
+		  console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + " : " + message(msg.cleanContent));
 
         if (msg.author.bot) return;
 
