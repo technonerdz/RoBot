@@ -13,6 +13,7 @@ urban <word>: Searches for the word in Urban Dictionary
 tba <arguments>: Querys the TBA database for information
 stats: Gives info about the server statistics
 giveme {list}: Gives the user a specified allowed role, adding list gives the roles allowed
+xkcd {num}: Returns the current XKCD comic, or that number if specifiec.
 
 
 Adminstrative commands (requires the command user to have permissions):
