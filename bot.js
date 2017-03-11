@@ -4,7 +4,7 @@ var db = new sqlite3.Database('frclogs.sqlite');
 const Discord = require("discord.js");
 const fse = require("fs-extra");
 const PREFIX = config.prefix;
-let bot = new Discord.Client();
+let bot = new Discord.Client({fetchAllMembers: true, sync: true, disabledEvents: ["TYPING_START", "TYPING_STOP", "ROLE_CREATE", "ROLE_DELETE", "USER_UPDATE"]});
 
 var chalk = require("chalk");
 var chan = chalk.bold.red;
@@ -92,15 +92,7 @@ bot.on("message", (msg) => {
 			.then(messages => msg.channel.bulkDelete(messages))
 			.catch(msg.channel.bulkDelete);
 			msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please follow the bot's instructions to enter the server!")
-			.then(msg => msg.pin());
         }
-		
-		if(msg.content == '%reload') {
-			plugins = null;
-			plugins = new Map();
-			loadPlugins();
-			msg.channel.sendMessage('Plugins Reloaded');
-		}
 
         if (msg.content.startsWith(PREFIX)) {
             let content = msg.content.split(PREFIX)[1];
@@ -112,7 +104,7 @@ bot.on("message", (msg) => {
 				msg.content = args;
 				plugins.get(cmd).main(bot, msg);
 			} else if (plugins.get(content) !== undefined && content.indexOf(" ") < 0) {
-				console.log(cmand(msg.author.username + " executed: " + content));
+				console.log(cmand('[NOARGS]' + msg.author.username + " executed: " + content));
 				plugins.get(content).main(bot, msg);
 			} else {
 				console.log("ERROR:" + content);
@@ -130,7 +122,7 @@ bot.on("guildMemberAdd", (member) => {
 
         member.guild.channels.get('253661179702935552').sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " +
             "You are currently unable to see the server's main channels. " +
-            "To gain access to the rest of the server, please do %rules and read the rules to find the phrase to enter.");
+            "To gain access to the rest of the server, please read the rules in <#288856064089128960>.");
     }
 });
 

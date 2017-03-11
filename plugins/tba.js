@@ -18,7 +18,7 @@ module.exports = {
 						 .addField('Location', d.location, true)
 						 .addField('Website', d.website, true)
 						 .addField('Motto', d.motto, true)
-					m.channel.sendEmbed(embed)
+					sendEmbed(embed)
 					embed = null;
 			}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
 		} else if(!isNaN(teamNumber)) {
@@ -33,7 +33,7 @@ module.exports = {
 							 .addField('Location', d.location, true)
 							 .addField('Website', d.website, true)
 							 .addField('Motto', d.motto, true)
-						m.channel.sendEmbed(embed)
+						sendEmbed(embed)
 						embed = null;
 				}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
 			} else if (args === "awards") {
@@ -67,7 +67,7 @@ module.exports = {
 							}
 							if(embed.fields.length == 2 || j == awards.length - 1) {
 								embed.setColor(0x1675DB)
-								m.channel.sendEmbed(embed);
+								sendEmbed(embed);
 								embed = null;
 								var embed = new Discord.RichEmbed();
 							}
@@ -86,7 +86,7 @@ module.exports = {
 						for(let i in d){
 							embed.addField(i, d[i].name);
 						}
-						m.channel.sendEmbed(embed);
+						sendEmbed(embed);
 						embed = null;
 						team = null;
 				}).catch((e) => {
@@ -111,7 +111,7 @@ module.exports = {
 							endDate = new Date(d[i].end_date);
 							embed.addField(d[i].year + ' ' + d[i].name, d[i].location + '\n' + startDate.toLocaleDateString() + ' - ' + endDate.toLocaleDateString());
 						}
-						m.channel.sendEmbed(embed);
+						sendEmbed(embed);
 						embed = null;
 				}).catch((e) => {
 					console.log(e.message);
@@ -120,6 +120,15 @@ module.exports = {
 			}
 		} else {
 			m.channel.sendMessage("Please specify an argument! Accepted arguments: team, awards, robots, events");
+		}
+		
+		function sendEmbed(embed) {
+			m.channel.sendEmbed(embed)
+			.then(msg =>  {
+				setTimeout(() => {
+					msg.delete();
+				}, 7000);
+			})
 		}
 	}
 };
