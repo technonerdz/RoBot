@@ -4,13 +4,12 @@ var db = new sqlite3.Database('frclogs.sqlite');
 const Discord = require("discord.js");
 const fse = require("fs-extra");
 const PREFIX = config.prefix;
-let bot = new Discord.Client();
+let bot = new Discord.Client({fetchAllMembers: true, sync: true, disabledEvents: ["TYPING_START", "TYPING_STOP", "ROLE_CREATE", "ROLE_DELETE", "USER_UPDATE"]});
 
 var chalk = require("chalk");
-var server = chalk.bold.red;
-var chan = chalk.bold.green;
-var message = chalk.yellow;
-var usr = chalk.bold.blue;
+var chan = chalk.bold.red;
+var usr = chalk.bold.green;
+var message = chalk.bold.blue;
 var cmand = chalk.bgRed;
 var gray = chalk.gray;
 
@@ -67,7 +66,7 @@ bot.on("message", (msg) => {
         });*/
       });
 
-		  console.log(gray("[" + str + "] ") + server(msg.guild) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + ": " + message(msg.cleanContent));
+		  console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + " | " + message(msg.cleanContent));
 
         if (msg.author.bot) return;
 
@@ -91,25 +90,28 @@ bot.on("message", (msg) => {
 			.then(messages => msg.channel.bulkDelete(messages))
 			.catch(msg.channel.bulkDelete);
 			msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please follow the bot's instructions to enter the server!")
-			.then(msg => msg.pin());
         }
 
         if (msg.content.startsWith(PREFIX)) {
             let content = msg.content.split(PREFIX)[1];
-            let cmd = content.substring(0, content.indexOf(" ")),
-                args = content.substring(content.indexOf(" ") + 1, content.length);
-            if (plugins.get(cmd) !== undefined && content.indexOf(" ") !== -1) {
-                console.log(cmand(msg.author.username + " executed: " + cmd + " " + args));
-                msg.content = args;
-                plugins.get(cmd).main(bot, msg);
-            } else if (plugins.get(content) !== undefined && content.indexOf(" ") < 0) {
-                console.log(cmand(msg.author.username + " executed: " + content));
-                plugins.get(content).main(bot, msg);
-            } else {
-                console.log("ERROR:" + content);
-            }
+			
+			let cmd = content.substring(0, content.indexOf(" ")),
+				args = content.substring(content.indexOf(" ") + 1, content.length);
+			if (plugins.get(cmd) !== undefined && content.indexOf(" ") !== -1) {
+				console.log(cmand(msg.author.username + " executed: " + cmd + " " + args));
+				msg.content = args;
+				plugins.get(cmd).main(bot, msg);
+			} else if (plugins.get(content) !== undefined && content.indexOf(" ") < 0) {
+				console.log(cmand('[NOARGS]' + msg.author.username + " executed: " + content));
+				plugins.get(content).main(bot, msg);
+			} else {
+				console.log("ERROR:" + content);
+			}
         }
-    }
+    } else {
+		if (msg.author.bot) return;
+		msg.channel.sendMessage("This bot cannot be used in DMs!");
+	}
 });
 
 bot.on("guildMemberAdd", (member) => {
@@ -118,7 +120,7 @@ bot.on("guildMemberAdd", (member) => {
 
         member.guild.channels.get('253661179702935552').sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " +
             "You are currently unable to see the server's main channels. " +
-            "To gain access to the rest of the server, please do %rules and read the rules to find the phrase to enter.");
+            "To gain access to the rest of the server, please read the rules in <#288856064089128960>.");
     }
 });
 
