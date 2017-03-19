@@ -21,9 +21,10 @@ function loadPlugins() {
     console.log(__dirname + "/plugins");
     let files = fse.readdirSync(__dirname + "/plugins", "utf8");
     for (let plugin of files) {
-        if (plugin.endsWith(".js")) {
+        if (plugin.endsWith(".js"))
             plugins.set(plugin.slice(0, -3), require(__dirname + "/plugins/" + plugin));
-        }
+        else
+            console.log(plugin);
     }
     console.log("Plugins loaded.");
 }
@@ -37,16 +38,13 @@ bot.on("ready", () => {
     var hours = currentTime.getHours()
     var minutes = currentTime.getMinutes()
     var seconds = currentTime.getSeconds()
-    if (minutes < 10) {
-        minutes = "0" + minutes
-    }
-    if (seconds < 10) {
-        seconds = "0" + seconds
-    }
+    if (minutes < 10)
+        minutes = "0" + minutes;
+    if (seconds < 10)
+        seconds = "0" + seconds;
     str += hours + ":" + minutes + ":" + seconds;
     console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
-    const owner = bot.users.get(config.owner);
-    owner.sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
+    bot.users.get(config.owner).sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
     bot.user.setGame("FIRST Steamworks 2017");
 });
 
