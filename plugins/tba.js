@@ -4,14 +4,13 @@ let req = new TBA('FRCDiscord', 'Discord Bot', 1.0);
 
 module.exports = {
 	main: function(bot, m) {
-		var embed;
 		var args = m.content.split(" ")[0];
 		var teamNumber = m.content.split(" ")[1];
 		console.log(args + ", " + teamNumber);
 		if(!isNaN(args)) {
-			embed = new Discord.RichEmbed();
+			var team = new Discord.RichEmbed();
 			req.getTeam(args).then(d => {
-					embed.setTitle('*FIRST®* Robotics Competition Team ' + args)
+					team.setTitle('*FIRST®* Robotics Competition Team ' + args)
 						 .setColor(0x1675DB)
 						 .setURL('https://www.thebluealliance.com/team/' + args)
 						 .addField('Name', d.nickname, true)
@@ -19,13 +18,13 @@ module.exports = {
 						 .addField('Location', d.location, true)
 						 .addField('Website', d.website, true)
 						 .addField('Motto', d.motto, true)
-					sendEmbed(embed)
+					sendEmbed(team)
 			}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
 		} else if(!isNaN(teamNumber)) {
 			if (args === "team") {
-				embed = new Discord.RichEmbed();
+				var teaminfo = new Discord.RichEmbed();
 				req.getTeam(teamNumber).then(d => {
-						embed.setTitle('*FIRST®* Robotics Competition Team ' + teamNumber)
+						teaminfo.setTitle('*FIRST®* Robotics Competition Team ' + teamNumber)
 							 .setColor(0x1675DB)
 							 .setURL('https://www.thebluealliance.com/team/' + teamNumber)
 							 .addField('Name', d.nickname, true)
@@ -33,13 +32,12 @@ module.exports = {
 							 .addField('Location', d.location, true)
 							 .addField('Website', d.website, true)
 							 .addField('Motto', d.motto, true)
-						sendEmbed(embed)
+						sendEmbed(teaminfo)
 				}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
 			} else if (args === "awards") {
-				embed = new Discord.RichEmbed();
+				var awardlist = new Discord.RichEmbed();
 				req.getTeamAwardHistory(teamNumber).then(d => {
-					var embed = new Discord.RichEmbed();
-						embed.setTitle('Awards for *FIRST®* Robotics Competition Team ' + teamNumber)
+						awardlist.setTitle('Awards for *FIRST®* Robotics Competition Team ' + teamNumber)
 							.setColor(0x1675DB)
 							.setURL('https://www.thebluealliance.com/team/' + teamNumber)
 						var awards = [""];
@@ -57,18 +55,14 @@ module.exports = {
 						}
 						for(var j = 0; j < awards.length; j++) {
 							if(awards[j] != undefined) {
-								if(awards.length == 1) {
-									embed.addField("Award List", awards[j])
-								}
-								else {
-									embed.addField("Award List Page " + (j + 1), awards[j])
-								}
+								if(awards.length == 1)
+									awardlist.addField("Award List", awards[j])
+								else
+									awardlist.addField("Award List Page " + (j + 1), awards[j])
 							}
-							if(embed.fields.length == 2 || j == awards.length - 1) {
-								embed.setColor(0x1675DB)
-								sendEmbed(embed);
-								embed = null;
-								var embed = new Discord.RichEmbed();
+							if(awardlist.fields.length == 2 || j == awards.length - 1) {
+								awardlist.setColor(0x1675DB)
+								sendEmbed(awardlist);
 							}
 						}
 				}).catch((e) => {
@@ -76,22 +70,22 @@ module.exports = {
 					msg.reply(e);
 				});
 			} else if (args === "robots") {
-				embed = new Discord.RichEmbed();
+				var robots = new Discord.RichEmbed();
 				req.getTeamRobotHistory(teamNumber).then(d => {
-						embed.setTitle('Robots for *FIRST®* Robotics Competition Team ' + teamNumber)
+						robots.setTitle('Robots for *FIRST®* Robotics Competition Team ' + teamNumber)
 							.setColor(0x1675DB)
 							.setURL('https://www.thebluealliance.com/team/' + teamNumber)
 						for(let i in d){
-							embed.addField(i, d[i].name);
+							robots.addField(i, d[i].name);
 						}
-						sendEmbed(embed);
+						sendEmbed(robots);
 						team = null;
 				}).catch((e) => {
 					console.log(e.message);
 					m.reply("an error has occurred")
 				});
 			} else if (args === "events") {
-				embed = new Discord.RichEmbed();
+				var evts = new Discord.RichEmbed();
 				let year = m.content.split(" ")[2];
 				console.log(year);
 				if(year == undefined) {
@@ -99,15 +93,15 @@ module.exports = {
 					year = 2017;
 				}
 				req.getTeamEvents(teamNumber, year).then(d => {
-					embed.setTitle('Events for *FIRST®* Robotics Competition Team ' + teamNumber + ' in ' + year)
+					evts.setTitle('Events for *FIRST®* Robotics Competition Team ' + teamNumber + ' in ' + year)
 						.setColor(0x1675DB)
 						.setURL('https://www.thebluealliance.com/team/' + teamNumber)
 					for(var i = 0; i < d.length; i++){
 						startDate = new Date(d[i].start_date);
 						endDate = new Date(d[i].end_date);
-						embed.addField(d[i].year + ' ' + d[i].name, d[i].location + '\n' + startDate.toLocaleDateString() + ' - ' + endDate.toLocaleDateString());
+						evts.addField(d[i].year + ' ' + d[i].name, d[i].location + '\n' + startDate.toLocaleDateString() + ' - ' + endDate.toLocaleDateString());
 					}
-					sendEmbed(embed);
+					sendEmbed(evts);
 				}).catch((e) => {
 					console.log(e.message);
 					m.reply("an error has occurred")
@@ -146,8 +140,6 @@ module.exports = {
 				m.channel.sendMessage("Please specify an argument! Accepted arguments: team, awards, robots, events, district");
 			}
 		}
-		
-		embed = null;
 		
 		function sendEmbed(embed) {
 			m.channel.sendEmbed(embed)
