@@ -3,7 +3,9 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('frclogs.sqlite');
 const Discord = require("discord.js");
 const fse = require("fs-extra");
+
 const PREFIX = config.prefix;
+const isCommander = ["171319044715053057", "180094452860321793"];
 let bot = new Discord.Client({fetchAllMembers: true, sync: true, disabledEvents: ["TYPING_START", "TYPING_STOP", "ROLE_CREATE", "ROLE_DELETE", "USER_UPDATE"]});
 
 var chalk = require("chalk");
@@ -95,20 +97,22 @@ bot.on("message", (msg) => {
         }
 
         if (msg.content.startsWith(PREFIX)) {
-            let content = msg.content.split(PREFIX)[1];
+            var content = msg.content.split(PREFIX)[1];
 			
-			let cmd = content.substring(0, content.indexOf(" ")),
+			var cmd = content.substring(0, content.indexOf(" ")),
 				args = content.substring(content.indexOf(" ") + 1, content.length);
-			if (plugins.get(cmd) !== undefined && content.indexOf(" ") !== -1) {
-				console.log(cmand(msg.author.username + " executed: " + cmd + " " + args));
-				msg.content = args;
-				plugins.get(cmd).main(bot, msg);
-			} else if (plugins.get(content) !== undefined && content.indexOf(" ") < 0) {
-				console.log(cmand('[NOARGS]' + msg.author.username + " executed: " + content));
-				plugins.get(content).main(bot, msg);
-			} else {
-				console.log("ERROR:" + content);
+				
+			if(cmd == "sudo" && isCommander.indexOf(msg.author.id) > -1) {
+				msg.delete();
+				content = msg.content.split(PREFIX)[2];
+				msg.author = msg.mentions.users.array()[0];
+				msg.member = msg.guild.members.get(msg.mentions.users.array()[0].id);
+				console.log(content + "|" + msg.author.username);
+				cmd = content.substring(0, content.indexOf(" "));
+				args = content.substring(content.indexOf(" ") + 1, content.length);
 			}
+			
+			command(msg, cmd, args, content);
         }
     } else {
 		if (msg.author.bot) return;
@@ -135,3 +139,16 @@ bot.on("guildBanAdd", (guild, user) => {
 });
 
 bot.login(config.token);
+
+function command(msg, cmd, args, content) {
+	if (plugins.get(cmd) !== undefined && content.indexOf(" ") !== -1) {
+		console.log(cmand(msg.author.username + " executed: " + cmd + " " + args));
+		msg.content = args;
+		plugins.get(cmd).main(bot, msg);
+	} else if (plugins.get(content) !== undefined && content.indexOf(" ") < 0) {
+		console.log(cmand('[NOARGS]' + msg.author.username + " executed: " + content));
+		plugins.get(content).main(bot, msg);
+	} else {
+		console.log("ERROR:" + content);
+	}
+}
