@@ -1,6 +1,8 @@
 var config = require("./config.json");
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('frclogs.sqlite');
+var m = new Date().getMonth() + 1;
+var y = new Date().getFullYear();
+var db = new sqlite3.Database('frclogs-' + m + '-' + y + '.sqlite');
 const Discord = require("discord.js");
 const fse = require("fs-extra");
 
