@@ -58,6 +58,7 @@ bot.on("message", (msg) => {
       var day = new Date().getDate();
       var month = new Date().getMonth() + 1;
       var year = new Date().getFullYear();
+	  //TODO: Figure out logging embeds
       db.serialize(function() {
         db.run(`CREATE TABLE IF NOT EXISTS frc_logs_${month}_${day}_${year} (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, CHANNEL_NAME VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, AUTHOR_NICKNAME VARCHAR(32), MESSAGE VARCHAR(2000) NOT NULL)`);
         var stmt = db.prepare(`INSERT INTO frc_logs_${month}_${day}_${year} (CHANNEL_ID, CHANNEL_NAME, AUTHOR_ID, AUTHOR_NAME, AUTHOR_NICKNAME, MESSAGE) VALUES (?, ?, ?, ?, ?, ?)`);
@@ -140,17 +141,17 @@ bot.on("guildMemberRemove", (member) => {
 	var leave = new Discord.RichEmbed();
 	leave.setColor(0xFF0000)
 	.setAuthor(member.user.username, member.user.avatarURL)
-	.addField('Member Left', `*${member.user.username} left the server.*`)
+	.addField('Member Left', `*${member.user.username}#{member.user.discriminator} left the server.*`)
 	.setFooter(`FRC Discord Server | ${member.guild.members.size} members`, `${member.guild.iconURL}`)
 	.setTimestamp()
 	bot.channels.get('267837014014033931').sendEmbed(leave);
 });
 
-bot.on("guildBanAdd", (guild, member) => {
+bot.on("guildBanAdd", (guild, user) => {
 	var ban = new Discord.RichEmbed();
 	ban.setColor(0xFF00FF)
-	.setAuthor(member.username, member.avatarURL)
-	.addField('Member Banned', `**:hammer: ${member.username} was banned from the server.**`)
+	.setAuthor(user.username, user.avatarURL)
+	.addField('Member Banned', `**:hammer: ${user.username}#{user.discriminator} (${user.id}) was banned from the server.**`)
 	.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
 	.setTimestamp()
 	bot.channels.get('267837014014033931').sendEmbed(ban);
