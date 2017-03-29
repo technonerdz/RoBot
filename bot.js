@@ -64,10 +64,6 @@ bot.on("message", (msg) => {
         var channelID = msg.channel.id, channelName = msg.channel.name, authorID = msg.author.id, authorNAME = msg.author.username, authorNICK = msg.member.nickname, message = msg.cleanContent;
         stmt.run(channelID, channelName, authorID, authorNAME, authorNICK, message);
         stmt.finalize();
-
-        /*db.each("SELECT * FROM frc_logs", function(err, row) {
-          console.log(row);
-        });*/
       });
 
 		  console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + " | " + message(msg.cleanContent));
@@ -89,11 +85,11 @@ bot.on("message", (msg) => {
                 "Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
                 "if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!*");
             msg.guild.channels.get('253661179702935552').fetchMessages({
-				limit: 10
+				limit: 5
 			})
 			.then(messages => msg.channel.bulkDelete(messages))
 			.catch(msg.channel.bulkDelete);
-			msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please follow the bot's instructions to enter the server!")
+			msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please read <#288856064089128960> to enter the server!")
         }
 
         if (msg.content.startsWith(PREFIX)) {
@@ -136,6 +132,28 @@ bot.on("guildMemberRemove", (member) => {
 
 bot.on("guildBanAdd", (guild, user) => {
     bot.channels.get('267837014014033931').sendMessage(":hammer: " + user.user.username + " was banned.");
+});
+
+bot.on("voiceStateUpdate", (oldMember, newMember) => {
+	if(newMember.voiceChannel != null) {
+		if(newMember.voiceChannel.name.includes("General") && newMember.voiceChannel.name.includes("#1"))
+			newMember.addRole('296436001524547584')
+		else if(newMember.voiceChannel.name.includes("General") && newMember.voiceChannel.name.includes("#2"))
+			newMember.addRole('296436015156166657')
+		if(oldMember.voiceChannel != null) {
+			if(oldMember.voiceChannel.name.includes("General") && !newMember.voiceChannel.name.includes("General"))
+				newMember.removeRoles(['296436001524547584', '296436015156166657'])
+			else {
+				if(oldMember.voiceChannel.name.includes("General #1") && newMember.voiceChannel.name.includes("General #2"))
+					newMember.removeRole('296436001524547584')
+				else if(oldMember.voiceChannel.name.includes("General #2") && newMember.voiceChannel.name.includes("General #1"))
+					newMember.removeRole('296436015156166657')
+			}
+		}
+	} else {
+		if(oldMember.voiceChannel.name.includes("General"))
+			newMember.removeRoles(['296436001524547584', '296436015156166657'])
+	}
 });
 
 bot.login(config.token);
