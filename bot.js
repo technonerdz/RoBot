@@ -151,7 +151,7 @@ bot.on("guildBanRemove", (guild, user) => {
 	var ban = new Discord.RichEmbed();
 	ban.setColor(0x00FF00)
 	.setAuthor(user.username, user.avatarURL)
-	.addField('Member Banned', `**${user.username}#${user.discriminator} (${user.id}) was unbanned from the server.**`)
+	.addField('Member Unbanned', `**${user.username}#${user.discriminator} (${user.id}) was unbanned from the server.**`)
 	.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
 	.setTimestamp()
 	bot.channels.get('267837014014033931').sendEmbed(ban);
