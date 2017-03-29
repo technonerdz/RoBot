@@ -71,25 +71,35 @@ bot.on("message", (msg) => {
         if (msg.author.bot) return;
 
         if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
-            msg.guild.members.get(msg.author.id).setNickname(msg.author.username + " - (SET TEAM#)");
 			msg.member.addRole('246469964574228481')
-			.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server! They are member number " + msg.guild.members.size))
-			.catch(err => {console.log(err)})
+			.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server.");
 			
             setTimeout(function() {
-                bot.channels.get("200090417809719296").sendMessage(msg.author.username + " Join Nick set to --> ``" + msg.author.username + " - (SET TEAM#)``");
+				msg.guild.members.get(msg.author.id).setNickname(msg.author.username + " - (SET TEAM#)")
+				.then(member => bot.channels.get("200090417809719296").sendMessage(member.user.username + " Nickname set to --> ``" + member.nickname + "``"));
             }, 1000)
-
-            bot.channels.get('267837014014033931').sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!** We now have ``" + msg.guild.members.size + "`` members.");
+			
+            //bot.channels.get('267837014014033931').sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!** We now have ``" + msg.guild.members.size + "`` members.");
+			
+			var join = new Discord.RichEmbed();
+			join.setColor(0x1675DB)
+			.setAuthor(msg.author.username, msg.author.avatarURL)
+			.addField('Member Joined', `**${msg.author} joined the server!**`)
+			.setFooter(`FRC Discord Server | ${msg.guild.members.size} members`, `${msg.guild.iconURL}`)
+			.setTimestamp()
+			bot.channels.get('267837014014033931').sendEmbed(join);
+			
 			msg.author.sendMessage("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
                 "Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
                 "if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!*");
+				
             msg.guild.channels.get('253661179702935552').fetchMessages({
 				limit: 5
 			})
-			.then(messages => msg.channel.bulkDelete(messages))
-			.catch(msg.channel.bulkDelete);
-			msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please read <#288856064089128960> to enter the server!")
+			.then(messages => {
+				msg.channel.bulkDelete(messages);
+				msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please read <#288856064089128960> to enter the server!");
+			})
         }
 
         if (msg.content.startsWith(PREFIX)) {
@@ -127,11 +137,23 @@ bot.on("guildMemberAdd", (member) => {
 });
 
 bot.on("guildMemberRemove", (member) => {
-    bot.channels.get('267837014014033931').sendMessage(member.user.username + " left the server. RIP " + member.user.username + ".");
+	var leave = new Discord.RichEmbed();
+	leave.setColor(0xFF0000)
+	.setAuthor(member.user.username, member.user.avatarURL)
+	.addField('Member Left', `*${member.user.username} left the server.*`)
+	.setFooter(`FRC Discord Server | ${member.guild.members.size} members`, `${member.guild.iconURL}`)
+	.setTimestamp()
+	bot.channels.get('267837014014033931').sendEmbed(leave);
 });
 
-bot.on("guildBanAdd", (guild, user) => {
-    bot.channels.get('267837014014033931').sendMessage(":hammer: " + user.user.username + " was banned.");
+bot.on("guildBanAdd", (guild, member) => {
+	var ban = new Discord.RichEmbed();
+	ban.setColor(0xFF00FF)
+	.setAuthor(member.username, member.avatarURL)
+	.addField('Member Banned', `**:hammer: ${member.username} was banned from the server.**`)
+	.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
+	.setTimestamp()
+	bot.channels.get('267837014014033931').sendEmbed(ban);
 });
 
 bot.on("voiceStateUpdate", (oldMember, newMember) => {
