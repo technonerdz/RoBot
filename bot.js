@@ -141,7 +141,7 @@ bot.on("guildMemberRemove", (member) => {
 	var leave = new Discord.RichEmbed();
 	leave.setColor(0xFF0000)
 	.setAuthor(member.user.username, member.user.avatarURL)
-	.addField('Member Left', `*${member.user.username}#{member.user.discriminator} left the server.*`)
+	.addField('Member Left', `*${member.user.username}#${member.user.discriminator} left the server.*`)
 	.setFooter(`FRC Discord Server | ${member.guild.members.size} members`, `${member.guild.iconURL}`)
 	.setTimestamp()
 	bot.channels.get('267837014014033931').sendEmbed(leave);
@@ -151,7 +151,7 @@ bot.on("guildBanAdd", (guild, user) => {
 	var ban = new Discord.RichEmbed();
 	ban.setColor(0xFF00FF)
 	.setAuthor(user.username, user.avatarURL)
-	.addField('Member Banned', `**:hammer: ${user.username}#{user.discriminator} (${user.id}) was banned from the server.**`)
+	.addField('Member Banned', `**:hammer: ${user.username}#${user.discriminator} (${user.id}) was banned from the server.**`)
 	.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
 	.setTimestamp()
 	bot.channels.get('267837014014033931').sendEmbed(ban);
