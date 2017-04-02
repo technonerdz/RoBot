@@ -1,7 +1,7 @@
 module.exports = {
-	main: function(bot, message){
-		if (message.member.hasPermission('ADMINISTRATOR') === true || message.author.id === "171319044715053057") {
-			message.channel.sendMessage(":wave: RoBot is restarting...");
+	main: function(bot, msg){
+		if (msg.member.hasPermission('ADMINISTRATOR') === true || msg.author.id === "171319044715053057") {
+			msg.channel.sendMessage(":wave: RoBot is restarting...");
 
 			setTimeout(function() {
 				bot.logout();
@@ -10,6 +10,8 @@ module.exports = {
 			setTimeout(function() {
 				process.exit();
 			}, 2000);
+		} else {
+			msg.channel.sendMessage(msg.author + ": You do not have permission to do this!")
 		}
 	}
 };

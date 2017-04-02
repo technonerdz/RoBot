@@ -1,6 +1,6 @@
 module.exports = {
 	main: function(bot, message) {
-		if (message.member.hasPermission('MANAGE_MESSAGES') === true || message.author.id === "171319044715053057") {
+		if (message.member.hasPermission('MANAGE_MESSAGES') || message.author.id === "171319044715053057") {
 			var num = message.content;
 			if (!isNaN(num)) {
 				message.channel.fetchMessages({limit: num})
