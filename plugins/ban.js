@@ -1,31 +1,40 @@
 module.exports = {
-	main: function(bot, message) {
-		var banee = message.mentions.users.array()[0];
+	main: function(bot, msg) {
+		var banee = msg.mentions.users.array()[0];
 
-		if (message.member.hasPermission('BAN_MEMBERS') === true || message.member.hasPermission('ADMINISTRATOR') === true) {
+		if (msg.member.hasPermission('BAN_MEMBERS') === true || msg.member.hasPermission('ADMINISTRATOR') === true) {
 			try {
-				var banned = message.guild.members.get(banee.id);
-				var reason = message.content.split(" ").splice(1).join(" ");
+				var banned = msg.guild.members.get(banee.id);
+				var reason = msg.content.split(" ").splice(1).join(" ");
 				
 				if(reason == "")
 					var reason = "Not specified.";
 				
 				banned.ban();
 
-				message.reply(banee + " has been banned.");
+				msg.reply(banee + " has been successfullly banned.");
+				
+				var ban = new Discord.RichEmbed();
+				ban.setColor(0xFF00FF)
+					.setAuthor(user.username, user.avatarURL)
+					.addField('Member Banned', `**:hammer: ${user.username}#${user.discriminator} (${user.id}) was banned from the server.**`)
+					.addField('Responsible Moderator', msg.author.username)
+					.addField('Reason', reason)
+					.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
+					.setTimestamp()
+				bot.channels.get('267837014014033931').sendEmbed(ban);
 
 				try {
-					var log = message.guild.channels.find("name", "mod-log");
-					log.sendMessage("ACTION: BAN\nUSER: " + banee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
+					var log = msg.guild.channels.get('300441175532503040');
+					log.sendEmbed(ban);
 				} catch (e) {
-					message.channel.sendMessage("Make a channel called #mod-log.");
-					message.channel.sendMessage("ACTION: BAN\nUSER: " + banee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
+					msg.channel.sendEmbed(ban);
 				}
 			} catch (e) {
 				console.error(e);
 			}
 		} else {
-			message.reply(" you do not have permission to do this action");
+			msg.reply(" you do not have permission to perform this action!");
 		}
 	}
 };

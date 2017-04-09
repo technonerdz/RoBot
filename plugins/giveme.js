@@ -1,6 +1,6 @@
 module.exports = {
 	main: function(bot, msg) {
-		const allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media', 'place'];
+		const allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media'];
 		var roleToGive = msg.content;
 		roleToGive = roleToGive.trim().toLowerCase();
 		var found = false;

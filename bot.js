@@ -23,8 +23,6 @@ var gray = chalk.gray;
 
 let plugins = new Map();
 
-var lol = require("./plasmalol.json")
-
 function loadPlugins() {
 	console.log(__dirname + "/plugins");
 	let files = fse.readdirSync(__dirname + "/plugins", "utf8");
@@ -82,14 +80,6 @@ bot.on("message", (msg) => {
 		console.log(gray("[" + str + "] ") + chan(msg.channel.name) + " | " + usr(msg.author.username) + " | " + message(msg.cleanContent));
 
 		if(msg.author.bot) return;
-
-		if(msg.author.id == "180094452860321793" && msg.content.toLowerCase().includes('lol')) {
-			lol[0]++;
-			fse.writeFile('plasmalol.json', JSON.stringify(lol), (err) => {
-				if (err) throw err;
-				console.log('Lols saved! ' + lol[0]);
-			});
-		}
 
 		if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
 			msg.member.addRole('246469964574228481')
