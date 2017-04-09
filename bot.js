@@ -51,7 +51,7 @@ bot.on("ready", () => {
 	str += hours + ":" + minutes + ":" + seconds;
 	console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
 	bot.users.get(config.owner).sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
-	bot.user.setGame("FIRST Steamworks 2017");
+	bot.user.setGame("Houston CMP Hype");
 });
 
 bot.on("message", (msg) => {
