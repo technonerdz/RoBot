@@ -7,6 +7,7 @@ module.exports = {
 			try {
 				var kicked = msg.guild.members.get(banee.id);
 				var user = bot.users.get(banee.id);
+				var guild = msg.guild;
 				var reason = msg.content.split(" ").splice(1).join(" ");
 				
 				if(reason == "")
