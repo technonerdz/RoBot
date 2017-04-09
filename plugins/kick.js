@@ -25,7 +25,6 @@ module.exports = {
 					.addField('Reason', reason)
 					.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
 					.setTimestamp()
-				bot.channels.get('267837014014033931').sendEmbed(ban);
 
 				try {
 					var log = msg.guild.channels.get('300441175532503040');
