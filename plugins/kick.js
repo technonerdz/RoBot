@@ -6,7 +6,7 @@ module.exports = {
 		if (msg.member.hasPermission('KICK_MEMBERS') === true || msg.member.hasPermission('ADMINISTRATOR') === true) {
 			try {
 				var kicked = msg.guild.members.get(banee.id);
-				var user = bot.users.get(bannee.id);
+				var user = bot.users.get(banee.id);
 				var reason = msg.content.split(" ").splice(1).join(" ");
 				
 				if(reason == "")
