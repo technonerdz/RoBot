@@ -1,31 +1,41 @@
 module.exports = {
-	main: function(bot, message) {
-		var kickee = message.mentions.users.array()[0];
+	main: function(bot, msg) {
+		const Discord = require("discord.js");
+		var banee = msg.mentions.users.array()[0];
 
-		if (message.member.hasPermission('KICK_MEMBERS') === true || message.member.hasPermission('ADMINISTRATOR') === true) {
+		if (msg.member.hasPermission('KICK_MEMBERS') === true || msg.member.hasPermission('ADMINISTRATOR') === true) {
 			try {
-				var kicked = message.guild.members.get(kickee.id);
-				var reason = message.content.split(" ").splice(1).join(" ")
+				var kicked = msg.guild.members.get(banee.id);
+				var reason = msg.content.split(" ").splice(1).join(" ");
 				
 				if(reason == "")
 					var reason = "Not specified.";
-
+				
 				kicked.kick();
-				message.channel.sendMessage(kickee + " has been kicked.");
+
+				msg.reply(banee + " has been successfullly kicked.");
+				
+				var ban = new Discord.RichEmbed();
+				ban.setColor(0xFF0000)
+					.setAuthor(user.username, user.avatarURL)
+					.addField('Member Kicked', `**${user.username}#${user.discriminator} (${user.id}) was kicked from the server.**`)
+					.addField('Responsible Moderator', msg.author.username)
+					.addField('Reason', reason)
+					.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
+					.setTimestamp()
+				bot.channels.get('267837014014033931').sendEmbed(ban);
 
 				try {
-					var log = message.guild.channels.find("name", "mod-log");
-					log.sendMessage("ACTION: KICK\nUSER: " + kickee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
+					var log = msg.guild.channels.get('300441175532503040');
+					log.sendEmbed(ban);
 				} catch (e) {
-					console.error(e);
-					message.channel.sendMessage("Make a channel called #mod-log.");
-					message.channel.sendMessage("ACTION: KICK\nUSER: " + kickee.username + "\nReason: " + reason + "\nModerator: " + message.author.username);
+					msg.channel.sendEmbed(ban);
 				}
 			} catch (e) {
-				console.log(e);
+				console.error(e);
 			}
 		} else {
-			message.reply( " you do not have permission to do this!");
+			msg.reply(" you do not have permission to perform this action!");
 		}
 	}
 };

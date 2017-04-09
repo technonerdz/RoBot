@@ -132,7 +132,8 @@ bot.on("message", (msg) => {
 			command(msg, cmd, args, content);
 		}
 	} else {
-		msg.channel.sendMessage("This bot cannot be used in DMs!");
+		if(msg.author.bot) return;
+			msg.channel.sendMessage("This bot cannot be used in DMs!");
 	}
 });
 

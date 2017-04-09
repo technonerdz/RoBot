@@ -1,5 +1,6 @@
 module.exports = {
 	main: function(bot, msg) {
+		const Discord = require("discord.js");
 		var banee = msg.mentions.users.array()[0];
 
 		if (msg.member.hasPermission('BAN_MEMBERS') === true || msg.member.hasPermission('ADMINISTRATOR') === true) {
