@@ -132,12 +132,12 @@ module.exports = {
 		function sendEmbed(embed) {
 			m.channel.sendEmbed(embed)
 			.then(msg =>  {
-				if(!m.content.endsWith('--stickey')) {
+				if(!m.content.endsWith('--nodel')) {
 					setTimeout(() => {
 						msg.delete();
 					}, 30000);
 				} else {
-					m.channel.sendMessage("This is a stickey message.")
+					m.channel.sendMessage("This is a nodel message.")
 					.then(msg => {
 						setTimeout(() => {
 							msg.delete();
