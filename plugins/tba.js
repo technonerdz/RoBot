@@ -108,7 +108,7 @@ module.exports = {
 								temp = 'https://i.imgur.com/' + d[i].foreign_key + '.png'
 							} else if(d[i].type == 'cdphotothread') {
 								name = 'Chief Delphi'
-								temp = 'https://www.chiefdelphi.com/media/img/' + d[i].foreign_key
+								temp = 'https://www.chiefdelphi.com/media/img/' + d[i].details.image_partial
 							} else if(d[i].type == 'youtube') {
 								name = 'Youtube'
 								temp = 'https://www.youtube.com/watch?v=' + d[i].foreign_key
