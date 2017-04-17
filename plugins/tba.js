@@ -3,7 +3,12 @@ const TBA = require('tba-api-storm');
 let req = new TBA('FRCDiscord', 'Discord Bot', 1.0);
 
 module.exports = {
+	name: 'tba',
+    usage: 'tba <arguments>',
+    permission: 1,
+    help: 'Querys The Blue Alliance API for information.',
 	main: function(bot, m) {
+		var curYear = new Date().getFullYear();
 		var args = m.content.split(" ")[0];
 		var teamNumber = m.content.split(" ")[1];
 		console.log(args + ", " + teamNumber);
@@ -15,9 +20,8 @@ module.exports = {
 			} else if (args === "awards") {
 				var awardlist = new Discord.RichEmbed();
 				req.getTeamAwardHistory(teamNumber).then(d => {
-						awardlist.setTitle('Awards for *FIRST®* Robotics Competition Team ' + teamNumber)
+						awardlist.setAuthor('Events for FIRST® Robotics Competition Team ' + teamNumber, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + teamNumber)
 							.setColor(0x1675DB)
-							.setURL('https://www.thebluealliance.com/team/' + teamNumber)
 						var awards = [""];
 						var n = 0;
 						for(var i = 0; i < d.length; i++) {
@@ -50,9 +54,8 @@ module.exports = {
 			} else if (args === "robots") {
 				var robots = new Discord.RichEmbed();
 				req.getTeamRobotHistory(teamNumber).then(d => {
-						robots.setTitle('Robots for *FIRST®* Robotics Competition Team ' + teamNumber)
+						robots.setAuthor('Robot Names for FIRST® Robotics Competition Team ' + teamNumber, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + teamNumber)
 							.setColor(0x1675DB)
-							.setURL('https://www.thebluealliance.com/team/' + teamNumber)
 						for(let i in d){
 							robots.addField(i, d[i].name);
 						}
@@ -67,11 +70,10 @@ module.exports = {
 				let year = m.content.split(" ")[2];
 				console.log(year);
 				if(year == undefined)
-					year = 2017;
+					year = curYear;
 				req.getTeamEvents(teamNumber, year).then(d => {
-					evts.setTitle('Events for *FIRST®* Robotics Competition Team ' + teamNumber + ' in ' + year)
-						.setColor(0x1675DB)
-						.setURL('https://www.thebluealliance.com/team/' + teamNumber)
+					evts.setAuthor('Events for FIRST® Robotics Competition Team ' + teamNumber + ' in ' + year, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + teamNumber)
+					.setColor(0x1675DB)
 					for(var i = 0; i < d.length; i++){
 						startDate = new Date(d[i].start_date);
 						endDate = new Date(d[i].end_date);
@@ -83,13 +85,62 @@ module.exports = {
 					m.reply("an error has occurred")
 				});
 			} else if (args === "media") {
-				var evts = new Discord.RichEmbed();
+				var media = new Discord.RichEmbed();
 				let year = m.content.split(" ")[2];
 				console.log(year);
 				if(year == undefined)
-					year = 2017;
+					year = curYear;
 				req.getTeamMedia(teamNumber, year).then(d => {
-					
+					if(d.length != 0) {
+						media.setAuthor('Media for FIRST® Robotics Competition Team ' + teamNumber + ' in ' + year, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + teamNumber)
+							.setColor(0x1675DB)
+						for(var i = 0; i < d.length; i++) {
+							if((d[i].type == 'imgur' || d[i].type == 'cdphotothread') && media.image == null) {
+								if(d[i].type == 'imgur')
+									media.setImage('https://i.imgur.com/' + d[i].foreign_key + '.png')
+								else if(d[i].type == 'cdphotothread')
+									media.setImage('https://www.chiefdelphi.com/media/img/' + d[i].foreign_key)
+							}
+							var temp, name;
+							
+							if(d[i].type == 'imgur') {
+								name = 'Imgur'
+								temp = 'https://i.imgur.com/' + d[i].foreign_key + '.png'
+							} else if(d[i].type == 'cdphotothread') {
+								name = 'Chief Delphi'
+								temp = 'https://www.chiefdelphi.com/media/img/' + d[i].foreign_key
+							} else if(d[i].type == 'youtube') {
+								name = 'Youtube'
+								temp = 'https://www.youtube.com/watch?v=' + d[i].foreign_key
+							} else if(d[i].type == 'facebook-profile') {
+								name = 'Facebook'
+								temp = 'https://www.facebook.com/' + d[i].foreign_key
+							} else if(d[i].type == 'youtube-channel') {
+								name = 'Youtube Channel'
+								temp = 'https://twitter.com/' + d[i].foreign_key
+							} else if(d[i].type == 'twitter-profile') {
+								name = 'Twitter'
+								temp = 'https://www.youtube.com/' + d[i].foreign_key
+							} else if(d[i].type == 'github-profile') {
+								name = 'Github'
+								temp = 'https://github.com/' + d[i].foreign_key
+							} else if(d[i].type == 'instagram-profile') {
+								name = 'Instagram'
+								temp = 'https://www.instagram.com/' + d[i].foreign_key
+							} else if(d[i].type == 'periscope-profile') {
+								name = 'Periscope'
+								temp = 'https://www.periscope.tv/' + d[i].foreign_key
+							} else if(d[i].type == 'grabcad') {
+								name = 'GrabCAD'
+								temp = 'https://grabcad.com/library/' + d[i].foreign_key
+							} 
+							
+							media.addField(name, temp)
+						}
+						sendEmbed(media)
+					} else {
+						m.channel.sendMessage('Unfortunately there is no media for team ' + teamNumber + ' for ' + year + '.');
+					}
 				}).catch((e) => {
 					console.log(e.message);
 					m.reply("an error has occurred")
@@ -100,7 +151,7 @@ module.exports = {
 				var toSend = new Discord.RichEmbed();
 				let subcommand = m.content.split(" ")[1];
 				if(subcommand == "list") {
-					req.getDistrictList(2017).then(d => {
+					req.getDistrictList(curYear).then(d => {
 						toSend.setColor(0x1675DB)
 						.setURL('https://www.thebluealliance.com');
 						var str = "";
@@ -119,8 +170,9 @@ module.exports = {
 				} else if(subcommand == "rankings") {
 					var district = m.content.split(" ")[2];
 					var year = m.content.split(" ")[3];
-					var rankings = req.getDistrictRankings(district, year)
-					
+					req.getDistrictRankings(district, year).then(d => {
+						
+					})
 				} else {
 					m.channel.sendMessage("Arguments for district subcommand: list, events, rankings")
 				}
@@ -137,7 +189,7 @@ module.exports = {
 						msg.delete();
 					}, 30000);
 				} else {
-					m.channel.sendMessage("This is a nodel message.")
+					m.channel.sendMessage("This message will not autodelete.")
 					.then(msg => {
 						setTimeout(() => {
 							msg.delete();
@@ -150,9 +202,8 @@ module.exports = {
 		function team (num) {
 			var teaminfo = new Discord.RichEmbed();
 			req.getTeam(num).then(d => {
-					teaminfo.setTitle('*FIRST®* Robotics Competition Team ' + num)
+					teaminfo.setAuthor('FIRST® Robotics Competition Team ' + teamNumber, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + teamNumber)
 						 .setColor(0x1675DB)
-						 .setURL('https://www.thebluealliance.com/team/' + num)
 						 .addField('Name', d.nickname, true)
 						 .addField('Rookie Year', d.rookie_year, true)
 						 .addField('Location', d.location, true)
