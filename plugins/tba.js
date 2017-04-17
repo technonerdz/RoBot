@@ -136,6 +136,13 @@ module.exports = {
 					setTimeout(() => {
 						msg.delete();
 					}, 30000);
+				} else {
+					m.channel.sendMessage("This is a stickey message.")
+					.then(msg => {
+						setTimeout(() => {
+							msg.delete();
+						}, 5000);
+					})
 				}
 			})
 		}
