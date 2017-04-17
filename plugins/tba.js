@@ -99,7 +99,7 @@ module.exports = {
 								if(d[i].type == 'imgur')
 									media.setImage('https://i.imgur.com/' + d[i].foreign_key + '.png')
 								else if(d[i].type == 'cdphotothread')
-									media.setImage('https://www.chiefdelphi.com/media/img/' + d[i].foreign_key)
+									media.setImage('https://www.chiefdelphi.com/media/img/' + d[i].details.image_partial)
 							}
 							var temp, name;
 							
