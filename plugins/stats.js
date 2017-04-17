@@ -14,14 +14,14 @@ module.exports = {
 		osu.cpuUsage(function(v){
 		message.channel.sendMessage("```"
 								+ "----- Stats for RoBot -----" 
-								+ "\n> Created by : ASIANBOI#4122"
+								+ "\n> Created by : ASIANBOI#2345"
 								+ "\n> Library    : discord.js"
 								+ "\n> Users      : " + bot.users.size
 								+ "\n> Channels   : " + bot.channels.size
 								+ "\n> Servers    : " + bot.guilds.size
 								+ "\n\n-------- VPS Details -------------"
-								+ "\n> Host             : Digital Ocean"
-								+ "\n> Operating System : Ubuntu Linux 14.04.4 Server"
+								+ "\n> Host             : Solomon Hosting Inc."
+								+ "\n> Operating System : Debian"
 								+ "\n> Uptime           : " + strDate
 								+ "\n> Memory Usage     : " + memory + "MB / " + totalmem + " MB"
 								+ "\n> CPU Usage        : " + v.toFixed(2) * 100 + "%"

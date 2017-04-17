@@ -90,8 +90,6 @@ bot.on("message", (msg) => {
 					.then(member => bot.channels.get("200090417809719296").sendMessage(member.user.username + " Nickname set to --> ``" + member.nickname + "``"));
 			}, 1000)
 
-			//bot.channels.get('267837014014033931').sendMessage("Welcome " + msg.author + " to the **FIRST Robotics Competition Discord Server!** We now have ``" + msg.guild.members.size + "`` members.");
-
 			var join = new Discord.RichEmbed();
 			join.setColor(0x1675DB)
 				.setAuthor(msg.author.username, msg.author.avatarURL)
@@ -105,30 +103,18 @@ bot.on("message", (msg) => {
 				"if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!*");
 
 			msg.guild.channels.get('253661179702935552').fetchMessages({
-					limit: 5
-				})
-				.then(messages => {
-					msg.channel.bulkDelete(messages);
-					msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please read <#288856064089128960> to enter the server!");
-				})
+				limit: 5
+			})
+			.then(messages => {
+				msg.channel.bulkDelete(messages);
+				msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please read <#288856064089128960> to enter the server!");
+			})
 		}
 
 		if (msg.content.startsWith(PREFIX)) {
 			var content = msg.content.split(PREFIX)[1];
-
 			var cmd = content.substring(0, content.indexOf(" ")),
 				args = content.substring(content.indexOf(" ") + 1, content.length);
-
-			if (cmd == "sudo" && isCommander.indexOf(msg.author.id) > -1) {
-				msg.delete();
-				content = msg.content.split(PREFIX)[2];
-				msg.author = msg.mentions.users.array()[0];
-				msg.member = msg.guild.members.get(msg.mentions.users.array()[0].id);
-				console.log(content + "|" + msg.author.username);
-				cmd = content.substring(0, content.indexOf(" "));
-				args = content.substring(content.indexOf(" ") + 1, content.length);
-			}
-
 			command(msg, cmd, args, content);
 		}
 	} else {

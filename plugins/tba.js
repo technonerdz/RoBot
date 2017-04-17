@@ -8,32 +8,10 @@ module.exports = {
 		var teamNumber = m.content.split(" ")[1];
 		console.log(args + ", " + teamNumber);
 		if(!isNaN(args)) {
-			var team = new Discord.RichEmbed();
-			req.getTeam(args).then(d => {
-					team.setTitle('*FIRST®* Robotics Competition Team ' + args)
-						 .setColor(0x1675DB)
-						 .setURL('https://www.thebluealliance.com/team/' + args)
-						 .addField('Name', d.nickname, true)
-						 .addField('Rookie Year', d.rookie_year, true)
-						 .addField('Location', d.location, true)
-						 .addField('Website', d.website, true)
-						 .addField('Motto', d.motto, true)
-					sendEmbed(team)
-			}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
+			team(args)
 		} else if(!isNaN(teamNumber)) {
 			if (args === "team") {
-				var teaminfo = new Discord.RichEmbed();
-				req.getTeam(teamNumber).then(d => {
-						teaminfo.setTitle('*FIRST®* Robotics Competition Team ' + teamNumber)
-							 .setColor(0x1675DB)
-							 .setURL('https://www.thebluealliance.com/team/' + teamNumber)
-							 .addField('Name', d.nickname, true)
-							 .addField('Rookie Year', d.rookie_year, true)
-							 .addField('Location', d.location, true)
-							 .addField('Website', d.website, true)
-							 .addField('Motto', d.motto, true)
-						sendEmbed(teaminfo)
-				}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
+				team(teamNumber)
 			} else if (args === "awards") {
 				var awardlist = new Discord.RichEmbed();
 				req.getTeamAwardHistory(teamNumber).then(d => {
@@ -88,10 +66,8 @@ module.exports = {
 				var evts = new Discord.RichEmbed();
 				let year = m.content.split(" ")[2];
 				console.log(year);
-				if(year == undefined) {
-					console.log('switching to 2017');
+				if(year == undefined)
 					year = 2017;
-				}
 				req.getTeamEvents(teamNumber, year).then(d => {
 					evts.setTitle('Events for *FIRST®* Robotics Competition Team ' + teamNumber + ' in ' + year)
 						.setColor(0x1675DB)
@@ -102,6 +78,18 @@ module.exports = {
 						evts.addField(d[i].year + ' ' + d[i].name, d[i].location + '\n' + startDate.toLocaleDateString() + ' - ' + endDate.toLocaleDateString());
 					}
 					sendEmbed(evts);
+				}).catch((e) => {
+					console.log(e.message);
+					m.reply("an error has occurred")
+				});
+			} else if (args === "media") {
+				var evts = new Discord.RichEmbed();
+				let year = m.content.split(" ")[2];
+				console.log(year);
+				if(year == undefined)
+					year = 2017;
+				req.getTeamMedia(teamNumber, year).then(d => {
+					
 				}).catch((e) => {
 					console.log(e.message);
 					m.reply("an error has occurred")
@@ -120,7 +108,7 @@ module.exports = {
 							str += d[i].name + ", ";
 						}
 						str = str.substring(0, str.length - 2);
-						toSend.addField("District List", str)
+						toSend.addField("Current District List", str)
 						sendEmbed(toSend);
 					}).catch((e) => {
 						console.log(e.message);
@@ -134,20 +122,38 @@ module.exports = {
 					var rankings = req.getDistrictRankings(district, year)
 					
 				} else {
-					m.channel.sendMessage("Arguments for district subcommant: list, events, rankings")
+					m.channel.sendMessage("Arguments for district subcommand: list, events, rankings")
 				}
 			} else {
-				m.channel.sendMessage("Please specify an argument! Accepted arguments: team, awards, robots, events, district");
+				m.channel.sendMessage("Please specify an argument! Accepted arguments: team, awards, media, robots, events, district");
 			}
 		}
 		
 		function sendEmbed(embed) {
 			m.channel.sendEmbed(embed)
 			.then(msg =>  {
-				setTimeout(() => {
-					msg.delete();
-				}, 30000);
+				if(!m.content.endsWith('--stickey')) {
+					setTimeout(() => {
+						msg.delete();
+					}, 30000);
+				}
 			})
+		}
+		
+		function team (num) {
+			var teaminfo = new Discord.RichEmbed();
+			req.getTeam(num).then(d => {
+					teaminfo.setTitle('*FIRST®* Robotics Competition Team ' + num)
+						 .setColor(0x1675DB)
+						 .setURL('https://www.thebluealliance.com/team/' + num)
+						 .addField('Name', d.nickname, true)
+						 .addField('Rookie Year', d.rookie_year, true)
+						 .addField('Location', d.location, true)
+						 .addField('Website', d.website, true)
+						 if(d.motto != null)
+							teaminfo.addField('Motto', d.motto, true)
+					sendEmbed(teaminfo)
+			}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
 		}
 	}
 };
