@@ -168,7 +168,7 @@ module.exports = {
 				} else if(subcommand == "events") {
 					var district = m.content.split(" ")[2];
 					var year = m.content.split(" ")[3];
-					if(!isNaN(year))
+					if(year == null)
 						year = curYear;
 					var eventList = new Discord.RichEmbed();
 					var districtName = getDistrictName(district, year)
@@ -251,11 +251,11 @@ module.exports = {
 			}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
 		}
 		
-		function getDistrictName(d, y) {
+		function getDistrictName(n, y) {
 			var name;
 			req.getDistrictList(y).then(d => {
 				for(var i = 0; i < d.length; i++){
-					if(d[i].key == d)
+					if(d[i].key == n)
 						name = d[i].name;
 				}
 			})
