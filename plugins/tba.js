@@ -139,7 +139,7 @@ module.exports = {
 						}
 						sendEmbed(media)
 					} else {
-						m.channel.sendMessage('Unfortunately there is no media for team ' + teamNumber + ' for ' + year + '.');
+						m.channel.sendMessage('Unfortunately there is no media for team ' + teamNumber + ' in ' + year + '.');
 					}
 				}).catch((e) => {
 					console.log(e.message);
@@ -166,7 +166,44 @@ module.exports = {
 						m.reply("an error has occurred")
 					});
 				} else if(subcommand == "events") {
-					
+					var district = m.content.split(" ")[2];
+					var year = m.content.split(" ")[3];
+					if(!isNaN(year))
+						year = curYear;
+					var eventList = new Discord.RichEmbed();
+					var districtName = getDistrictName(district, year)
+					req.getDistrictEvents(district, year).then(d => {
+							eventList.setAuthor('Events for the ' + districtName + ' district in ' + year, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/events/' + district + '/' + year)
+								.setColor(0x1675DB)
+							var events = [""];
+							var n = 0;
+							for(var i = 0; i < d.length; i++) {
+								if((events[n] + d[i].name).length >= 1024) {
+									n++;
+								}
+								if(events[n] != undefined) {
+									events[n] += d[i].name + "\n";
+								}
+								else {
+									events[n] = d[i].name + "\n";
+								}
+							}
+							for(var j = 0; j < events.length; j++) {
+								if(events[j] != undefined) {
+									if(events.length == 1)
+										eventList.addField("Event List", events[j])
+									else
+										eventList.addField("Event List Page " + (j + 1), events[j])
+								}
+								if(eventList.fields.length == 2 || j == events.length - 1) {
+									eventList.setColor(0x1675DB)
+									sendEmbed(eventList);
+								}
+							}
+					}).catch((e) => {
+						console.log(e.message);
+						msg.reply(e);
+					});
 				} else if(subcommand == "rankings") {
 					var district = m.content.split(" ")[2];
 					var year = m.content.split(" ")[3];
@@ -212,6 +249,17 @@ module.exports = {
 							teaminfo.addField('Motto', d.motto, true)
 					sendEmbed(teaminfo)
 			}).catch((e) => {console.log(e); m.channel.sendMessage('Team does not exist')});
+		}
+		
+		function getDistrictName(d, y) {
+			var name;
+			req.getDistrictList(y).then(d => {
+				for(var i = 0; i < d.length; i++){
+					if(d[i].key == d)
+						name = d[i].name;
+				}
+			})
+			return name;
 		}
 	}
 };
