@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 module.exports = {
 	main: function(bot, message) {
 		if (message.member.hasPermission('MANAGE_MESSAGES') || message.author.id === "171319044715053057") {
