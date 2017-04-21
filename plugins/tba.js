@@ -250,30 +250,31 @@ module.exports = {
 		}
 		
 		function getDistrictName(n, y) {
-			switch(n) {
-				case 'chs':
-					return 'Chesapeake'
-				case 'fim':
-					return 'Michigan'
-				case 'in':
-					return 'Indiana'
-				case 'isr':
-					return 'Israel'
-				case 'mar'
-					return 'Mid-Atlantic'
-				case 'nc'
-					return 'North Carolina'
-				case 'ne'
-					return 'New England'
-				case 'ont'
-					return 'Ontario'
-				case 'pch'
-					return 'Peachtree'
-				caSe 'pnw'
-					return 'Pacific Northwest'
-				default:
-					return 'not found';
-			}
+			var r;
+			if(n == 'chs')
+				r = 'Chesapeake'
+			else if(n == 'fim')
+				r = 'Michigan'
+			else if(n == 'in')
+				r = 'Indiana'
+			else if(n == 'isr')
+				r = 'Israel'
+			else if(n == 'mar')
+				r = 'Mid-Atlantic'
+			else if(n == 'nc')
+				r = 'North Carolina'
+			else if(n == 'ne')
+				r = 'New England'
+			else if(n == 'ont')
+				r = 'Ontario'
+			else if(n == 'pch')
+				r = 'Peachtree'
+			else if(n == 'pnw')
+				r = 'Pacific Northwest'
+			else
+				r = 'not found';
+			
+			return r;
 		}
 	}
 };
