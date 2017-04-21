@@ -10,19 +10,19 @@ module.exports = {
 				message.channel.sendMessage("Deleted " + num + " messages under request of <@" + message.author.id + ">")
 				.then(msg => setTimeout(function() {msg.delete()}, 5000));
 				
-				var p = new Discord.RichEmbed();
-				p.setColor(0xFF00FF)
-					.setAuthor(message.author.username, message.author.avatarURL)
-					.addField('Messages Pruned', `${num} messages were pruned from ${message.channel} by ${message.author}.`)
-					.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
-					.setTimestamp()
+					var p = new Discord.RichEmbed();
+					p.setColor(0xFF00FF)
+						.setAuthor(message.author.username, message.author.avatarURL)
+						.addField('Messages Pruned', `${num} messages were pruned from ${message.channel} by ${message.author}.`)
+						.setFooter(`${message.guild.name} | ${message.guild.members.size} members`, `${message.guild.iconURL}`)
+						.setTimestamp()
 
-				try {
-					var log = msg.guild.channels.get('300441175532503040');
-					log.sendEmbed(p);
-				} catch (e) {
-					msg.channel.sendEmbed(p);
-				}
+					try {
+						var log = message.guild.channels.find('name', 'moderation-logs');
+						log.sendEmbed(p);
+					} catch (e) {
+						message.channel.sendEmbed(p);
+					}
 			} else {
 				message.channel.sendMessage("Please specify a number!");
 			}

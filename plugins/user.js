@@ -16,8 +16,8 @@ module.exports = {
 			"\nDiscriminator: " + user.discriminator +
 			"\nID: " + user.id +
 			"\nRoles: " + roles +
-			"\nStatus: " + user.status +
-			"\n" + user.avatarURL +
+			"\nStatus: " + user.presence.status +
+			"\nAvatar URL: " + user.avatarURL +
 			"```"
 		);
 	}

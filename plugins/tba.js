@@ -181,12 +181,10 @@ module.exports = {
 								if((events[n] + d[i].name).length >= 1024) {
 									n++;
 								}
-								if(events[n] != undefined) {
+								if(events[n] != undefined)
 									events[n] += d[i].name + "\n";
-								}
-								else {
+								else
 									events[n] = d[i].name + "\n";
-								}
 							}
 							for(var j = 0; j < events.length; j++) {
 								if(events[j] != undefined) {
@@ -239,7 +237,7 @@ module.exports = {
 		function team (num) {
 			var teaminfo = new Discord.RichEmbed();
 			req.getTeam(num).then(d => {
-					teaminfo.setAuthor('FIRST® Robotics Competition Team ' + teamNumber, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + teamNumber)
+					teaminfo.setAuthor('FIRST® Robotics Competition Team ' + num, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + teamNumber)
 						 .setColor(0x1675DB)
 						 .addField('Name', d.nickname, true)
 						 .addField('Rookie Year', d.rookie_year, true)
@@ -252,14 +250,30 @@ module.exports = {
 		}
 		
 		function getDistrictName(n, y) {
-			var name;
-			req.getDistrictList(y).then(d => {
-				for(var i = 0; i < d.length; i++){
-					if(d[i].key == n)
-						name = d[i].name;
-				}
-			})
-			return name;
+			switch(n) {
+				case 'chs':
+					return 'Chesapeake'
+				case 'fim':
+					return 'Michigan'
+				case 'in':
+					return 'Indiana'
+				case 'isr':
+					return 'Israel'
+				case 'mar'
+					return 'Mid-Atlantic'
+				case 'nc'
+					return 'North Carolina'
+				case 'ne'
+					return 'New England'
+				case 'ont'
+					return 'Ontario'
+				case 'pch'
+					return 'Peachtree'
+				caSe 'pnw'
+					return 'Pacific Northwest'
+				default:
+					return 'not found';
+			}
 		}
 	}
 };

@@ -1,7 +1,7 @@
 module.exports = {
 	main: function(bot, msg) {
 		const isCommander = ["171319044715053057", "180094452860321793"];
-		if (msg.member.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') === true || msg.member.hasPermission('ADMINISTRATOR') === true || isCommander.indexOf(msg.author.id) > -1) {
+		if (msg.member.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') || msg.member.hasPermission('ADMINISTRATOR') || isCommander.indexOf(msg.author.id) > -1) {
 			var user = msg.mentions.users.array()[0];
 			var roleToGive = msg.content.split(" ").splice(1).join(" ");
 			roleToGive = roleToGive.trim();

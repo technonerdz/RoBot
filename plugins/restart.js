@@ -1,6 +1,6 @@
 module.exports = {
 	main: function(bot, msg){
-		if (msg.member.hasPermission('ADMINISTRATOR') === true || msg.author.id === "171319044715053057") {
+		if (msg.author.id === "171319044715053057") {
 			msg.channel.sendMessage(":wave: RoBot is restarting...");
 
 			setTimeout(function() {

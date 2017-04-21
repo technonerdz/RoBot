@@ -23,11 +23,11 @@ module.exports = {
 					.addField('Member Banned', `**:hammer: ${user.username}#${user.discriminator} (${user.id}) was banned from the server.**`)
 					.addField('Responsible Moderator', msg.author.username)
 					.addField('Reason', reason)
-					.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
+					.setFooter(`${guild.name} | ${guild.members.size} members`, `${guild.iconURL}`)
 					.setTimestamp()
 
 				try {
-					var log = msg.guild.channels.get('300441175532503040');
+					var log = msg.guild.channels.find('name', 'mod-logs');
 					log.sendEmbed(ban);
 				} catch (e) {
 					msg.channel.sendEmbed(ban);

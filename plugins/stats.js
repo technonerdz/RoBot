@@ -20,8 +20,8 @@ module.exports = {
 								+ "\n> Channels   : " + bot.channels.size
 								+ "\n> Servers    : " + bot.guilds.size
 								+ "\n\n-------- VPS Details -------------"
-								+ "\n> Host             : Solomon Hosting Inc."
-								+ "\n> Operating System : Debian"
+								+ "\n> Host             : LoganDark Hosting Inc."
+								+ "\n> Operating System : Ubuntu"
 								+ "\n> Uptime           : " + strDate
 								+ "\n> Memory Usage     : " + memory + "MB / " + totalmem + " MB"
 								+ "\n> CPU Usage        : " + v.toFixed(2) * 100 + "%"

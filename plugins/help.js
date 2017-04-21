@@ -1,4 +1,5 @@
 var config = require("../config.json");
+const fse = require("fs-extra");
 
 module.exports = {
 	name: 'help',
