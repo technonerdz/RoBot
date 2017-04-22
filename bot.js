@@ -79,7 +79,7 @@ bot.on("message", (msg) => {
 				stmt.finalize();
 			});
 			
-			if (msg.content.contains("read the rules") && msg.channel.id === "253661179702935552") {
+			if (msg.content.includes("read the rules") && msg.channel.id === "253661179702935552") {
 				msg.member.addRole('246469964574228481')
 					.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server."));
 
