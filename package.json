@@ -36,6 +36,8 @@
 	"google-search": "*",
 	"leetspeak": "*",
 	"xkcd": "*",
-	"os-utils": "*"
+	"os-utils": "*",
+	"goo.gl": "*",
+	"cool-ascii-faces": "*"
   }
 }
