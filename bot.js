@@ -79,7 +79,7 @@ bot.on("message", (msg) => {
 				stmt.finalize();
 			});
 			
-			if (msg.content.startsWith("I have read the rules and regulations") && msg.channel.id === "253661179702935552") {
+			if (msg.content.contains("read the rules") && msg.channel.id === "253661179702935552") {
 				msg.member.addRole('246469964574228481')
 					.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server."));
 
@@ -208,7 +208,7 @@ function command(msg, cmd, args, content) {
 		msg.content = args;
 		plugins.get(cmd).main(bot, msg);
 	} else if (plugins.get(content) !== undefined && content.indexOf(" ") < 0) {
-		console.log(cmand('[NOARGS]' + msg.author.username + " executed: " + content));
+		console.log(cmand('[NOARGS] ' + msg.author.username + " executed: " + content));
 		plugins.get(content).main(bot, msg);
 	} else {
 		console.log("ERROR:" + content);

@@ -4,7 +4,7 @@ let req = new TBA('FRCDiscord', 'Discord Bot', 1.0);
 
 module.exports = {
 	name: 'tba',
-    usage: 'tba <arguments>',
+    usage: '<p>tba <arguments>',
     permission: 1,
     help: 'Querys The Blue Alliance API for information.',
 	main: function(bot, m) {

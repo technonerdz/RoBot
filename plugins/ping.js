@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'ping',
+    usage: 'ping',
+    permission: 1,
+    help: 'Pings the bot to see its response time.',
 	main: function(bot, message) {
 		var start = new Date(message.createdAt).getTime();
 

@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'urban',
+    usage: '<p>urban <word>',
+    permission: 1,
+    help: 'Defines a word from the Urban Dictionary.',
 	main: function(bot, message) {
 		var urban = require('urban'),
 		definition = urban(message.content);

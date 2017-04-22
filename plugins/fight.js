@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'fight',
+    usage: '<p>fight <user>',
+    permission: 1,
+    help: 'Simulates a fight against another user.',
 	main: function(bot, msg) {
 		var responses = [" was hit on the head with a gear by ", " was kicked by ", " was slammed into a wall by ", " was dropkicked by ", " was DDoSed by ", " was chokeslammed by ", " was run over with a robot by ", " was pelted by fuel thanks to the robot of ", " was Simbot Sideswipe'd by ", " had their IQ dropped 15 points by ", " had a robot dropped on them by "];
 		var player1 = msg.author;

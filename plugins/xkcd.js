@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'xkcd',
+    usage: 'xkcd <optional-num>',
+    permission: 1,
+    help: 'Returns an XKCD comic.',
 	main: function(bot, msg) {
 		var xkcd = require('xkcd');
 		var num = msg.content;

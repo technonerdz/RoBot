@@ -1,11 +1,16 @@
 var GoogleSearch = require('google-search');
 var config = require('../config.json');
+const Discord = require("discord.js");
 var google = new GoogleSearch({
   key: config.key,
   cx: config.cx
 });
 
 module.exports = {
+	name: 'google',
+    usage: '<p>google <query>',
+    permission: 1,
+    help: 'Queries google for information.',
 	main: function(bot, message) {
         google.build({
 			q: message.content,
@@ -24,10 +29,17 @@ module.exports = {
             }
 			else if(response.items != undefined) {
 				console.log(response);
+				var results = new Discord.RichEmbed();
 				var link = response.items[0].link;
 				var title = response.items[0].title;
 				var desc = response.items[0].snippet;
-				message.channel.sendMessage("**Result: **" + title + "\n**Link: **" + link + "\n**Description: **" + desc);
+				results.setAuthor('Google', 'https://cdn.discordapp.com/avatars/187406062989606912/c723649997673dcc758186ce92d475a0.jpg?size=1024', 'https://www.google.com/')
+				.setTitle(title)
+				.setURL(link)
+				.setDescription(desc + ' [more](' + link + ')')
+				.setTimestamp()
+				.setFooter('Powered by RoBot', bot.user.avatarURL)
+				message.channel.sendEmbed(results);
 			}
 		});
 	}

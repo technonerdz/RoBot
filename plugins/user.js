@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'user',
+    usage: '<p>user <optional-mention>',
+    permission: 1,
+    help: 'Provides information about a user.',
 	main: function(bot, message) {
 		if (message.mentions.users.array()[0] == null) {
 			var member = message.guild.members.get(message.author.user.id);

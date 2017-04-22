@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'sudoleave',
+    usage: 'sudoleave',
+    permission: 3,
+    help: 'Makes the bot leave a server.',
 	main: function(bot, message) {	
 		if (message.author.id === "171319044715053057") {
             message.channel.sendMessage("Leaving this server in 5 seconds :ok_hand:");

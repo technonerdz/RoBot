@@ -1,6 +1,10 @@
 var unirest = require('unirest');
 
 module.exports = {
+	name: 'strawpoll',
+    usage: '<p>strawpoll question|opt1,opt2,opt3,etc',
+    permission: 1,
+    help: 'Creates a strawpoll poll.',
 	main: function(bot, msg) {
 		try {
 			var title = msg.content.substr(0, msg.content.indexOf("|"));

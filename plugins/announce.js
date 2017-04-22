@@ -1,6 +1,10 @@
 var unirest = require('unirest');
 
 module.exports = {
+	name: 'announce',
+    usage: '<p>announce <announcement>',
+    permission: 3,
+    help: 'Posts to a webhook for a server announcement.',
 	main: function(bot, message) {
 		const isCommander = ["171319044715053057", "180094452860321793"];
 		if (isCommander.indexOf(message.author.id) > -1){

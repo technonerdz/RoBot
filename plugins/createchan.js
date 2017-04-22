@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'createchan',
+    usage: '<p>createchan <channel>',
+    permission: 2,
+    help: 'Creates a channel of the specified name.',
 	main: function(bot, message) {
 		const isCommander = ["171319044715053057", "180094452860321793"];
 		if (isCommander.indexOf(message.author.id) > -1){

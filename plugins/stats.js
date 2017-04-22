@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'stats',
+    usage: '<p>stats',
+    permission: 1,
+    help: 'Gives the bot\'s current statistics.',
 	main: function(bot, message) {
 		const os = require('os');
 		var osu  = require('os-utils');

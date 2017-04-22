@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'timeout',
+    usage: '<p>timeout <duration>',
+    permission: 2,
+    help: 'Times out a specified channel for a period of time',
 	main: function(bot, msg) {
 		var time = msg.content;
 		var id;

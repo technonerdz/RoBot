@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'ban',
+    usage: '<p>ban <user> <reason>',
+    permission: 1,
+    help: 'Bans a user and puts in moderation logs.',
 	main: function(bot, msg) {
 		const Discord = require("discord.js");
 		var banee = msg.mentions.users.array()[0];

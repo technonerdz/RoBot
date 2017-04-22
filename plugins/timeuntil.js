@@ -1,6 +1,10 @@
 module.exports = {
+	name: 'timeuntil',
+    usage: '<p>timeuntil <time>',
+    permission: 1,
+    help: 'Provides the time until a specified date.',
 	main: function(bot, message) {
-		try{
+		try {
 			var d1 = new Date(message.content);
 			var d2 = new Date();
 			var t1 = d1.getTime();

@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'eval',
+    usage: '<p> eval <code>',
+    permission: 3,
+    help: 'Allows bot administrators to evaluate code to test the bot.',
 	main: function(bot, msg) {
 		var Discord = require('discord.js');
 		const util = require('util');

@@ -1,4 +1,8 @@
 module.exports = {
+	name: 'server',
+    usage: '<p>server',
+    permission: 1,
+    help: 'Provides information about the server.',
 	main: function(bot, message) {
 		const Discord = require('discord.js');
 		const embed = new Discord.RichEmbed()
