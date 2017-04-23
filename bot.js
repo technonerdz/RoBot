@@ -118,7 +118,11 @@ bot.on("message", (msg) => {
 			var content = msg.content.split(PREFIX)[1];
 			var cmd = content.substring(0, content.indexOf(" ")),
 				args = content.substring(content.indexOf(" ") + 1, content.length);
-			command(msg, cmd, args, content);
+			if (content == 'help' | cmd == 'help') {
+				help(msg, cmd, args, content);
+			} else {
+				command(msg, cmd, args, content);
+			}
 		}
 	} else {
 		if(msg.author.bot) return;
@@ -212,5 +216,36 @@ function command(msg, cmd, args, content) {
 		plugins.get(content).main(bot, msg);
 	} else {
 		console.log("ERROR:" + content);
+	}
+}
+
+function help(msg, cmd, args, content) {
+	console.log(cmand(msg.author.username + " executed: help"));
+	msg.reply('check your DMs!')
+	if(content == 'help') {
+		var i = 0;
+		var e = new Discord.RichEmbed()
+		.setAuthor('RoBot', bot.user.avatarURL)
+		.setDescription('Command List')
+		.setColor(0x1675DB)
+		.setFooter('Requested by ' + msg.author.username)
+		.setTimestamp()
+		plugins.forEach(function (item, key, mapObj) {
+			if(i < 25) {
+				i++;
+				e.addField(item.name + ' (' + item.usage + ')', item.help);
+			} else {
+				i = 0;
+				msg.author.sendEmbed(e);
+				e = new Discord.RichEmbed()
+				.setColor(0x1675DB)
+				.setFooter('Requested by ' + msg.author.username)
+				.setTimestamp()
+				e.addField(item.name + ' (' + item.usage + ')', item.help);
+			}
+		})
+		msg.author.sendEmbed(e);
+	} else {
+		console.log('hai');
 	}
 }
