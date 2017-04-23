@@ -25,7 +25,7 @@ module.exports = {
 				ban.setColor(0xFF0000)
 					.setAuthor(user.username, user.avatarURL)
 					.addField('Member Kicked', `**${user.username}#${user.discriminator} (${user.id}) was kicked from the server.**`)
-					.addField('Responsible Moderator', msg.author.username)
+					.addField('Responsible Moderator', msg.member.displayName)
 					.addField('Reason', reason)
 					.setFooter(`${guild.name} | ${guild.members.size} members`, `${guild.iconURL}`)
 					.setTimestamp()
