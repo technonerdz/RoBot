@@ -52,7 +52,7 @@ bot.on("ready", () => {
 	str += hours + ":" + minutes + ":" + seconds;
 	console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
 	bot.channels.get('304790274058485760').sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
-	bot.user.setGame("Houston CMP Hype");
+	bot.user.setGame("St. Louis CMP Hype", "https://twitch.tv/FIRSTInspires");
 });
 
 bot.on("message", (msg) => {
