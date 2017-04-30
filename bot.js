@@ -52,7 +52,7 @@ bot.on("ready", () => {
 	str += hours + ":" + minutes + ":" + seconds;
 	console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
 	bot.channels.get('304790274058485760').sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
-	bot.user.setGame("Offseason");
+	bot.user.setGame(bot.guilds.size + ' Servers | ' + PREFIX + 'help');
 });
 
 bot.on("message", (msg) => {
@@ -78,7 +78,7 @@ bot.on("message", (msg) => {
 				stmt.run(channelID, channelName, authorID, authorNAME, authorNICK, message);
 				stmt.finalize();
 			});
-			
+
 			if (msg.content.includes("have read the rules") && msg.channel.id === "253661179702935552") {
 				msg.member.addRole('246469964574228481')
 					.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server."));
@@ -101,7 +101,7 @@ bot.on("message", (msg) => {
 					"if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!*");
 
 				msg.guild.channels.get('253661179702935552').fetchMessages({
-					limit: 5
+					limit: 4
 				})
 				.then(messages => {
 					msg.channel.bulkDelete(messages);
@@ -246,6 +246,6 @@ function help(msg, cmd, args, content) {
 		})
 		msg.author.sendEmbed(e);
 	} else {
-		console.log('hai');
+		console.log('You specified an argument.');
 	}
 }
