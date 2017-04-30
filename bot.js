@@ -52,7 +52,7 @@ bot.on("ready", () => {
 	str += hours + ":" + minutes + ":" + seconds;
 	console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
 	bot.channels.get('304790274058485760').sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
-	bot.user.setGame("St. Louis CMP Hype", "https://twitch.tv/FIRSTInspires");
+	bot.user.setGame("Offseason");
 });
 
 bot.on("message", (msg) => {
@@ -118,7 +118,7 @@ bot.on("message", (msg) => {
 			var content = msg.content.split(PREFIX)[1];
 			var cmd = content.substring(0, content.indexOf(" ")),
 				args = content.substring(content.indexOf(" ") + 1, content.length);
-			if (content == 'help' | cmd == 'help') {
+			if (content == 'help' || cmd == 'help') {
 				help(msg, cmd, args, content);
 			} else {
 				command(msg, cmd, args, content);

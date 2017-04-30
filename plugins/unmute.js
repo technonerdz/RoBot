@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'mute',
-    usage: '<p>mute <user>',
+    usage: '<p>unmute <user>',
     permission: 2,
-    help: 'Mutes a specified user.',
+    help: 'Unmutes a specified user.',
 	main: function(bot, msg) {
 		const Discord = require("discord.js");
 		var mutee = msg.mentions.users.array();
@@ -12,15 +12,15 @@ module.exports = {
 				var user = bot.users.get(mutee[k].id);
 				var guild = msg.guild;
 				var channels = msg.guild.channels.array();
-				
+
 				for(var i = 0; i < channels.length; i++) {
 					if(channels[i].type == 'text')
 						channels[i].overwritePermissions(member, {SEND_MESSAGES: null})
 				}
 				msg.reply(member + ' has been unmuted.')
-				
+
 				var mute = new Discord.RichEmbed();
-				
+
 				mute.setColor(0x00FF00)
 					.setAuthor(user.username, user.avatarURL)
 					.addField('Member Unmuted', `**${user.username}#${user.discriminator} (${user.id}) was unmuted.**`)
