@@ -138,7 +138,10 @@ bot.on("guildMemberAdd", (member) => {
 			"You are currently unable to see the server's main channels. " +
 			"To gain access to the rest of the server, please read the rules in <#288856064089128960>.");
 	} else {
-		member.guild.defaultChannel.sendMessage(`Welcome ${member} to the server!`)
+		if (member.id == '171319044715053057')
+			member.guild.defaultChannel.sendMessage(`**${member} (Developer of RoBot) has joined the server.**`)
+		else
+			member.guild.defaultChannel.sendMessage(`Welcome ${member} to the server!`)
 	}
 });
 
