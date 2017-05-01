@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'giveme',
-    usage: '<p>giveme <rolename>',
+    usage: '<p>anniversary',
     permission: 1,
-    help: 'Gives the user a specified role from an allowed list.',
+    help: 'Gives the user the One Year role',
 	main: function(bot, msg) {
 		if(msg.guild.id == '176186766946992128') {
 			var role = msg.guild.roles.get('308258215953432577');
