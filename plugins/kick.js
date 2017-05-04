@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'kick',
-    usage: '<p>kick <usermention> <reason>',
-    permission: 2,
-    help: 'Kicks a specified user.',
+	usage: '<p>kick <usermention> <reason>',
+	permission: 2,
+	help: 'Kicks a specified user.',
 	main: function(bot, msg) {
 		const Discord = require("discord.js");
 		var banee = msg.mentions.users.array()[0];
@@ -17,7 +17,7 @@ module.exports = {
 				if(reason == "")
 					var reason = "Not specified.";
 				
-				kicked.kick();
+				kicked.kick(reason);
 
 				msg.reply(banee + " has been successfullly kicked.");
 				
