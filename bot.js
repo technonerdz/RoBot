@@ -4,7 +4,7 @@ var m = new Date().getMonth() + 1;
 var y = new Date().getFullYear();
 var db = new sqlite3.Database('frclogs-' + m + '-' + y + '.sqlite');
 const Discord = require("discord.js");
-const fse = require("fs-extra");
+const fse = require("fs");
 
 const PREFIX = config.prefix;
 const isCommander = ["171319044715053057", "180094452860321793"];
@@ -24,22 +24,10 @@ var gray = chalk.gray;
 
 let plugins = new Map();
 
-function loadPlugins() {
-	console.log(__dirname + "/plugins");
-	let files = fse.readdirSync(__dirname + "/plugins", "utf8");
-	for (let plugin of files) {
-		if (plugin.endsWith(".js"))
-			plugins.set(plugin.slice(0, -3), require(__dirname + "/plugins/" + plugin));
-		else
-			console.log(plugin);
-	}
-	console.log("Plugins loaded.");
-}
+console.log("RoBot is ready! Loading plugins...");
+loadPlugins();
 
 bot.on("ready", () => {
-	console.log("RoBot is ready! Loading plugins...");
-	loadPlugins();
-
 	var str = "";
 	var currentTime = new Date()
 	var hours = currentTime.getHours()
@@ -251,4 +239,16 @@ function help(msg, cmd, args, content) {
 	} else {
 		console.log('You specified an argument.');
 	}
+}
+
+function loadPlugins() {
+	console.log(__dirname + "/plugins");
+	let files = fse.readdirSync(__dirname + "/plugins", "utf8");
+	for (let plugin of files) {
+		if (plugin.endsWith(".js"))
+			plugins.set(plugin.slice(0, -3), require(__dirname + "/plugins/" + plugin));
+		else
+			console.log(plugin);
+	}
+	console.log("Plugins loaded.");
 }

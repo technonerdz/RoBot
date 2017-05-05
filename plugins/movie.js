@@ -8,6 +8,7 @@ module.exports = {
 	help: 'Gets information about a movie.',
 	main: function(bot, msg) {
 		imdb.get(msg.content).then(d => {
+			console.log(d);
 			var m = new Discord.RichEmbed()
 			if(d.type == 'movie') {
 				m.setImage(d.poster)
@@ -19,11 +20,11 @@ module.exports = {
 				.addField('Genres', d.genres, true)
 				.addField('Duration', d.runtime, true)
 				.addField('Rating', d.rating + '/10', true)
-				.addField('Votes', d.votes, true);
+				.addField('Votes', d.votes, true)
 				.addField('Description', d.plot)
 			}
 			
-			msg.channel.send(m);
+			msg.channel.sendEmbed(m);
 		});
 	}
 };
