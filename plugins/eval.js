@@ -21,7 +21,7 @@ module.exports = {
 
 				embed.setColor(0x00FF00)
 				.setTitle("RoBot Javascript Evaluation Complete")
-				.setFooter(`${msg.author.username}`, `${bot.user.avatarURL}`)
+				.setFooter(`${msg.author.username}`, `${msg.author.avatarURL}`)
 				.setTimestamp()
 				.addField('Code', "```js\n" + clean(code) + "```")
 				.addField('Result', "```js\n" + clean(evaled.toString().replace(bot.token, 'REDACTED')) + "```");
@@ -34,8 +34,8 @@ module.exports = {
 				msg.channel.sendEmbed(embed)
 			} catch (err) {
 				embed.setColor(0xFF0000)
-				.setTitle(":rotating_light: :rotating_light: ERROR ERROR ERROR :rotating_light: :rotating_light: in RoBot Javascript Evaluation")
-				.setFooter(`${msg.author.username}`, `${bot.user.avatarURL}`)
+				.setTitle(":rotating_light: :rotating_light: ERROR THROWN :rotating_light: :rotating_light: in RoBot Javascript Evaluation")
+				.setFooter(`${msg.author.username}`, `${msg.author.avatarURL}`)
 				.setTimestamp()
 				.addField('Code', "```js\n" + clean(code) + "```")
 				.addField('Error', "```LDIF\n" + clean(err.message) + "```");

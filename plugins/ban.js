@@ -17,7 +17,7 @@ module.exports = {
 				if(reason == "")
 					var reason = "Not specified.";
 				
-				banned.ban();
+				banned.ban(reason);
 
 				msg.reply(banee + " has been successfullly banned.");
 				
