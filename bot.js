@@ -132,16 +132,16 @@ bot.on("message", (msg) => {
 
 bot.on("guildMemberAdd", (member) => {
 	if (member.guild.id === "176186766946992128") {
-		bot.channels.get('200090417809719296').sendMessage(member + " joined the server");
+		bot.channels.get('200090417809719296').send(member + " joined the server");
 
-		member.guild.channels.get('253661179702935552').sendMessage("Welcome " + member + " to the FIRST® Robotics Competition server! " +
+		member.guild.channels.get('253661179702935552').send("Welcome " + member + " to the FIRST® Robotics Competition server! " +
 			"You are currently unable to see the server's main channels. " +
 			"To gain access to the rest of the server, please read the rules in <#288856064089128960>.");
 	} else {
 		if (member.id == '171319044715053057')
-			member.guild.defaultChannel.sendMessage(`**${member} (Developer of RoBot) has joined the server.**`)
+			member.guild.defaultChannel.send(`**${member} (Developer of RoBot) has joined the server.**`)
 		else
-			member.guild.defaultChannel.sendMessage(`Welcome ${member} to the server!`)
+			member.guild.defaultChannel.send(`Welcome ${member} to the server!`)
 	}
 });
 
@@ -155,7 +155,7 @@ bot.on("guildMemberRemove", (member) => {
 			.setTimestamp()
 		bot.channels.get('267837014014033931').sendEmbed(leave);
 	} else {
-		member.guild.defaultChannel.sendMessage(`${member.user.username} left the server.`)
+		member.guild.defaultChannel.send(`${member.user.username} left the server.`)
 	}
 });
 
