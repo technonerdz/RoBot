@@ -92,8 +92,9 @@ bot.on("message", (msg) => {
 				})
 			}
 		}
-
-		console.log(gray("[" + str + "] ") + guil(msg.guild.name) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + " | " + message(msg.cleanContent));
+		
+		if(msg.guild.id != '110373943822540800' && msg.guild.id != '110373943822540800')
+			console.log(gray("[" + str + "] ") + guil(msg.guild.name) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + " | " + message(msg.cleanContent));
 
 		if(msg.author.bot) return;
 

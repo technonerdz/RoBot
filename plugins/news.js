@@ -16,5 +16,5 @@ module.exports = {
 				console.log(item.description + "\n")
 			});
 			msg.channel.send({embed: e});
-		}
+		});
 };
