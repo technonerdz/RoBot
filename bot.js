@@ -1,20 +1,19 @@
 var config = require("./config.json");
-var sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3').verbose();
 var m = new Date().getMonth() + 1;
 var y = new Date().getFullYear();
 var db = new sqlite3.Database('frclogs-' + m + '-' + y + '.sqlite');
 const Discord = require("discord.js");
 const fse = require("fs");
-
+const unirest = require('unirest');
 const PREFIX = config.prefix;
-const isCommander = ["171319044715053057", "180094452860321793"];
 let bot = new Discord.Client({
 	fetchAllMembers: true,
 	sync: true,
 	disabledEvents: ["TYPING_START", "TYPING_STOP", "ROLE_CREATE", "ROLE_DELETE", "USER_UPDATE"]
 });
 
-var chalk = require("chalk");
+const chalk = require("chalk");
 var guil = chalk.bgBlue;
 var chan = chalk.bold.red;
 var usr = chalk.bold.green;
@@ -28,6 +27,8 @@ console.log("RoBot is ready! Loading plugins...");
 loadPlugins();
 
 bot.on("ready", () => {
+	sendServerCount(bot);
+	
 	var str = "";
 	var currentTime = new Date()
 	var hours = currentTime.getHours()
@@ -40,7 +41,7 @@ bot.on("ready", () => {
 	str += hours + ":" + minutes + ":" + seconds;
 	console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
 	bot.channels.get('304790274058485760').sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
-	bot.user.setGame(bot.guilds.size + ' Servers | ' + PREFIX + 'help');
+	bot.user.setGame(PREFIX + 'help | ' + bot.guilds.size + ' Servers');
 });
 
 bot.on("message", (msg) => {
@@ -57,13 +58,7 @@ bot.on("message", (msg) => {
 			db.serialize(function() {
 				db.run(`CREATE TABLE IF NOT EXISTS frc_logs_${month}_${day}_${year} (MSGINDEX INTEGER PRIMARY KEY, TIME DATETIME DEFAULT CURRENT_TIMESTAMP, CHANNEL_ID VARCHAR(32) NOT NULL, CHANNEL_NAME VARCHAR(32) NOT NULL, AUTHOR_ID VARCHAR(32) NOT NULL, AUTHOR_NAME VARCHAR(32) NOT NULL, AUTHOR_NICKNAME VARCHAR(32), MESSAGE VARCHAR(2000) NOT NULL)`);
 				var stmt = db.prepare(`INSERT INTO frc_logs_${month}_${day}_${year} (CHANNEL_ID, CHANNEL_NAME, AUTHOR_ID, AUTHOR_NAME, AUTHOR_NICKNAME, MESSAGE) VALUES (?, ?, ?, ?, ?, ?)`);
-				var channelID = msg.channel.id,
-					channelName = msg.channel.name,
-					authorID = msg.author.id,
-					authorNAME = msg.author.username,
-					authorNICK = msg.member.displayName,
-					message = msg.cleanContent;
-				stmt.run(channelID, channelName, authorID, authorNAME, authorNICK, message);
+				stmt.run(msg.channel.id, msg.channel.name, msg.author.id, msg.author.username, msg.member.displayName, msg.cleanContent);
 				stmt.finalize();
 			});
 
@@ -103,7 +98,7 @@ bot.on("message", (msg) => {
 		if(msg.author.bot) return;
 
 		if (msg.content.startsWith(PREFIX)) {
-			var content = msg.content.split(PREFIX)[1];
+			var content = msg.content.substring(prefix.length, msg.content.length);
 			var cmd = content.substring(0, content.indexOf(" ")),
 				args = content.substring(content.indexOf(" ") + 1, content.length);
 			if (content == 'help' || cmd == 'help') {
@@ -195,6 +190,18 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
 	}
 });
 
+bot.on("guildCreate", (guild) => {
+	sendServerCount(bot);
+	bot.user.setGame(PREFIX + 'help | ' + bot.guilds.size + ' Servers');
+	bot.users.get(config.owner).send("I joined **" + guild.name + "** (" + guild.id + ") with **" + guild.members.size + "** members. It's owner is **" + guild.owner.user.username + "** (" + guild.owner.user.id + "). I am now in " + bot.guilds.size " guilds.")
+});
+
+bot.on("guildDelete", (guild) => {
+	sendServerCount(bot);
+	bot.user.setGame(PREFIX + 'help | ' + bot.guilds.size + ' Servers');
+	bot.users.get(config.owner).send("I left **" + guild.name + "** (" + guild.id + ") with **" + guild.members.size + "** members. It's owner is **" + guild.owner.user.username + "** (" + guild.owner.user.id + "). I am now in " + bot.guilds.size " guilds.")
+});
+
 bot.login(config.token);
 
 function command(msg, cmd, args, content) {
@@ -251,4 +258,20 @@ function loadPlugins() {
 			console.log(plugin);
 	}
 	console.log("Plugins loaded.");
+}
+
+function sendServerCount(bot) {
+	unirest.post("https://bots.discordlist.net/api")
+	.headers({'Content-Type': 'application/json'})
+	.send({"token": config.dlist, "servers": bot.guilds.size});
+	
+	unirest.post("https://bots.discord.pw/api/bots/" + bot.user.id + "/stats")
+	.headers({'Authorization': config.dbotspw, 'Content-Type': 'application/json'})
+	.send({"server_count": bot.guilds.size})
+	
+	unirest.post("https://discordbots.org/api/bots/" + bot.user.id + "/stats")
+	.headers({'Authorization': config.dbotsorg, 'Content-Type': 'application/json'})
+	.send({"server_count": bot.guilds.size})
+	
+	console.log("All server counts posted successfully!");
 }

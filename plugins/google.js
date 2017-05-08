@@ -8,9 +8,9 @@ var google = new GoogleSearch({
 
 module.exports = {
 	name: 'google',
-    usage: '<p>google <query>',
-    permission: 1,
-    help: 'Queries Google for information.',
+	usage: '<p>google <query>',
+	permission: 1,
+	help: 'Queries Google for information.',
 	main: function(bot, message) {
         google.build({
 			q: message.content,
