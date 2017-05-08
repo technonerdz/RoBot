@@ -68,16 +68,10 @@ bot.on("message", (msg) => {
 
 				setTimeout(function() {
 					msg.guild.members.get(msg.author.id).setNickname(msg.author.username + ' - (SET TEAM#)')
-						.then(member => bot.channels.get("200090417809719296").sendMessage(member.user.username + " Nickname set to --> ``" + member.nickname + "``"));
+						.then(member => bot.channels.get("200090417809719296").sendMessage(member.user.username + " Nickname set to --> ``" + member.displayName + "``"));
 				}, 1000)
-
-				var join = new Discord.RichEmbed();
-				join.setColor(0x1675DB)
-					.setAuthor(msg.author.username, msg.author.avatarURL)
-					.addField('Member Joined', `**${msg.author} joined the server!**`)
-					.setFooter(`FRC Discord Server | ${msg.guild.members.size} members`, `${msg.guild.iconURL}`)
-					.setTimestamp()
-				bot.channels.get('267837014014033931').sendEmbed(join);
+				
+				bot.channels.get('267837014014033931').sendEmbed(new Discord.RichEmbed().setColor(0x1675DB).setAuthor(msg.author.username, msg.author.avatarURL).addField('Member Joined', `**${msg.author} joined the server!**`).setFooter(`FRC Discord Server | ${msg.guild.members.size} members`, `${msg.guild.iconURL}`).setTimestamp());
 
 				msg.author.sendMessage("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
 					"Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
@@ -93,13 +87,13 @@ bot.on("message", (msg) => {
 			}
 		}
 		
-		if(msg.guild.id != '110373943822540800' && msg.guild.id != '110373943822540800')
+		if(msg.guild.id != '110373943822540800' && msg.guild.id != '264445053596991498')
 			console.log(gray("[" + str + "] ") + guil(msg.guild.name) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + " | " + message(msg.cleanContent));
 
 		if(msg.author.bot) return;
 
 		if (msg.content.startsWith(PREFIX)) {
-			var content = msg.content.substring(prefix.length, msg.content.length);
+			var content = msg.content.substring(PREFIX.length, msg.content.length);
 			var cmd = content.substring(0, content.indexOf(" ")),
 				args = content.substring(content.indexOf(" ") + 1, content.length);
 			if (content == 'help' || cmd == 'help') {
@@ -232,7 +226,7 @@ function help(msg, cmd, args, content) {
 		plugins.forEach(function (item, key, mapObj) {
 			if(i < 25) {
 				i++;
-				e.addField(item.name + ' (' + item.usage + ')', item.help);
+				e.addField(item.name + ' (' + item.usage.replace('<p>', PREFIX) + ')', item.help);
 			} else {
 				i = 0;
 				msg.author.sendEmbed(e);
