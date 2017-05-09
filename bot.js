@@ -28,7 +28,7 @@ loadPlugins();
 
 bot.on("ready", () => {
 	sendServerCount(bot);
-	
+
 	var str = "";
 	var currentTime = new Date()
 	var hours = currentTime.getHours()
@@ -70,7 +70,7 @@ bot.on("message", (msg) => {
 					msg.guild.members.get(msg.author.id).setNickname(msg.author.username + ' - (SET TEAM#)')
 						.then(member => bot.channels.get("200090417809719296").sendMessage(member.user.username + " Nickname set to --> ``" + member.displayName + "``"));
 				}, 1000)
-				
+
 				bot.channels.get('267837014014033931').sendEmbed(new Discord.RichEmbed().setColor(0x1675DB).setAuthor(msg.author.username, msg.author.avatarURL).addField('Member Joined', `**${msg.author} joined the server!**`).setFooter(`FRC Discord Server | ${msg.guild.members.size} members`, `${msg.guild.iconURL}`).setTimestamp());
 
 				msg.author.sendMessage("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
@@ -86,7 +86,7 @@ bot.on("message", (msg) => {
 				})
 			}
 		}
-		
+
 		if(msg.guild.id != '110373943822540800' && msg.guild.id != '264445053596991498')
 			console.log(gray("[" + str + "] ") + guil(msg.guild.name) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + " | " + message(msg.cleanContent));
 
@@ -116,10 +116,11 @@ bot.on("guildMemberAdd", (member) => {
 			"You are currently unable to see the server's main channels. " +
 			"To gain access to the rest of the server, please read the rules in <#288856064089128960>.");
 	} else {
+		var channel = member.guild.channels.find('name', 'logs') || member.guild.channels.find('name', 'member-logs') || member.guild.defaultChannel;
 		if (member.id == '171319044715053057')
-			member.guild.defaultChannel.send(`**${member} (Developer of RoBot) has joined the server.**`)
+			channel.send(`**${member} (Developer of RoBot) has joined the server.**`)
 		else
-			member.guild.defaultChannel.send(`Welcome ${member} to the server!`)
+			channel.send(`Welcome ${member} to the server!`)
 	}
 });
 
@@ -133,7 +134,8 @@ bot.on("guildMemberRemove", (member) => {
 			.setTimestamp()
 		bot.channels.get('267837014014033931').sendEmbed(leave);
 	} else {
-		member.guild.defaultChannel.send(`${member.user.username} left the server.`)
+		var channel = member.guild.channels.find('name', 'logs') || member.guild.channels.find('name', 'member-logs') || member.guild.defaultChannel;
+		channel.send(`${member.user.username} left the server.`)
 	}
 });
 
@@ -257,16 +259,24 @@ function loadPlugins() {
 
 function sendServerCount(bot) {
 	unirest.post("https://bots.discordlist.net/api")
-	.headers({'Content-Type': 'application/json'})
-	.send({"token": config.dlist, "servers": bot.guilds.size});
-	
+	.send({"token": config.dlist, "servers": bot.guilds.size})
+	.end(function (response) {
+		console.log(response.body);
+	});
+
 	unirest.post("https://bots.discord.pw/api/bots/" + bot.user.id + "/stats")
 	.headers({'Authorization': config.dbotspw, 'Content-Type': 'application/json'})
 	.send({"server_count": bot.guilds.size})
-	
+	.end(function (response) {
+		console.log(response.body);
+	});
+
 	unirest.post("https://discordbots.org/api/bots/" + bot.user.id + "/stats")
 	.headers({'Authorization': config.dbotsorg, 'Content-Type': 'application/json'})
 	.send({"server_count": bot.guilds.size})
-	
+	.end(function (response) {
+		console.log(response.body);
+	});
+
 	console.log("All server counts posted successfully!");
 }
