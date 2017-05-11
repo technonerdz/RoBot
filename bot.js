@@ -80,6 +80,7 @@ bot.on("message", (msg) => {
 				msg.guild.channels.get('253661179702935552').fetchMessages({
 					limit: 4
 				})
+				
 				.then(messages => {
 					msg.channel.bulkDelete(messages);
 					msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please read <#288856064089128960> to enter the server!");
