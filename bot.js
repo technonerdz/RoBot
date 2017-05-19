@@ -245,7 +245,7 @@ function help(msg, cmd, args, content) {
 				e.addField(item.name + ' (' + item.usage + ')', item.help);
 			}
 		})
-		msg.author.send({"embed": e);
+		msg.author.send({"embed": e});
 	} else {
 		console.log('You specified an argument.');
 	}
