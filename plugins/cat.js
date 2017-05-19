@@ -8,7 +8,7 @@ module.exports = {
 	main: function(bot, msg) {
 		unirest.get("http://random.cat/meow")
         .end(function (result) {
-            msg.channel.sendMessage(result.body.file)
+            msg.channel.send(result.body.file)
         });
 	}
 };

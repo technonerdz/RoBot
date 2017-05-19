@@ -40,8 +40,13 @@ bot.on("ready", () => {
 		seconds = "0" + seconds;
 	str += hours + ":" + minutes + ":" + seconds;
 	console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
-	bot.channels.get('304790274058485760').sendMessage(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
-	bot.user.setGame(PREFIX + 'help | ' + bot.guilds.size + ' Servers');
+	bot.channels.get('304790274058485760').send(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
+	
+	let games = [`with ASIANBOI`, `in the FIRST Robotics Competition server`, `in ${bot.guilds.size} servers`, `join my support server! https://discord.io/RoBot`, ``];
+	bot.user.setGame(games[Math.round(Math.random() * (games.length - 1))] + ' | ' + PREFIX + 'help');
+	setInterval(() => {
+		bot.user.setGame(games[Math.round(Math.random() * (games.length - 1))] + ' | ' + PREFIX + 'help');
+	}, 300000);
 });
 
 bot.on("message", (msg) => {
@@ -64,16 +69,16 @@ bot.on("message", (msg) => {
 
 			if (msg.content.includes("have read the rules") && msg.channel.id === "253661179702935552") {
 				msg.member.addRole('246469964574228481')
-					.then(bot.channels.get("200090417809719296").sendMessage(msg.author + " has entered the server."));
+					.then(bot.channels.get("200090417809719296").send(msg.author + " has entered the server."));
 
 				setTimeout(function() {
 					msg.guild.members.get(msg.author.id).setNickname(msg.author.username + ' - (SET TEAM#)')
-						.then(member => bot.channels.get("200090417809719296").sendMessage(member.user.username + " Nickname set to --> ``" + member.displayName + "``"));
+						.then(member => bot.channels.get("200090417809719296").send(member.user.username + " Nickname set to --> ``" + member.displayName + "``"));
 				}, 1000)
 
-				bot.channels.get('267837014014033931').sendEmbed(new Discord.RichEmbed().setColor(0x1675DB).setAuthor(msg.author.username, msg.author.avatarURL).addField('Member Joined', `**${msg.author} joined the server!**`).setFooter(`FRC Discord Server | ${msg.guild.members.size} members`, `${msg.guild.iconURL}`).setTimestamp());
+				bot.channels.get('267837014014033931').send({"embed": new Discord.RichEmbed().setColor(0x1675DB).setAuthor(msg.author.username, msg.author.avatarURL).addField('Member Joined', `**${msg.author} joined the server!**`).setFooter(`FRC Discord Server | ${msg.guild.members.size} members`, `${msg.guild.iconURL}`).setTimestamp()});
 
-				msg.author.sendMessage("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
+				msg.author.send("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
 					"Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
 					"if you have any questions! \n\n*Please change your nick with '/nick NAME - TEAM#' to reflect your team number!*");
 
@@ -83,7 +88,7 @@ bot.on("message", (msg) => {
 				
 				.then(messages => {
 					msg.channel.bulkDelete(messages);
-					msg.channel.sendMessage("Welcome to our server. This is the channel for new member verification. Please read <#288856064089128960> to enter the server!");
+					msg.channel.send("Welcome to our server. This is the channel for new member verification. Please read <#288856064089128960> to enter the server!");
 				})
 			}
 		}
@@ -105,7 +110,7 @@ bot.on("message", (msg) => {
 		}
 	} else {
 		if(msg.author.bot) return;
-			msg.channel.sendMessage("This bot cannot be used in DMs!");
+			msg.channel.send("This bot cannot be used in DMs!");
 	}
 });
 
@@ -133,7 +138,7 @@ bot.on("guildMemberRemove", (member) => {
 			.addField('Member Left', `*${member.user.username}#${member.user.discriminator} left the server.*`)
 			.setFooter(`FRC Discord Server | ${member.guild.members.size} members`, `${member.guild.iconURL}`)
 			.setTimestamp()
-		bot.channels.get('267837014014033931').sendEmbed(leave);
+		bot.channels.get('267837014014033931').send({"embed": leave});
 	} else {
 		var channel = member.guild.channels.find('name', 'logs') || member.guild.channels.find('name', 'member-logs') || member.guild.defaultChannel;
 		channel.send(`${member.user.username} left the server.`)
@@ -148,7 +153,7 @@ bot.on("guildBanRemove", (guild, user) => {
 				.addField('Member Unbanned', `**${user.username}#${user.discriminator} (${user.id}) was unbanned from the server.**`)
 				.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
 				.setTimestamp()
-			bot.channels.get('267837014014033931').sendEmbed(ban);
+			bot.channels.get('267837014014033931').send({"embed": ban});
 	}
 });
 
@@ -160,7 +165,7 @@ bot.on("guildBanAdd", (guild, user) => {
 			.addField('Member Banned', `**:hammer: ${user.username}#${user.discriminator} (${user.id}) was banned from the server.**`)
 			.setFooter(`FRC Discord Server | ${guild.members.size} members`, `${guild.iconURL}`)
 			.setTimestamp()
-		bot.channels.get('267837014014033931').sendEmbed(ban);
+		bot.channels.get('267837014014033931').send({"embed": ban});
 	}
 });
 
@@ -232,7 +237,7 @@ function help(msg, cmd, args, content) {
 				e.addField(item.name + ' (' + item.usage.replace('<p>', PREFIX) + ')', item.help);
 			} else {
 				i = 0;
-				msg.author.sendEmbed(e);
+				msg.author.send({"embed": e});
 				e = new Discord.RichEmbed()
 				.setColor(0x1675DB)
 				.setFooter('Requested by ' + msg.author.username)
@@ -240,7 +245,7 @@ function help(msg, cmd, args, content) {
 				e.addField(item.name + ' (' + item.usage + ')', item.help);
 			}
 		})
-		msg.author.sendEmbed(e);
+		msg.author.send({"embed": e);
 	} else {
 		console.log('You specified an argument.');
 	}

@@ -7,16 +7,22 @@ module.exports = {
 		const isCommander = ["171319044715053057", "180094452860321793"];
 		if (msg.member.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') || msg.member.hasPermission('ADMINISTRATOR') || isCommander.indexOf(msg.author.id) > -1) {
 			var user = msg.mentions.users.array()[0];
-			var roleToGive = msg.content.split(" ").splice(1).join(" ");
-			roleToGive = roleToGive.trim();
+			var roleToGive = msg.content.split(" ").splice(1).join(" ").trim();
 			let role = msg.guild.roles.find("name", roleToGive);
 			if (!role) {
-				msg.channel.sendMessage("Role does not exist.");
-				return;
+				msg.channel.send(":negative_squared_cross_mark: Role does not exist!");
+			} else if(role.comparePositionTo(msg.guild.members.get(user.id).highestRole) < 0) {
+				msg.guild.members.get(user.id).addRole(role).then(m => {
+					if(m.roles.has(role.id))
+						msg.channel.send("Successfully added role *" + roleToGive + "* to " + user + ".");
+					else
+						msg.channel.send("Failed to add role *" + roleToGive + "* to " + user + ".");
+				}).catch(console.error);
+			} else {
+				msg.channel.send(":negative_squared_cross_mark: Your highest role is lower than this role, so you cannot assign it!")
 			}
-			var member = msg.guild.members.get(user.id);
-			member.addRole(role).catch(console.error);
-			msg.channel.sendMessage("Successfully added role " + roleToGive + " to " + user.username + ".");
+		} else {
+			msg.channel.send(":negative_squared_cross_mark: You do not have the necessary permissions to perform this action!")
 		}
 	}
 };

@@ -30,22 +30,20 @@ module.exports = {
 				} else {
 					embed.addField('Type', "```js\n" + type + "```");
 				}
-				msg.delete();
 				msg.channel.sendEmbed(embed)
 			} catch (err) {
 				embed.setColor(0xFF0000)
-				.setTitle(":rotating_light: :rotating_light: ERROR THROWN :rotating_light: :rotating_light: in RoBot Javascript Evaluation")
+				.setTitle(":rotating_light: ERROR THROWN :rotating_light: in RoBot Javascript Evaluation")
 				.setFooter(`${msg.author.username}`, `${msg.author.avatarURL}`)
 				.setTimestamp()
 				.addField('Code', "```js\n" + clean(code) + "```")
 				.addField('Error', "```LDIF\n" + clean(err.message) + "```");
-				msg.delete();
 				msg.channel.sendEmbed(embed)
 					.catch(error => console.log(error.stack));
 			}
 		}
 		else {
-			msg.channel.sendMessage(msg.author + ", you do not have permission to use eval!");
+			msg.reply("you do not have permission to use eval!");
 		}
 		
 		function clean(text) {

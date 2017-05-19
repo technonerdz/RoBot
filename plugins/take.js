@@ -3,19 +3,25 @@ module.exports = {
     usage: '<p>take <user> <role>',
     permission: 2,
     help: 'Takes a user\'s role from them',
-	main: function(bot, message) {
-		const isCommander = ["171319044715053057", "180094452860321793"];
-		if (message.member.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') === true || message.member.hasPermission('ADMINISTRATOR') === true || isCommander.indexOf(message.author.id) > -1) {
-			var user = message.mentions.users.array()[0];
-			var roleToTake = message.content.split(" ").splice(1).join(" ");
-			var role = message.guild.roles.find("name", roleToTake);
+	main: function(bot, msg) {
+		if (msg.member.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') || msg.member.hasPermission('ADMINISTRATOR') || isCommander.indexOf(msg.author.id) > -1) {
+			var user = msg.mentions.users.array()[0];
+			var roleToTake = msg.content.split(" ").splice(1).join(" ").trim();
+			let role = msg.guild.roles.find("name", roleToTake);
 			if (!role) {
-				message.channel.sendMessage("Role does not exist.");
-				return;
+				msg.channel.send(":negative_squared_cross_mark: Role does not exist!");
+			} else if(role.comparePositionTo(msg.guild.members.get(user.id).highestRole) < 0) {
+				msg.guild.members.get(user.id).removeRole(role).then(m => {
+					if(m.roles.has(role.id))
+						msg.channel.send("Successfully removed role *" + roleToTake + "* from " + user + ".");
+					else
+						msg.channel.send("Failed to remove role *" + roleToTake + "* from " + user + ".");
+				}).catch(console.error);
+			} else {
+				msg.channel.send(":negative_squared_cross_mark: Your highest role is lower than this role, so you cannot deassign it!")
 			}
-			var member = message.guild.members.get(user.id);
-			member.removeRole(role);
-			message.channel.sendMessage("Successfully removed role " + roleToTake + " from " + user.username + ".");
+		} else {
+			msg.channel.send(":negative_squared_cross_mark: You do not have the necessary permissions to perform this action!")
 		}
 	}
 };
