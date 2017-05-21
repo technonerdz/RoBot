@@ -6,12 +6,12 @@ module.exports = {
     permission: 1,
     help: 'Provides information about a user.',
 	main: function(bot, msg) {
-		if (msg.mentions.users.array()[0] == null)
-			var member = msg.guild.members.get(msg.author.id);
+		if (msg.mentions.users.array()[0])
+			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
 		else if(!isNaN(msg.content))
 			var member = msg.guild.members.get(msg.content);
 		else
-			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
+			var member = msg.guild.members.get(msg.author.id);
 		var user = member.user;
 		var roles = member.roles.size;
 
