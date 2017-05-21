@@ -19,7 +19,7 @@ module.exports = {
 			var game = 'None'
 		
 		var info = new Discord.RichEmbed()
-		.setTitle(user.username)
+		.setAuthor(user.username + '#' + user.discriminator, msg.author.avatarURL)
 		.setDescription("User Information")
 		.setColor(0x1675DB)
 		.setFooter('Triggered by ' + msg.author.username, msg.author.avatarURL)
@@ -27,7 +27,6 @@ module.exports = {
 		.setThumbnail(user.avatarURL)
 		.addField('Username', user.username, true)
 		.addField('Display Name', member.displayName, true)
-		.addField('Discriminator', user.discriminator, true)
 		.addField('ID', user.id, true)
 		.addField('Account Created', new Date(user.createdAt), true)
 		.addField('Join Date', new Date(member.joinedAt), true)
