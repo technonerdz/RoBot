@@ -8,7 +8,7 @@ module.exports = {
 	main: function(bot, msg) {
 		if (msg.mentions.users.array()[0] == null)
 			var member = msg.guild.members.get(msg.author.id);
-		else if(bot.users.get(msg.content))
+		else if(!isNaN(msg.content))
 			var member = msg.guild.members.get(msg.content);
 		else
 			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
@@ -21,7 +21,7 @@ module.exports = {
 			var game = 'None'
 		
 		var info = new Discord.RichEmbed()
-		.setAuthor(user.username + '#' + user.discriminator, msg.author.avatarURL)
+		.setAuthor(user.username + '#' + user.discriminator, user.avatarURL)
 		.setDescription("User Information")
 		.setColor(0x1675DB)
 		.setFooter('Triggered by ' + msg.author.username, msg.author.avatarURL)
