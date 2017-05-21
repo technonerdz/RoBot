@@ -6,12 +6,11 @@ module.exports = {
     permission: 1,
     help: 'Provides information about a user.',
 	main: function(bot, msg) {
-		var user = msg.user;
 		if (msg.mentions.users.array()[0] == null)
 			var member = msg.guild.members.get(msg.author.id);
 		else
 			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
-		
+		var user = member.user;
 		var roles = member.roles.map(r => " " + r.name);
 		
 		var info = new Discord.RichEmbed()
