@@ -8,7 +8,7 @@ module.exports = {
 	main: function(bot, msg) {
 		if (msg.mentions.users.array()[0])
 			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
-		else if(!isNaN(msg.content))
+		else if(bot.users.get(msg.content))
 			var member = msg.guild.members.get(msg.content);
 		else
 			var member = msg.guild.members.get(msg.author.id);
