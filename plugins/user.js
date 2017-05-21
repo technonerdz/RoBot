@@ -7,7 +7,7 @@ module.exports = {
     help: 'Provides information about a user.',
 	main: function(bot, msg) {
 		if (msg.mentions.users.array()[0] == null)
-			var member = msg.guild.members.get(msg.author.user.id);
+			var member = msg.guild.members.get(msg.author.id);
 		else
 			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
 		
