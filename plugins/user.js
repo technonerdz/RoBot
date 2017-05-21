@@ -11,7 +11,8 @@ module.exports = {
 		else
 			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
 		var user = member.user;
-		var roles = member.roles.map(r => " " + r.name);
+		var roles = member.roles.size;
+		var game = user.presence.game.name || 'None'
 		
 		var info = new Discord.RichEmbed()
 		.setTitle(user.username)
@@ -28,7 +29,7 @@ module.exports = {
 		.addField('Join Date', new Date(member.joinedAt), true)
 		.addField('Bot', user.bot, true)
 		.addField('Status', user.presence.status, true)
-		.addField('Game', user.presence.game.name || 'None', true)
+		.addField('Game', game, true)
 		.addField('Roles', roles, true)
 		.addField('Color', member.displayHexColor, true)
 		.addField('Highest Role', member.highestRole.name, true)
