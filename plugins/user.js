@@ -12,7 +12,10 @@ module.exports = {
 			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
 		var user = member.user;
 		var roles = member.roles.size;
-		var game = user.presence.game.name || 'None'
+		if(user.presence.status != 'offline')
+			var game = user.presence.game.name || 'None'
+		else
+			var game = 'None'
 		
 		var info = new Discord.RichEmbed()
 		.setTitle(user.username)
