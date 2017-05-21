@@ -18,7 +18,7 @@ module.exports = {
 		.setDescription("User Information")
 		.setColor(0x1675DB)
 		.setFooter('Triggered by ' + msg.author.username, msg.author.avatarURL)
-		.setTimestamp();
+		.setTimestamp()
 		.setThumbnail(user.avatarURL)
 		.addField('Username', user.username, true)
 		.addField('Display Name', member.displayName, true)
