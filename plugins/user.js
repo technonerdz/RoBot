@@ -14,7 +14,7 @@ module.exports = {
 		
 		var roles = member.roles.map(r => " " + r.name);
 		
-		var user = new Discord.RichEmbed()
+		var info = new Discord.RichEmbed()
 		.setTitle(user.username)
 		.setDescription("User Information")
 		.setColor(0x1675DB)
@@ -34,6 +34,6 @@ module.exports = {
 		.addField('Color', member.displayHexColor, true)
 		.addField('Highest Role', member.highestRole.name, true)
 		
-		msg.channel.send({embed:user})
+		msg.channel.send({embed:info})
 	}
 };
