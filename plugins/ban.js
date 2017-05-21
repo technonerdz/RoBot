@@ -32,9 +32,9 @@ module.exports = {
 
 				try {
 					var log = msg.guild.channels.find('name', 'mod-logs');
-					log.sendEmbed(ban);
+					log.send({embed: ban});
 				} catch (e) {
-					msg.channel.sendEmbed(ban);
+					msg.channel.send({embed: ban});
 				}
 			} catch (e) {
 				console.error(e);

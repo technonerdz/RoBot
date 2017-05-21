@@ -12,10 +12,10 @@ module.exports = {
         
 		googl.expand(msg.content)
 		.then(function (longURL) {
-			msg.channel.sendMessage('URL expanded to ' + longURL)
+			msg.channel.send('URL expanded to ' + longURL)
 		})
 		.catch(function (err) {
-			msg.channel.sendMessage(err);
+			msg.channel.send(err);
 			console.error(err.message);
 		});
 	}

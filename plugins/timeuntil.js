@@ -18,10 +18,10 @@ module.exports = {
 			var totalMinutes = parseInt(time / 60000);
 			var minutes = parseInt((time - (totalHours * 3600000)) / 60000) ;
 			var seconds = parseInt((time - (totalMinutes * 60000)) / 1000) ;
-			message.channel.sendMessage("Time until " + d1.toDateString() + ": \n**" + years + " years, " + days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + " seconds**");
+			message.channel.send("Time until " + d1.toDateString() + ": \n**" + years + " years, " + days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + " seconds**");
 		}
 		catch(err) {
-			message.channel.sendMessage("Error processing date. Please put in MM/DD/YY format");
+			message.channel.send("Error processing date. Please put in MM/DD/YY format");
 		}
 	}
 };

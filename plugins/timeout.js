@@ -16,7 +16,7 @@ module.exports = {
 			
 			msg.channel.overwritePermissions(id, {SEND_MESSAGES: false})
 			.then(
-				msg.channel.sendMessage(`**This channel has been timed out for ${time} seconds by ${msg.author}.**`)
+				msg.channel.send(`**This channel has been timed out for ${time} seconds by ${msg.author}.**`)
 				.then(msg => {
 					setTimeout(() => {
 						msg.edit("**The timeout period has elapsed.**");

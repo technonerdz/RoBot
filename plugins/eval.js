@@ -30,7 +30,7 @@ module.exports = {
 				} else {
 					embed.addField('Type', "```js\n" + type + "```");
 				}
-				msg.channel.sendEmbed(embed)
+				msg.channel.send({embed:embed})
 			} catch (err) {
 				embed.setColor(0xFF0000)
 				.setTitle(":rotating_light: ERROR THROWN :rotating_light: in RoBot Javascript Evaluation")
@@ -38,7 +38,7 @@ module.exports = {
 				.setTimestamp()
 				.addField('Code', "```js\n" + clean(code) + "```")
 				.addField('Error', "```LDIF\n" + clean(err.message) + "```");
-				msg.channel.sendEmbed(embed)
+				msg.channel.send({embed:embed})
 					.catch(error => console.log(error.stack));
 			}
 		}

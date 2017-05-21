@@ -12,8 +12,8 @@ module.exports = {
 		f.setColor(0x1675DB)
 			.setAuthor(msg.author.username, msg.author.avatarURL)
 			.addField('Feedback Recieved', msg.content)
-			.setFooter(`RoBot 4.20`, `${bot.user.avatarURL}`)
+			.setFooter(`RoBot`, `${bot.user.avatarURL}`)
 			.setTimestamp()
-		owner.sendEmbed(f);
+		owner.send({embed:f});
 	}
 };

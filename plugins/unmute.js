@@ -29,9 +29,9 @@ module.exports = {
 					.setTimestamp()
 				try {
 					var log = msg.guild.channels.find('name', 'mod-logs');
-					log.sendEmbed(mute);
+					log.send({embed: mute});
 				} catch (e) {
-					msg.channel.sendEmbed(mute);
+					msg.channel.send({embed: mute});
 				}
 			}
 		} else {

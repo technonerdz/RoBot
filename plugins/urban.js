@@ -20,15 +20,15 @@ module.exports = {
 					  .addField('Definition', def.definition, false)
 					  .addField('Example', def.example, false)
 					  .addField('Other Information', def.thumbs_up + ' :thumbsup: | ' + def.thumbs_down + ' :thumbsdown: \nAuthor: ' + def.author, false);
-					message.channel.sendEmbed(embed,{ disableEveryone: true });
+					message.channel.send({embed:embed});
 				}
 				else {
-					message.channel.sendMessage("Could not find word.");
+					message.channel.send("Could not find word.");
 				}
 			});
 		}
 		catch(err) {
-			message.channel.sendMessage("An error occurred.");
+			message.channel.send("An error occurred.");
 		}
 	}
 };

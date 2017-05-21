@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'xkcd',
-    usage: 'xkcd <optional-num>',
+    usage: '<p>xkcd <optional-num>',
     permission: 1,
     help: 'Returns an XKCD comic.',
 	main: function(bot, msg) {

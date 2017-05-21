@@ -8,10 +8,6 @@ module.exports = {
 			msg.channel.sendMessage(":wave: RoBot is restarting...");
 
 			setTimeout(function() {
-				bot.logout();
-			}, 1000);
-
-			setTimeout(function() {
 				process.exit();
 			}, 2000);
 		} else {

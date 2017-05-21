@@ -12,8 +12,7 @@ module.exports = {
 			.header("Accept", "application/json")
 			.end(function (result) {
 				console.log(result.body);
-				var res = JSON.parse(result.body);
-				msg.channel.sendMessage(res.quote + '\n*- ' + res.author + '*')
+				msg.channel.send(result.body.quote + '\n*- ' + result.body.author + '*')
 			});
 	}
 };

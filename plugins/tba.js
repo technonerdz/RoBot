@@ -217,7 +217,7 @@ module.exports = {
 		}
 		
 		function sendEmbed(embed) {
-			m.channel.sendEmbed(embed)
+			m.channel.send({embed:embed})
 			.then(msg =>  {
 				if(!m.content.endsWith('--nodel')) {
 					setTimeout(() => {
