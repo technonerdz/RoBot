@@ -76,7 +76,7 @@ bot.on("message", (msg) => {
 						.then(member => bot.channels.get("200090417809719296").send(member.user.username + " Nickname set to --> ``" + member.displayName + "``"));
 				}, 1000)
 
-				bot.channels.get('267837014014033931').send({"embed": new Discord.RichEmbed().setColor(0x1675DB).setAuthor(msg.author.username, msg.author.avatarURL).addField('Member Joined', `**${msg.author} joined the server!**`).setFooter(`FRC Discord Server | ${msg.guild.members.size} members`, `${msg.guild.iconURL}`).setTimestamp()});
+				bot.channels.get('267837014014033931').send({"embed": new Discord.RichEmbed().setColor(0x1675DB).setAuthor(msg.author.username, msg.author.displayAvatarURL).addField('Member Joined', `**${msg.author} joined the server!**`).setFooter(`FRC Discord Server | ${msg.guild.members.size} members`, `${msg.guild.iconURL}`).setTimestamp()});
 
 				msg.author.send("Thank you for reading the rules and regulations. We would like to welcome you to the FIRST Robotics Competition Discord Server! " +
 					"Please follow the server rules and have fun! Don't hesitate to ping a member of the moderation team " +
