@@ -12,8 +12,9 @@ module.exports = {
 			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
 		var user = member.user;
 		var roles = member.roles.size;
-		if(user.presence.status != 'offline')
-			var game = user.presence.game.name || 'None'
+
+		if(user.presence.game)
+			var game = user.presence.game.name
 		else
 			var game = 'None'
 		
