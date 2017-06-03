@@ -10,19 +10,18 @@ module.exports = {
 			var roleToGive = msg.content.split(" ").splice(1).join(" ").trim();
 			let role = msg.guild.roles.find("name", roleToGive);
 			if (!role) {
-				msg.channel.send(":negative_squared_cross_mark: Role does not exist!");
-			} else if(role.comparePositionTo(msg.guild.members.get(user.id).highestRole) < 0) {
+				msg.channel.send(":x: Role does not exist!");
+			} else if(role.comparePositionTo(msg.member.highestRole) < 0) {
 				msg.guild.members.get(user.id).addRole(role).then(m => {
 					if(m.roles.has(role.id))
 						msg.channel.send("Successfully added role *" + roleToGive + "* to " + user + ".");
 					else
 						msg.channel.send("Failed to add role *" + roleToGive + "* to " + user + ".");
 				}).catch(console.error);
-			} else {
-				msg.channel.send(":negative_squared_cross_mark: Your highest role is lower than this role, so you cannot assign it!")
-			}
+			} else
+				msg.channel.send(":x: Your highest role is lower than this role, so you cannot assign it!")
 		} else {
-			msg.channel.send(":negative_squared_cross_mark: You do not have the necessary permissions to perform this action!")
+			msg.channel.send(":x: You do not have the necessary permissions to perform this action!")
 		}
 	}
 };
