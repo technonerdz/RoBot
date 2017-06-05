@@ -7,7 +7,7 @@ module.exports = {
 		var Discord = require('discord.js');
 		const util = require('util');
 		
-		if (msg.author.id === "171319044715053057" || msg.member.hasPermission('ADMINISTRATOR')) {
+		if (msg.author.id === "171319044715053057") {
 			var code = msg.content;
 			var embed = new Discord.RichEmbed();
 			try {
