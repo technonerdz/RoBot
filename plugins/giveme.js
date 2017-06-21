@@ -5,7 +5,7 @@ module.exports = {
     help: 'Gives the user a specified role from an allowed list.',
 	main: function(bot, msg) {
 		if(msg.guild.id == '176186766946992128') {
-			const allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media', 'CS:GO', 'Civilization', 'CAH', 'DOTA', 'League of Legends', 'Overwatch', 'Rocket League', 'Minecraft'];
+			const allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media', 'CS:GO', 'Civilization', 'CAH', 'Beantown', 'IRI', 'League of Legends', 'Overwatch', 'Rocket League', 'Minecraft'];
 			var roleToGive = msg.content.trim().toLowerCase();
 			var found = false;
 			var role = null;
