@@ -8,7 +8,7 @@ module.exports = {
 		definition = urban(message.content);
 		try {
 			definition.first(function(def) {
-				if(def != undefined) {
+				if (def != undefined) {
 					const Discord = require('discord.js');
 					const embed = new Discord.RichEmbed()
 					  .setTitle(def.word)
@@ -27,7 +27,7 @@ module.exports = {
 				}
 			});
 		}
-		catch(err) {
+		catch (err) {
 			message.channel.send("An error occurred.");
 		}
 	}

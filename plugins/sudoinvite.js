@@ -15,7 +15,7 @@ module.exports = {
 					message.author.send("https://discord.gg/" + i.code);
 				});
 			}
-			catch(err) {
+			catch (err) {
 				console.log(err);
 			}
         }

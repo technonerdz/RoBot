@@ -7,13 +7,13 @@ module.exports = {
 		const Discord = require("discord.js");
 		var mutee = msg.mentions.users.array();
 		if (msg.member.hasPermission('KICK_MEMBERS') || msg.member.hasPermission('ADMINISTRATOR')) {
-			for(var k = 0; k < mutee.length; k++) {
+			for (var k = 0; k < mutee.length; k++) {
 				var member = msg.guild.members.get(mutee[k].id);
 				var user = bot.users.get(mutee[k].id);
 				var guild = msg.guild;
 				var channels = msg.guild.channels.array();
 
-				for(var i = 0; i < channels.length; i++) {
+				for (var i = 0; i < channels.length; i++) {
 					if(channels[i].type == 'text')
 						channels[i].overwritePermissions(member, {SEND_MESSAGES: null})
 				}

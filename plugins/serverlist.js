@@ -6,7 +6,7 @@ module.exports = {
 	main: function(bot, msg) {
 		var str = "";
 		var guilds = bot.guilds.array()
-		for(var i = 0; i < guilds.length; i++) {
+		for (var i = 0; i < guilds.length; i++) {
 			str += (i+1) + ": " + guilds[i].name + "\n"
 		}
 		msg.channel.sendMessage(str);

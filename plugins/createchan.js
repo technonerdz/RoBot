@@ -10,7 +10,7 @@ module.exports = {
 				msg.guild.createChannel(channelToCreate, 'text')
 				.then(chan => msg.channel.send("Alright, I have created the channel <#" + chan.id + ">!"))
 			}
-			catch(err) {
+			catch (err) {
 				console.log(err);
 				msg.channel.send("ERR: " + err);
 			}
