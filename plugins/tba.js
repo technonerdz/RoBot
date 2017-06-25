@@ -237,7 +237,7 @@ module.exports = {
 		function team (num) {
 			var teaminfo = new Discord.RichEmbed();
 			req.getTeam(num).then(d => {
-					teaminfo.setAuthor('FIRST® Robotics Competition Team ' + num, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + teamNumber)
+					teaminfo.setAuthor('FIRST® Robotics Competition Team ' + num, 'http://i.imgur.com/V8nrobr.png', 'https://www.thebluealliance.com/team/' + num)
 						 .setColor(0x1675DB)
 						 .addField('Name', d.nickname, true)
 						 .addField('Rookie Year', d.rookie_year, true)
