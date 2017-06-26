@@ -8,7 +8,7 @@ module.exports = {
 		var id;
 		console.log("\`" + time + "\`")
 		
-		if(!isNaN(time) && msg.member.hasPermission('MANAGE_MESSAGES')) {
+		if (!isNaN(time) && msg.member.hasPermission('MANAGE_MESSAGES')) {
 			if(msg.guild.id == '176186766946992128')
 				id = '246469964574228481';
 			else

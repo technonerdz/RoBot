@@ -20,7 +20,7 @@ module.exports = {
 			var seconds = parseInt((time - (totalMinutes * 60000)) / 1000) ;
 			message.channel.send("Time until " + d1.toDateString() + ": \n**" + years + " years, " + days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + " seconds**");
 		}
-		catch(err) {
+		catch (err) {
 			message.channel.send("Error processing date. Please put in MM/DD/YY format");
 		}
 	}

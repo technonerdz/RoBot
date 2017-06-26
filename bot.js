@@ -54,10 +54,10 @@ bot.on("message", (msg) => {
 	var str = n.substring(0, n.indexOf(" "));
 	
 	if (msg.channel.type === "text") {
-		if(msg.guild.id != '110373943822540800' && msg.guild.id != '264445053596991498')
+		if (msg.guild.id != '110373943822540800' && msg.guild.id != '264445053596991498')
 			console.log(gray("[" + str + "] ") + guil(msg.guild.name) + " | " + chan(msg.channel.name) + " | " + usr(msg.author.username) + " | " + message(msg.cleanContent));
 
-		if(msg.author.bot) return;
+		if (msg.author.bot) return;
 
 		if (msg.content.startsWith(PREFIX)) {
 			var content = msg.content.substring(PREFIX.length, msg.content.length);
@@ -70,13 +70,13 @@ bot.on("message", (msg) => {
 			}
 		}
 	} else {
-		if(msg.author.bot) return;
+		if (msg.author.bot) return;
 			msg.channel.send("This bot cannot be used in DMs!");
 	}
 });
 
 bot.on("guildMemberAdd", (member) => {
-	if(member.guild.id != "176186766946992128") {
+	if (member.guild.id != "176186766946992128") {
 		var channel = member.guild.channels.find('name', 'logs') || member.guild.channels.find('name', 'member-logs') || member.guild.defaultChannel;
 		if (member.id == '171319044715053057')
 			channel.send(`**${member} (Developer of RoBot) has joined the server.**`)
@@ -86,7 +86,7 @@ bot.on("guildMemberAdd", (member) => {
 });
 
 bot.on("guildMemberRemove", (member) => {
-	if(member.guild.id != "176186766946992128") {
+	if (member.guild.id != "176186766946992128") {
 		var channel = member.guild.channels.find('name', 'logs') || member.guild.channels.find('name', 'member-logs') || member.guild.defaultChannel;
 		channel.send(`${member.user.username} left the server.`)
 	}
@@ -122,7 +122,7 @@ function command(msg, cmd, args, content) {
 function help(msg, cmd, args, content) {
 	console.log(cmand(msg.author.username + " executed: help"));
 	msg.reply('check your DMs!')
-	if(content == 'help') {
+	if (content == 'help') {
 		var i = 0;
 		var e = new Discord.RichEmbed()
 		.setAuthor('RoBot', bot.user.avatarURL)
@@ -131,7 +131,7 @@ function help(msg, cmd, args, content) {
 		.setFooter('Requested by ' + msg.author.username)
 		.setTimestamp()
 		plugins.forEach(function (item, key, mapObj) {
-			if(i < 25) {
+			if (i < 25) {
 				i++;
 				e.addField(item.name + ' (' + item.usage.replace('<p>', PREFIX) + ')', item.help);
 			} else {

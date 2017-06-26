@@ -6,11 +6,11 @@ module.exports = {
 	main: function(bot, msg) {
 		var xkcd = require('xkcd');
 		var num = msg.content;
-		if(!isNaN(num)) {
+		if (!isNaN(num)) {
 			xkcd(num, function (data) {
 				try {
 					msg.channel.sendMessage("**XKCD #" + data.num + "**: \"" + data.title + "\"\n" + data.img + "\n*" + data.alt + "*");
-				} catch(err) {
+				} catch (err) {
 					msg.channel.sendMessage(err);
 				}
 				console.log(data);
@@ -19,7 +19,7 @@ module.exports = {
 			xkcd(function (data) {
 				try {
 					msg.channel.sendMessage("**" + data.num + "**: " + data.title + "\n" + data.img + "\n*" + data.alt + "*");
-				} catch(err) {
+				} catch (err) {
 					msg.channel.sendMessage(err);
 				}
 				console.log(data);

@@ -11,9 +11,9 @@ module.exports = {
 			let role = msg.guild.roles.find("name", roleToGive);
 			if (!role) {
 				msg.channel.send(":x: Role does not exist!");
-			} else if(role.comparePositionTo(msg.member.highestRole) < 0) {
+			} else if (role.comparePositionTo(msg.member.highestRole) < 0) {
 				msg.guild.members.get(user.id).addRole(role).then(m => {
-					if(m.roles.has(role.id))
+					if (m.roles.has(role.id))
 						msg.channel.send("Successfully added role *" + roleToGive + "* to " + user + ".");
 					else
 						msg.channel.send("Failed to add role *" + roleToGive + "* to " + user + ".");

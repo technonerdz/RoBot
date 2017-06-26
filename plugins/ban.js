@@ -14,7 +14,7 @@ module.exports = {
 				var guild = msg.guild;
 				var reason = msg.content.split(" ").splice(1).join(" ");
 				
-				if(reason == "")
+				if (reason == "")
 					var reason = "Not specified.";
 				
 				banned.ban(reason);

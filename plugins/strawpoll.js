@@ -24,7 +24,7 @@ module.exports = {
 				console.log(response.body);
 				msg.channel.sendMessage(`Created poll with title ${response.body.title} at https://strawpoll.me/${response.body.id}`);
 			});
-		} catch(err) {
+		} catch (err) {
 			msg.channel.sendMessage('Error:' + err + '\nCommand Usage: {prefix}strawpoll question|option1, option2, option3, etc.');
 		}
 	}

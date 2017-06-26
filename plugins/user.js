@@ -8,14 +8,14 @@ module.exports = {
 	main: function(bot, msg) {
 		if (msg.mentions.users.array()[0])
 			var member = msg.guild.members.get(msg.mentions.users.array()[0].id);
-		else if(bot.users.get(msg.content) != null)
+		else if (bot.users.get(msg.content) != null)
 			var member = msg.guild.members.get(msg.content);
 		else
 			var member = msg.guild.members.get(msg.author.id);
 		var user = member.user;
 		var roles = member.roles.size;
 
-		if(user.presence.game)
+		if (user.presence.game)
 			var game = user.presence.game.name
 		else
 			var game = 'None'

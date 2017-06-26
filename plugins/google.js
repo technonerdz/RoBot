@@ -27,7 +27,7 @@ module.exports = {
                 message.channel.sendMessage("No results.");
 				return;
             }
-			else if(response.items != undefined) {
+			else if (response.items != undefined) {
 				console.log(response);
 				var results = new Discord.RichEmbed();
 				var link = response.items[0].link;
