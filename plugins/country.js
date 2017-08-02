@@ -7,6 +7,7 @@ module.exports = {
     permission: 1,
     help: 'Gets information about a country.',
 	main: function(bot, msg) {
+		if (msg.content == null) return "Please specify a country!";
 		if (msg.content.trim().toLowerCase() == "north dumpling island"){
 			msg.channel.send("All hail our glorious leader, Dean Kamen!\nhttp://3.bp.blogspot.com/-SUNDyBLeen0/UA1gikP_2AI/AAAAAAAAEDs/32CU65woD-A/s1600/Dean_Kamen_FIRST.png")
 		} else {
