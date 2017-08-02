@@ -1,12 +1,12 @@
 module.exports = {
 	name: 'giveme',
-    usage: '<p>giveme <rolename>',
-    permission: 1,
-    help: 'Gives the user a specified role from an allowed list.',
+	usage: '<p>giveme <rolename>',
+	permission: 1,
+	help: 'Gives the user a specified role from an allowed list.',
 	main: function(bot, msg) {
 		var allowedRoles = [];
 		if (msg.guild.id == '176186766946992128') {
-			allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media', 'CS:GO', 'Civilization', 'CAH', 'Beantown', 'IRI', 'League of Legends', 'Overwatch', 'Rocket League', 'Minecraft'];
+			allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media', 'CS:GO', 'Civilization', 'CAH', 'League of Legends', 'Overwatch', 'Rocket League', 'Minecraft'];
 		} else if (msg.guild.id == '225450307654647808') {
 			allowedRoles = ['Social'];
 		}
@@ -14,7 +14,7 @@ module.exports = {
 		var found = false;
 		var role = null;
 		for (var i = 0; i < allowedRoles.length; i++) {
-			if(allowedRoles[i].toLowerCase() == roleToGive) {
+			if (allowedRoles[i].toLowerCase() == roleToGive) {
 				found = true;
 				role = msg.guild.roles.find("name", allowedRoles[i]);
 			}
@@ -25,7 +25,7 @@ module.exports = {
 			msg.channel.send("Successfully gave you " + role.name + "!");
 		} else if (roleToGive == "list" || roleToGive == "-l") {
 			var list = "List of Allowed Roles:";
-			for(var i = 0; i < allowedRoles.length; i++)
+			for (var i = 0; i < allowedRoles.length; i++)
 				list += "\n" + allowedRoles[i];
 			msg.channel.send(list);
 		} else {
