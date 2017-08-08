@@ -6,7 +6,7 @@ module.exports = {
 	main: function(bot, msg) {
 		var allowedRoles = [];
 		if (msg.guild.id == '176186766946992128') {
-			allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media', 'CS:GO', 'Civilization', 'CAH', 'League of Legends', 'Overwatch', 'Rocket League', 'Minecraft', 'ChezyChamps'];
+			allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media', 'CS:GO', 'Civilization', 'CAH', 'League of Legends', 'Overwatch', 'Rocket League', 'Minecraft', 'ChezyChamps', 'Hackathon'];
 		} else if (msg.guild.id == '225450307654647808') {
 			allowedRoles = ['Social'];
 		}
