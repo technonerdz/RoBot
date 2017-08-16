@@ -4,8 +4,8 @@ module.exports = {
 	permission: 1,
 	help: 'Gives the user a specified role from an allowed list.',
 	main: function(bot, msg) {
-		return msg.channel.send("Hey! Please use RoBot Beta's giveme command instead! It's a lot better!")
-		
+		msg.channel.send("Hey! Please use RoBot Beta's giveme command instead! It's a lot better!")
+		/*
 		if (msg.guild.id == '176186766946992128') {
 			allowedRoles = ['Gaming', 'Wiring', 'Build', 'Programming', 'Marketing', 'Design', 'Awards', 'Strategy', 'Politics', 'Java', 'C++', 'LabVIEW', 'Python', 'Media', 'CS:GO', 'Civilization', 'CAH', 'League of Legends', 'Overwatch', 'Rocket League', 'Minecraft', 'ChezyChamps', 'Hackathon', 'Alumni', 'Solidworks', 'Inventor', 'Creo', 'Social'];
 		} else if (msg.guild.id == '225450307654647808') {
@@ -51,6 +51,6 @@ module.exports = {
 			
 		} else {
 			msg.reply('that giveme does not exist!');
-		}
+		}*/
 	}
 };
