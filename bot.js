@@ -41,7 +41,7 @@ bot.on("ready", () => {
 	str += hours + ":" + minutes + ":" + seconds;
 	console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
 	
-	let games = [`with ASIANBOI`, `in the FIRST Robotics Competition server`, `in ${bot.guilds.size} servers`, `join my support server! https://discord.io/RoBot`, ``];
+	let games = [`in ${bot.guilds.size} servers`];
 	bot.user.setPresence({
 		game: {
 			name: games[Math.round(Math.random() * (games.length - 1))] + ' | ' + PREFIX + 'help', 
