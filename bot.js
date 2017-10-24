@@ -40,12 +40,21 @@ bot.on("ready", () => {
 		seconds = "0" + seconds;
 	str += hours + ":" + minutes + ":" + seconds;
 	console.log("Bot Online and Ready! On " + bot.guilds.size + " Servers!");
-	//bot.channels.get('304790274058485760').send(":stopwatch: ``" + str + "`` :mega: RoBot is online and ready! :white_check_mark:");
 	
-	let games = [`with ASIANBOI`, `in the FIRST Robotics Competition server`, `in ${bot.guilds.size} servers`, `join my support server! https://discord.io/RoBot`, ``];
-	bot.user.setGame(games[Math.round(Math.random() * (games.length - 1))] + ' | ' + PREFIX + 'help');
+	let games = [`in ${bot.guilds.size} servers`];
+	bot.user.setPresence({
+		game: {
+			name: games[Math.round(Math.random() * (games.length - 1))] + ' | ' + PREFIX + 'help', 
+			type: 0
+		}
+	});
 	setInterval(() => {
-		bot.user.setGame(games[Math.round(Math.random() * (games.length - 1))] + ' | ' + PREFIX + 'help');
+		bot.user.setPresence({
+			game: {
+				name: games[Math.round(Math.random() * (games.length - 1))] + ' | ' + PREFIX + 'help', 
+				type: 0
+			}
+		});
 	}, 300000);
 });
 
@@ -75,7 +84,7 @@ bot.on("message", (msg) => {
 	}
 });
 
-bot.on("guildMemberAdd", (member) => {
+/*bot.on("guildMemberAdd", (member) => {
 	if (member.guild.id != "176186766946992128") {
 		var channel = member.guild.channels.find('name', 'logs') || member.guild.channels.find('name', 'member-logs') || member.guild.defaultChannel;
 		if (member.id == '171319044715053057')
@@ -90,7 +99,7 @@ bot.on("guildMemberRemove", (member) => {
 		var channel = member.guild.channels.find('name', 'logs') || member.guild.channels.find('name', 'member-logs') || member.guild.defaultChannel;
 		channel.send(`${member.user.username} left the server.`)
 	}
-});
+});*/
 
 bot.on("guildCreate", (guild) => {
 	sendServerCount(bot);
