@@ -150,6 +150,7 @@ function help(msg, cmd, args, content) {
 				.setColor(0x1675DB)
 				.setFooter('Requested by ' + msg.author.username)
 				.setTimestamp()
+				.addField("Join our support server!", "Come join us at https://discord.gg/8QebTbk for support and more!")
 				e.addField(item.name + ' (' + item.usage + ')', item.help);
 			}
 		})
