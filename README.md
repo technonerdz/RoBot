@@ -1,4 +1,6 @@
 # RoBot
+[![Discord Bots](https://discordbots.org/api/widget/status/302555306603446283.png)](https://discordbots.org/bot/302555306603446283) [![Discord Bots](https://discordbots.org/api/widget/servers/302555306603446283.png)](https://discordbots.org/bot/302555306603446283) [![Discord Bots](https://discordbots.org/api/widget/lib/302555306603446283.png)](https://discordbots.org/bot/302555306603446283) [![Discord Bots](https://discordbots.org/api/widget/owner/302555306603446283.png)](https://discordbots.org/bot/302555306603446283)
+
 The FRC Discord Bot, developed by [@mcao](https://github.com/mcao) and used by the entire FRC Discord Community
 
 ## Contribution
